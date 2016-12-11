@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example of a simple "odf" structure for a refrigerator. -->
+<Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
+    <Object>
+        <id>SmartFridge22334411</id>
+        <InfoItem name="PowerConsumption">
+            <MetaData>
+                <InfoItem name="format">
+                    <value type="xs:string">xs:double</value>
+                </InfoItem>
+                <InfoItem name="latency">
+                    <value type="xs:int">5</value>
+                </InfoItem>
+                <InfoItem name="readable">
+                    <value type="xs:boolean">true</value>
+                </InfoItem>
+                <InfoItem name="writable">
+                    <value type="xs:boolean">false</value>
+                </InfoItem>
+                <InfoItem name="unit">
+                    <value type="xs:string">Watts</value>
+                </InfoItem>
+                <InfoItem name="accuracy">
+                    <value type="xs:double">1</value>
+                </InfoItem>
+            </MetaData>
+        </InfoItem>
+    </Object>
+</Objects>
