@@ -1,5 +1,8 @@
 package model;
 
+import com.complexible.pinto.annotations.RdfId;
+import com.complexible.pinto.annotations.RdfProperty;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,8 +13,9 @@ import java.util.List;
  */
 
 @XmlRootElement (name = "Object")
-public class Object extends QlmID {
+public class Object {
 
+    private String id;
     private String type;
     private String udef;
     private String description;
@@ -19,7 +23,7 @@ public class Object extends QlmID {
     private List<Object> object;
 
     public Object(String id, String type, String udef, String description, List<InfoItem> infoItem, List<Object> object){
-        super(id);
+        this.id = id;
         this.type = type;
         this.udef = udef;
         this.description = description;
@@ -72,5 +76,15 @@ public class Object extends QlmID {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @RdfId
+    @RdfProperty("odf:id")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

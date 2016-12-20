@@ -1,5 +1,8 @@
 package model;
 
+import com.complexible.pinto.annotations.RdfId;
+import com.complexible.pinto.annotations.RdfProperty;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,8 +13,9 @@ import java.util.List;
  */
 
 @XmlRootElement (name = "InfoItem")
-public class InfoItem extends QlmID {
+public class InfoItem {
 
+    private String name1;
     private String name;
     private String udef;
     private List<Value> value;
@@ -21,7 +25,7 @@ public class InfoItem extends QlmID {
     public InfoItem(){}
 
     public InfoItem(String name, String name1, String udef, List<Value> value, String description, MetaData metaData){
-        super(name);
+        this.name = name;
         this.name = name1;
         this.udef = udef;
         this.value = value;
@@ -29,6 +33,8 @@ public class InfoItem extends QlmID {
         this.metaData = metaData;
     }
 
+    @RdfId
+    @RdfProperty("odf:udef")
     @XmlAttribute
     public String getUdef() {
         return udef;
@@ -39,6 +45,8 @@ public class InfoItem extends QlmID {
     }
 
 
+    @RdfId
+    @RdfProperty("odf:value")
     @XmlElement
     public List<Value> getValue() {
         return value;
@@ -48,6 +56,8 @@ public class InfoItem extends QlmID {
         this.value = value;
     }
 
+    @RdfId
+    @RdfProperty("odf:description")
     @XmlElement
     public String getDescription() {
         return description;
@@ -57,6 +67,8 @@ public class InfoItem extends QlmID {
         this.description = description;
     }
 
+    @RdfId
+    @RdfProperty("odf:metaData")
     @XmlElement
     public MetaData getMetaData() {
         return metaData;
@@ -73,5 +85,16 @@ public class InfoItem extends QlmID {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @RdfId
+    @RdfProperty("odf:name")
+    @XmlElement
+    public String getName1() {
+        return name1;
+    }
+
+    public void setName1(String name1) {
+        this.name1 = name1;
     }
 }
