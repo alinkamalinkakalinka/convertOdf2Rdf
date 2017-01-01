@@ -33,6 +33,8 @@ public class Object {
 
     public Object(){}
 
+    @RdfId
+    @RdfProperty("odf:type")
     @XmlAttribute
     public String getType() {
         return type;
@@ -60,6 +62,8 @@ public class Object {
         this.object = object;
     }
 
+    @RdfId
+    @RdfProperty("odf:udef")
     @XmlAttribute
     public String getUdef() {
         return udef;
@@ -69,6 +73,8 @@ public class Object {
         this.udef = udef;
     }
 
+    @RdfId
+    @RdfProperty("odf:description")
     @XmlElement
     public String getDescription() {
         return description;
