@@ -1,5 +1,8 @@
 package model;
 
+import com.complexible.pinto.annotations.RdfId;
+import com.complexible.pinto.annotations.RdfsClass;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
@@ -8,6 +11,7 @@ import java.util.Date;
  * Created by aarunova on 12/11/16.
  */
 
+@RdfsClass("odf:Value")
 @XmlRootElement
 public class Value {
 
@@ -24,6 +28,7 @@ public class Value {
         this.unixTime = unixTime;
     }
 
+    @RdfId
     @XmlAttribute
     public String getType() {
         return type;
@@ -33,6 +38,7 @@ public class Value {
         this.type = type;
     }
 
+    @RdfId
     @XmlAttribute
     public Date getDateTime() {
         return dateTime;
@@ -42,6 +48,7 @@ public class Value {
         this.dateTime = dateTime;
     }
 
+    @RdfId
     @XmlAttribute
     public long getUnixTime() {
         return unixTime;

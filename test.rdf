@@ -1,0 +1,38 @@
+
+<tag:complexible:pinto:f698805f0016fa6a7b0dac59d21c3be7> a <odf:Objects> ;
+	<odf:object> <tag:complexible:pinto:f64ba4163dcb76275cea97eb2373807a> .
+
+<tag:complexible:pinto:f64ba4163dcb76275cea97eb2373807a> <odf:infoItem> <tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> ;
+	<odf:type> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+
+<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> <odf:id> "SubObject2" .
+
+<tag:complexible:pinto:f64ba4163dcb76275cea97eb2373807a> a <odf:Object> .
+
+<tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> <tag:complexible:pinto:name> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+
+<tag:complexible:pinto:f64ba4163dcb76275cea97eb2373807a> <odf:object> <tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> .
+
+<tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> <odf:id> "SubObject1" .
+
+<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> <odf:udef> "appropriate.udef.code" .
+
+<tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> a <odf:Object> .
+
+<tag:complexible:pinto:f64ba4163dcb76275cea97eb2373807a> <odf:id> "UniqueObjectID_1" .
+
+<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> <odf:type> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+
+<tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> a <odf:InfoItem> .
+
+<tag:complexible:pinto:f64ba4163dcb76275cea97eb2373807a> <odf:object> <tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> .
+
+<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> a <odf:Object> .
+
+<tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> <odf:type> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+
+<tag:complexible:pinto:f64ba4163dcb76275cea97eb2373807a> <odf:udef> "appropriate.udef.code" .
+
+<tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> <odf:udef> "appropriate.udef.code" .
+
+<tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> <odf:udef> "appropriate.udef.code" .

@@ -1,5 +1,9 @@
 package model;
 
+import com.complexible.pinto.annotations.RdfId;
+import com.complexible.pinto.annotations.RdfProperty;
+import com.complexible.pinto.annotations.RdfsClass;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,6 +13,7 @@ import java.util.List;
  * Created by aarunova on 12/11/16.
  */
 
+@RdfsClass("odf:Objects")
 @XmlRootElement (name = "Objects")
 public class Objects {
 
@@ -23,6 +28,7 @@ public class Objects {
         this.object = object;
     }
 
+    @RdfId
     @XmlAttribute
     public String getName() {
         return name;
@@ -32,7 +38,9 @@ public class Objects {
         this.name = name;
     }
 
-   @XmlElement (name = "Object")
+    @RdfId
+    @RdfProperty("odf:object")
+    @XmlElement (name = "Object")
     public List<Object> getObject() {
         return object;
     }

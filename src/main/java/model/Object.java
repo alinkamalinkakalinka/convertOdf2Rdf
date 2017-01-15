@@ -2,9 +2,11 @@ package model;
 
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfProperty;
+import com.complexible.pinto.annotations.RdfsClass;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
  * Created by aarunova on 12/11/16.
  */
 
+@RdfsClass("odf:Object")
 @XmlRootElement (name = "Object")
 public class Object {
 
@@ -20,15 +23,16 @@ public class Object {
     private String udef;
     private String description;
     private List<InfoItem> infoItem;
-    private List<Object> object;
+    private List<Object> objectList;
+    private Object object;
 
-    public Object(String id, String type, String udef, String description, List<InfoItem> infoItem, List<Object> object){
+    public Object(String id, String type, String udef, String description, List<InfoItem> infoItem, List<Object> objectList){
         this.id = id;
         this.type = type;
         this.udef = udef;
         this.description = description;
         this.infoItem = infoItem;
-        this.object = object;
+        this.objectList = objectList;
     }
 
     public Object(){}
@@ -44,6 +48,8 @@ public class Object {
         this.type = type;
     }
 
+    @RdfId
+    @RdfProperty("odf:infoItem")
     @XmlElement (name = "InfoItem")
     public List<InfoItem> getInfoItem() {
         return infoItem;
@@ -53,13 +59,15 @@ public class Object {
         this.infoItem = infoItem;
     }
 
+    @RdfId
+    @RdfProperty("odf:object")
     @XmlElement (name = "Object")
-    public List<Object> getObject() {
-        return object;
+    public List<Object> getObjectList() {
+        return objectList;
     }
 
-    public void setObject(List<Object> object) {
-        this.object = object;
+    public void setObjectList(List<Object> objectList) {
+        this.objectList = objectList;
     }
 
     @RdfId
