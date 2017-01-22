@@ -62,6 +62,9 @@ dependencies {
     compile "org.slf4j:slf4j-api:1.7.7"
     compile "org.slf4j:slf4j-jdk14:1.7.7"
 
+    // https://mvnrepository.com/artifact/org.apache.jena/jena-core
+    compile group: 'org.apache.jena', name: 'jena-core', version: '3.1.1'
+
     compile fileTree(dir: 'lib', include: 'pinto.jar')
 
 
