@@ -32,7 +32,7 @@ public class Main {
 
         try {
 
-            File file = new File("/Users/aarunova/Desktop/thesis/odfTordf/object_with_sub_objects.xml");
+            File file = new File("/Users/aarunova/Desktop/thesis/convertOdf2Rdf/src/main/resources/infoitem_values.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Objects.class);
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -41,8 +41,9 @@ public class Main {
             Model aGraph = RDFMapper.builder()
                     .build().writeValue(objects);
 
+            ModelClass modelClass = new ModelClass();
 
-            ModelClass.writeModel(aGraph);
+            modelClass.writeModel(aGraph);
 
 
         } catch (JAXBException e) {

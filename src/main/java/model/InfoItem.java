@@ -59,7 +59,7 @@ public class InfoItem {
     }
 
     @RdfId
-    @RdfProperty("odf:description")
+    @RdfProperty("dct:description")
     @XmlElement
     public String getDescription() {
         return description;
@@ -81,6 +81,7 @@ public class InfoItem {
     }
 
     @RdfId
+    @RdfProperty ("odf:name")
     @XmlAttribute
     public String getName() {
         return name;

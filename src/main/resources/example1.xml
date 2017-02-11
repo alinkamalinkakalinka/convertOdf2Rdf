@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example of Object with Sub-Objects. -->
+<Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
+    <Object type="Pedestrian traffic light">
+        <id>PTL_123</id>
+        <InfoItem name="Red light status">
+            <name>RedLight</name>
+            <value>on</value>
+        </InfoItem>
+        <InfoItem name="Green light status">
+            <name>GreenLight</name>
+            <value>off</value>
+        </InfoItem>
+        <InfoItem name="Status change frequency">
+            <name>StatusChangeFrequency</name>
+            <description>Time in seconds the lights switch status</description >
+            <value>15</value>
+        </InfoItem>
+    </Object>
+</Objects>

@@ -1,37 +1,69 @@
 
-<tag:complexible:pinto:7ae22d87cebb15ce9ab684df9cf86782> a <odf:Objects> ;
-	<odf:object> <tag:complexible:pinto:e6af7c92c0055d6e7079d223fca7c386> .
+<tag:complexible:pinto:ab2c81dc85e105a4573d65a3706b2171> a <odf:Objects> ;
+	<odf:object> <ex:UniqueTargetID_1> .
 
-<tag:complexible:pinto:e6af7c92c0055d6e7079d223fca7c386> <odf:infoItem> <tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> ;
-	<odf:type> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+<ex:SubSubTarget1InfoItem1> <odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
 
-<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> <odf:id> "SubObject2" .
+<ex:SubSubTarget1> a <odf:Object> .
 
-<tag:complexible:pinto:e6af7c92c0055d6e7079d223fca7c386> <odf:object> <tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> .
+<ex:SubTarget1> <odf:object> <ex:SubSubTarget1> ;
+	<odf:id> "SubTarget1" .
 
-<tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> <tag:complexible:pinto:name> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+<ex:SubSubTarget1> <odf:infoItem> <ex:SubSubTarget1InfoItem1> .
 
-<tag:complexible:pinto:e6af7c92c0055d6e7079d223fca7c386> a <odf:Object> .
+<ex:SubTarget2> <odf:infoItem> <ex:SubTarget2InfoItem1> .
 
-<tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> <odf:id> "SubObject1" .
+<ex:SubSubTarget1> <odf:id> "SubSubTarget1" ;
+	<odf:type> "someType" .
 
-<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> <odf:udef> "appropriate.udef.code" .
+<ex:InfoItem1> <odf:name> "InfoItem1" ;
+	a <odf:InfoItem> .
 
-<tag:complexible:pinto:e6af7c92c0055d6e7079d223fca7c386> <odf:udef> "appropriate.udef.code" .
+<ex:SubSubTarget1InfoItem1> a <odf:InfoItem> .
 
-<tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> a <odf:Object> .
+<ex:InfoItem2> <odf:name> "InfoItem2" ;
+	a <odf:InfoItem> .
 
-<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> <odf:type> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+<ex:SubTarget2> <odf:id> "SubTarget2" .
 
-<tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> a <odf:InfoItem> .
+<ex:UniqueTargetID_1> <odf:object> <ex:SubTarget2> .
 
-<tag:complexible:pinto:079dde2e5df5a3400f46441c1dacea35> a <odf:Object> .
+<ex:SubInfoItem1> a <odf:InfoItem> .
 
-<tag:complexible:pinto:e6af7c92c0055d6e7079d223fca7c386> <odf:object> <tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> .
+<ex:SubTarget2InfoItem1> a <odf:InfoItem> ;
+	<odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
 
-<tag:complexible:pinto:460d64bc125a8e95f456b81f0b1ad434> <odf:type> "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" ;
-	<odf:udef> "appropriate.udef.code" .
+<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem1> .
 
-<tag:complexible:pinto:b37c430a2c7a52735c45998ca6302000> <odf:udef> "appropriate.udef.code" .
+<ex:SubTarget1> a <odf:Object> .
 
-<tag:complexible:pinto:e6af7c92c0055d6e7079d223fca7c386> <odf:id> "UniqueObjectID_1" .
+<ex:SubSubTarget1InfoItem1> <odf:name> "SubSubTarget1InfoItem1" .
+
+<ex:InfoItem1> <odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
+
+<ex:UniqueTargetID_1> <odf:id> "UniqueTargetID_1" ;
+	<odf:object> <ex:SubTarget1> .
+
+<ex:SubInfoItem1> <odf:name> "SubInfoItem1" .
+
+<ex:SubTarget1> <odf:type> "someType" .
+
+<ex:InfoItem2> <odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
+
+<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem2> .
+
+<ex:SubTarget1> <odf:infoItem> <ex:SubInfoItem1> .
+
+<ex:UniqueTargetID_1> a <odf:Object> .
+
+<tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> <tag:complexible:pinto:unixTime> "0"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<ex:UniqueTargetID_1> <odf:type> "someType" .
+
+<ex:SubTarget2> a <odf:Object> .
+
+<tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> a <odf:Value> .
+
+<ex:SubTarget2InfoItem1> <odf:name> "SubTarget2InfoItem1" .
+
+<ex:SubTarget2> <odf:type> "someType" .
