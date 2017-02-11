@@ -24,7 +24,6 @@ public class Object {
     private String description;
     private List<InfoItem> infoItem;
     private List<Object> objectList;
-    private Object object;
 
     public Object(String id, String type, String udef, String description, List<InfoItem> infoItem, List<Object> objectList){
         this.id = id;

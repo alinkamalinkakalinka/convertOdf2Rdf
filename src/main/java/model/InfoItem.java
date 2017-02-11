@@ -6,6 +6,7 @@ import com.complexible.pinto.annotations.RdfsClass;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -20,13 +21,13 @@ public class InfoItem {
     private String name1;
     private String name;
     private String udef;
-    private List<Value> value;
+    private List<String> value;
     private String description;
     private MetaData metaData;
 
     public InfoItem(){}
 
-    public InfoItem(String name, String name1, String udef, List<Value> value, String description, MetaData metaData){
+    public InfoItem(String name, String name1, String udef, List<String> value, String description, MetaData metaData){
         this.name = name;
         this.name = name1;
         this.udef = udef;
@@ -49,12 +50,12 @@ public class InfoItem {
 
     @RdfId
     @RdfProperty("odf:value")
-    @XmlElement
-    public List<Value> getValue() {
+    @XmlElement (name = "value")
+    public List<String> getValue() {
         return value;
     }
 
-    public void setValue(List<Value> value) {
+    public void setValue(List<String> value) {
         this.value = value;
     }
 

@@ -1,69 +1,52 @@
 
-<tag:complexible:pinto:ab2c81dc85e105a4573d65a3706b2171> a <odf:Objects> ;
-	<odf:object> <ex:UniqueTargetID_1> .
+<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem1> ;
+	<odf:type> "someType" .
 
-<ex:SubSubTarget1InfoItem1> <odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
+<ex:SubTarget2InfoItem1> <odf:value> "34.6" .
 
-<ex:SubSubTarget1> a <odf:Object> .
-
-<ex:SubTarget1> <odf:object> <ex:SubSubTarget1> ;
-	<odf:id> "SubTarget1" .
+<ex:SubTarget1> <odf:infoItem> <ex:SubInfoItem1> ;
+	<odf:type> "someType" .
 
 <ex:SubSubTarget1> <odf:infoItem> <ex:SubSubTarget1InfoItem1> .
 
+<ex:SubTarget2> <odf:type> "someType" .
+
+<ex:InfoItem1> <odf:value> "Value2" .
+
 <ex:SubTarget2> <odf:infoItem> <ex:SubTarget2InfoItem1> .
 
-<ex:SubSubTarget1> <odf:id> "SubSubTarget1" ;
-	<odf:type> "someType" .
-
-<ex:InfoItem1> <odf:name> "InfoItem1" ;
-	a <odf:InfoItem> .
-
-<ex:SubSubTarget1InfoItem1> a <odf:InfoItem> .
-
-<ex:InfoItem2> <odf:name> "InfoItem2" ;
-	a <odf:InfoItem> .
-
-<ex:SubTarget2> <odf:id> "SubTarget2" .
-
-<ex:UniqueTargetID_1> <odf:object> <ex:SubTarget2> .
-
-<ex:SubInfoItem1> a <odf:InfoItem> .
-
-<ex:SubTarget2InfoItem1> a <odf:InfoItem> ;
-	<odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
-
-<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem1> .
+<ex:InfoItem2> <odf:value> "Value" .
 
 <ex:SubTarget1> a <odf:Object> .
 
-<ex:SubSubTarget1InfoItem1> <odf:name> "SubSubTarget1InfoItem1" .
+<ex:SubInfoItem1> a <odf:InfoItem> .
 
-<ex:InfoItem1> <odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
+<ex:InfoItem1> a <odf:InfoItem> .
 
-<ex:UniqueTargetID_1> <odf:id> "UniqueTargetID_1" ;
-	<odf:object> <ex:SubTarget1> .
+<ex:UniqueTargetID_1> <odf:object> <ex:SubTarget1> .
 
-<ex:SubInfoItem1> <odf:name> "SubInfoItem1" .
+<ex:SubSubTarget1> <odf:type> "someType" .
 
-<ex:SubTarget1> <odf:type> "someType" .
+<ex:SubTarget2InfoItem1> a <odf:InfoItem> .
 
-<ex:InfoItem2> <odf:value> <tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> .
-
-<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem2> .
-
-<ex:SubTarget1> <odf:infoItem> <ex:SubInfoItem1> .
-
-<ex:UniqueTargetID_1> a <odf:Object> .
-
-<tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> <tag:complexible:pinto:unixTime> "0"^^<http://www.w3.org/2001/XMLSchema#long> .
-
-<ex:UniqueTargetID_1> <odf:type> "someType" .
+<ex:SubSubTarget1InfoItem1> a <odf:InfoItem> .
 
 <ex:SubTarget2> a <odf:Object> .
 
-<tag:complexible:pinto:cfcd208495d565ef66e7dff9f98764da> a <odf:Value> .
+<ex:InfoItem2> a <odf:InfoItem> .
 
-<ex:SubTarget2InfoItem1> <odf:name> "SubTarget2InfoItem1" .
+<ex:SubSubTarget1> a <odf:Object> .
 
-<ex:SubTarget2> <odf:type> "someType" .
+<ex:SubTarget1> <odf:object> <ex:SubSubTarget1> .
+
+<ex:UniqueTargetID_1> a <odf:Object> .
+
+<ex:InfoItem1> <odf:value> "Value3" .
+
+<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem2> .
+
+<ex:SubSubTarget1InfoItem1> <odf:value> "22.5" .
+
+<ex:InfoItem1> <odf:value> "Value1" .
+
+<ex:UniqueTargetID_1> <odf:object> <ex:SubTarget2> .

@@ -1,0 +1,39 @@
+@prefix ex:    <http://example.org/> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:InfoItem1>  a    <odf:InfoItem> ;
+        <odf:value>  "Value1" , "Value3" , "Value2" .
+
+<ex:UniqueTargetID_1>
+        a               <odf:Object> ;
+        <odf:infoItem>  <ex:InfoItem2> , <ex:InfoItem1> ;
+        <odf:object>    <ex:SubTarget2> , <ex:SubTarget1> ;
+        <odf:type>      "someType" .
+
+<ex:SubSubTarget1InfoItem1>
+        a            <odf:InfoItem> ;
+        <odf:value>  "22.5" .
+
+<ex:SubTarget2>  a      <odf:Object> ;
+        <odf:infoItem>  <ex:SubTarget2InfoItem1> ;
+        <odf:type>      "someType" .
+
+<ex:InfoItem2>  a    <odf:InfoItem> ;
+        <odf:value>  "Value" .
+
+<ex:SubInfoItem1>  a  <odf:InfoItem> .
+
+<ex:SubTarget1>  a      <odf:Object> ;
+        <odf:infoItem>  <ex:SubInfoItem1> ;
+        <odf:object>    <ex:SubSubTarget1> ;
+        <odf:type>      "someType" .
+
+<ex:SubTarget2InfoItem1>
+        a            <odf:InfoItem> ;
+        <odf:value>  "34.6" .
+
+<ex:SubSubTarget1>  a   <odf:Object> ;
+        <odf:infoItem>  <ex:SubSubTarget1InfoItem1> ;
+        <odf:type>      "someType" .
