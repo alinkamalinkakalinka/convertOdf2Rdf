@@ -49,7 +49,7 @@ public class ModelWraper {
 
         //ByteArrayInputStream inputStream = modelModifier.modifyModel(aGraph);
 
-        //model.read(inputStream, "TTL");
+        //modelXml.read(inputStream, "TTL");
 
 
 

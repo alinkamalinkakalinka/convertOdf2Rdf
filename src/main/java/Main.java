@@ -3,8 +3,10 @@
  */
 
 import com.complexible.pinto.RDFMapper;
-import model.Objects;
+import modelRdf.ObjectsRdf;
+import modelXml.Objects;
 import org.openrdf.model.Model;
+import org.openrdf.model.impl.SimpleValueFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -32,8 +34,17 @@ public class Main {
             ModelModifier modelModifier = new ModelModifier();
             ModelWraper modelWraper = new ModelWraper();
 
-            //modelModifier.modifyModel(aGraph);
+            Model aGraph2 = modelModifier.modifyModel(aGraph);
+
+            aGraph2.subjects();
+            System.out.println(aGraph2.subjects());
+
+            ObjectsRdf objects1 = RDFMapper.create().readValue(aGraph,
+                    ObjectsRdf.class,
+                    SimpleValueFactory.getInstance().createIRI("ex:UniqueTargetID_1"));
+
             modelWraper.wrapModel(aGraph);
+
 
 
         } catch (JAXBException e) {

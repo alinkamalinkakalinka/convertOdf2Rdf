@@ -1,3 +1,4 @@
+import org.apache.jena.rdf.model.RDFNode;
 import org.openrdf.model.*;
 import org.openrdf.model.IRI;
 import org.openrdf.model.impl.LinkedHashModel;
@@ -24,10 +25,9 @@ public class ModelModifier {
     public Model modifyModel(Model aGraph) throws FileNotFoundException {
 
         HashMap<Resource, Resource> map = new HashMap<>();
+        HashMap<String , String> mapValues = new HashMap<>();
         ValueFactory factory = SimpleValueFactory.getInstance();
         Model model = new LinkedHashModel();
-
-        model.setNamespace("ex", "http://example.org/");
 
         //ByteArrayOutputStream stream = new ByteArrayOutputStream();
         FileOutputStream stream = new FileOutputStream("test.rdf");
@@ -37,10 +37,12 @@ public class ModelModifier {
 
             for (Statement st : aGraph) {
 
-                if (st.getPredicate().toString().equals("odf:id") || st.getPredicate().toString().equals("odf:name")) {
+                if (st.getPredicate().toString().equals("odf:id")
+                        || st.getPredicate().toString().equals("odf:name")) {
                     IRI object = factory.createIRI("ex:" + st.getObject().stringValue());
                     map.put(st.getSubject(), object);
                 }
+
             }
 
             for (Statement st : aGraph) {
@@ -58,13 +60,31 @@ public class ModelModifier {
                         object = factory.createIRI(map.get(st.getObject()).toString());
                     }
 
-                    if (!subject.stringValue().contains("pinto")) {
+                    //if (!subject.stringValue().contains("pinto")) {
                         model.add(subject, st.getPredicate(), object);
-                    }
+                    //}
                 }
 
             }
 
+
+
+
+/*            for (Statement st: model) {
+
+                if (st.getSubject().toString().contains("pinto") && st.getPredicate().toString().equals("odf:value")) {
+                    mapValues.put(st.getSubject().toString(), st.getObject().stringValue());
+                }
+
+                if (mapValues.containsKey(st.getSubject().toString())) {
+                    model.remove(st);
+                } else if (mapValues.containsKey(st.getSubject().toString()) && !st.getSubject().toString().contains("pinto") && st.getPredicate().toString().equals("odf:value")){
+
+                    model.add(st.getSubject(), st.getPredicate(), factory.createLiteral(mapValues.get(st.getSubject().toString())));
+
+                }
+
+            }*/
 
             writer.startRDF();
 

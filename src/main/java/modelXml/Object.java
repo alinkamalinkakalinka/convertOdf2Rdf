@@ -1,4 +1,4 @@
-package model;
+package modelXml;
 
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfProperty;
@@ -6,7 +6,6 @@ import com.complexible.pinto.annotations.RdfsClass;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 

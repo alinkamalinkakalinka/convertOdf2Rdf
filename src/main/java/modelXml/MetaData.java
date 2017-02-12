@@ -1,4 +1,4 @@
-package model;
+package modelXml;
 
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfsClass;
