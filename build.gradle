@@ -65,7 +65,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.jena/jena-core
     compile group: 'org.apache.jena', name: 'jena-arq', version: '3.1.0'
 
-    compile fileTree(dir: 'lib', include: 'pinto.jar')
+    compile fileTree(dir: 'libs', include: 'pinto.jar')
 
 
     testCompile 'junit:junit:4.11'
