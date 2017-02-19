@@ -4,7 +4,7 @@
 
 <tag:complexible:pinto:28fc02baefa3322ed9d9334266affd7c> <odf:value> "Value3" .
 
-<ex:InfoItem2> <odf:value> <tag:complexible:pinto:e6ad0b91cc46bceeb2ecc902a4e60708> .
+<ex:InfoItem2> <odf:value> "Value" .
 
 <ex:SubSubTarget1> <odf:infoItem> <ex:SubSubTarget1InfoItem1> .
 
@@ -14,7 +14,7 @@
 
 <ex:UniqueTargetID_1> <odf:object> <ex:SubTarget2> .
 
-<ex:SubSubTarget1InfoItem1> <odf:value> <tag:complexible:pinto:8135812bebc1a87626bbabe6797e102f> .
+<ex:SubSubTarget1InfoItem1> <odf:value> "22.5" .
 
 <ex:SubTarget1> <odf:object> <ex:SubSubTarget1> .
 
@@ -23,7 +23,7 @@
 
 <ex:SubTarget2InfoItem1> a <odf:InfoItem> .
 
-<ex:InfoItem1> <odf:value> <tag:complexible:pinto:592129efafcc1743da25741a8d5bcbda> , <tag:complexible:pinto:236866614ad4a6d9e52f490270654d8d> .
+<ex:InfoItem1> <odf:value> "Value1" , "Value2" .
 
 <tag:complexible:pinto:592129efafcc1743da25741a8d5bcbda> <odf:unixTime> "0"^^<http://www.w3.org/2001/XMLSchema#long> .
 
@@ -40,7 +40,7 @@
 	<odf:type> "someType" ;
 	a <odf:Object> .
 
-<ex:SubTarget2InfoItem1> <odf:value> <tag:complexible:pinto:5c88fde336881a7c7d14bc5ee93d71eb> .
+<ex:SubTarget2InfoItem1> <odf:value> "34.6" .
 
 <ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem1> ;
 	<odf:object> <ex:SubTarget1> .
@@ -53,7 +53,7 @@
 
 <tag:complexible:pinto:236866614ad4a6d9e52f490270654d8d> <odf:value> "Value2" .
 
-<ex:InfoItem1> <odf:value> <tag:complexible:pinto:28fc02baefa3322ed9d9334266affd7c> .
+<ex:InfoItem1> <odf:value> "Value3" .
 
 <ex:UniqueTargetID_1> <odf:type> "someType" .
 

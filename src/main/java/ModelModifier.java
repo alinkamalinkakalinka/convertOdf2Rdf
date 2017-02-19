@@ -28,6 +28,7 @@ public class ModelModifier {
         HashMap<String , String> mapValues = new HashMap<>();
         ValueFactory factory = SimpleValueFactory.getInstance();
         Model model = new LinkedHashModel();
+        Model model2 = new LinkedHashModel();
 
         //ByteArrayOutputStream stream = new ByteArrayOutputStream();
         FileOutputStream stream = new FileOutputStream("test.rdf");
@@ -60,9 +61,9 @@ public class ModelModifier {
                         object = factory.createIRI(map.get(st.getObject()).toString());
                     }
 
-                    //if (!subject.stringValue().contains("pinto")) {
-                        model.add(subject, st.getPredicate(), object);
-                    //}
+                    //if (!subject.stringValue().contains("pinto") && !object.stringValue().contains("odf:Objects")) {
+                    model.add(subject, st.getPredicate(), object);
+                    ///}
                 }
 
             }
@@ -70,39 +71,50 @@ public class ModelModifier {
 
 
 
-/*            for (Statement st: model) {
+            for (Statement st: model) {
 
                 if (st.getSubject().toString().contains("pinto") && st.getPredicate().toString().equals("odf:value")) {
                     mapValues.put(st.getSubject().toString(), st.getObject().stringValue());
                 }
+            }
 
-                if (mapValues.containsKey(st.getSubject().toString())) {
-                    model.remove(st);
-                } else if (mapValues.containsKey(st.getSubject().toString()) && !st.getSubject().toString().contains("pinto") && st.getPredicate().toString().equals("odf:value")){
+            for (Statement st: model) {
 
-                    model.add(st.getSubject(), st.getPredicate(), factory.createLiteral(mapValues.get(st.getSubject().toString())));
+                //if (!mapValues.containsKey(st.getSubject().toString())) {
 
+                if (mapValues.containsKey(st.getObject().toString())
+                        && !st.getSubject().toString().contains("pinto")
+                        && st.getPredicate().toString().equals("odf:value")) {
+
+                    model2.add(st.getSubject(), st.getPredicate(), factory.createLiteral(mapValues.get(st.getObject().toString())));
+                } else {
+                    model2.add(st);
                 }
 
-            }*/
+                //}
+
+            }
+
+            //System.out.println(mapValues);
+
 
             writer.startRDF();
 
-            for (Statement st: model) {
+            for (Statement st: model2) {
                 writer.handleStatement(st);
             }
 
             writer.endRDF();
 
 
-            System.out.println(map);
+            //System.out.println(map);
 
         }
         catch (RDFHandlerException e) {
             // oh no, do something!
         }
-        return model;
-                //new ByteArrayInputStream(stream.toByteArray());
+        return model2;
+        //new ByteArrayInputStream(stream.toByteArray());
     }
 
 

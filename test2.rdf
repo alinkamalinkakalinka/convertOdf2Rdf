@@ -15,14 +15,14 @@
 
 <ex:SubSubTarget1InfoItem1>
         a            <odf:InfoItem> ;
-        <odf:value>  <tag:complexible:pinto:8135812bebc1a87626bbabe6797e102f> .
+        <odf:value>  "22.5" .
 
 <ex:SubTarget2>  a      <odf:Object> ;
         <odf:infoItem>  <ex:SubTarget2InfoItem1> ;
         <odf:type>      "someType" .
 
 <ex:InfoItem2>  a    <odf:InfoItem> ;
-        <odf:value>  <tag:complexible:pinto:e6ad0b91cc46bceeb2ecc902a4e60708> .
+        <odf:value>  "Value" .
 
 <ex:SubInfoItem1>  a  <odf:InfoItem> .
 
@@ -57,11 +57,11 @@
 
 <ex:SubTarget2InfoItem1>
         a            <odf:InfoItem> ;
-        <odf:value>  <tag:complexible:pinto:5c88fde336881a7c7d14bc5ee93d71eb> .
+        <odf:value>  "34.6" .
 
 <ex:SubSubTarget1>  a   <odf:Object> ;
         <odf:infoItem>  <ex:SubSubTarget1InfoItem1> ;
         <odf:type>      "someType" .
 
 <ex:InfoItem1>  a    <odf:InfoItem> ;
-        <odf:value>  <tag:complexible:pinto:28fc02baefa3322ed9d9334266affd7c> , <tag:complexible:pinto:236866614ad4a6d9e52f490270654d8d> , <tag:complexible:pinto:592129efafcc1743da25741a8d5bcbda> .
+        <odf:value>  "Value3" , "Value2" , "Value1" .
