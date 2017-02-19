@@ -1,3 +1,4 @@
+/*
 package modelRdf;
 
 import com.complexible.pinto.Identifiable;
@@ -9,9 +10,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+*/
 /**
  * Created by aarunova on 2/12/17.
- */
+ *//*
+
 public class ObjectsRdf implements Identifiable{
 
     private String name;
@@ -57,3 +60,4 @@ public class ObjectsRdf implements Identifiable{
         this.object = object;
     }
 }
+*/

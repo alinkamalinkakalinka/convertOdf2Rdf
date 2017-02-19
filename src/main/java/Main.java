@@ -3,7 +3,7 @@
  */
 
 import com.complexible.pinto.RDFMapper;
-import modelRdf.ObjectsRdf;
+//import modelRdf.ObjectsRdf;
 import modelXml.Objects;
 import org.openrdf.model.Model;
 import org.openrdf.model.impl.SimpleValueFactory;
@@ -39,9 +39,9 @@ public class Main {
             aGraph2.subjects();
             System.out.println(aGraph2.subjects());
 
-            ObjectsRdf objects1 = RDFMapper.create().readValue(aGraph,
-                    ObjectsRdf.class,
-                    SimpleValueFactory.getInstance().createIRI("ex:UniqueTargetID_1"));
+            //ObjectsRdf objects1 = RDFMapper.create().readValue(aGraph,
+                    //ObjectsRdf.class,
+                    //SimpleValueFactory.getInstance().createIRI("ex:UniqueTargetID_1"));
 
             modelWraper.wrapModel(aGraph);
 
