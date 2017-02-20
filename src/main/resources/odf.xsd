@@ -23,7 +23,7 @@
 </xs:attribute> </xs:complexType>
 <xs:complexType name="ObjectType">
     <xs:sequence>
-        <xs:element name="id" type="qlmID" maxOccurs="unbounded"/>
+        <xs:element name="id" type="id" maxOccurs="unbounded"/>
         <xs:element ref="description" minOccurs="0"/>
         <xs:element ref="InfoItem" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="Object" minOccurs="0" maxOccurs="unbounded"/>
@@ -35,7 +35,7 @@
 </xs:complexType>
 <xs:complexType name="InfoItemType">
     <xs:sequence>
-        <xs:element name="name" type="qlmID" minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="name" type="id" minOccurs="0" maxOccurs="unbounded">
 <xs:annotation>
 <xs:documentation>Optional list of other names for the same
 InfoItem.</xs:documentation> </xs:annotation>
@@ -72,7 +72,7 @@ attributes.</xs:documentation> </xs:annotation>
 </xs:anyAttribute> </xs:extension>
 </xs:simpleContent> </xs:complexType>
 </xs:element>
-<xs:complexType name="qlmID">
+<xs:complexType name="id">
 <xs:simpleContent>
 <xs:extension base="xs:string">
 <xs:attribute name="idType" type="xs:string" use="optional"> <xs:annotation>

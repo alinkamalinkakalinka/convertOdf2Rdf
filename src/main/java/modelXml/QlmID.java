@@ -1,24 +1,26 @@
 package modelXml;
 
+import com.complexible.pinto.annotations.RdfId;
+import com.complexible.pinto.annotations.RdfProperty;
+import com.complexible.pinto.annotations.RdfsClass;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * Created by aarunova on 12/11/16.
  */
+
+@RdfsClass("odf:QlmID")
+@XmlRootElement(name = "id")
 public class QlmID {
 
     private String id;
     private String tagType;
     private Date startDate;
     private Date endDate;
-
-    public QlmID() {}
-
-    public QlmID(String id){
-        this.id = id;
-    }
 
     public QlmID(String id, String tagType, Date startDate, Date endDate) {
         this.id = id;
@@ -27,7 +29,13 @@ public class QlmID {
         this.endDate = endDate;
     }
 
-    @XmlElement
+    public QlmID() {
+    }
+
+
+    @RdfId
+    @RdfProperty("dct:id")
+    @XmlElement (name = "id")
     public String getId() {
         return id;
     }
@@ -36,7 +44,9 @@ public class QlmID {
         this.id = id;
     }
 
-    @XmlAttribute
+    @RdfId
+    @RdfProperty("odf:tagType")
+    @XmlAttribute (name = "tagType")
     public String getTagType() {
         return tagType;
     }
@@ -45,6 +55,8 @@ public class QlmID {
         this.tagType = tagType;
     }
 
+    @RdfId
+    @RdfProperty("time:startDate")
     @XmlAttribute
     public Date getStartDate() {
         return startDate;
@@ -54,6 +66,8 @@ public class QlmID {
         this.startDate = startDate;
     }
 
+    @RdfId
+    @RdfProperty("time:endDate")
     @XmlAttribute
     public Date getEndDate() {
         return endDate;

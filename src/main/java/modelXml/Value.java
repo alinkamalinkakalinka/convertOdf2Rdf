@@ -2,17 +2,19 @@ package modelXml;
 
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfProperty;
+import com.complexible.pinto.annotations.RdfsClass;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by aarunova on 12/11/16.
  */
 
-//@RdfsClass("odf:value")
+@RdfsClass("odf:Value")
 @XmlRootElement (name = "value")
 public class Value {
 
@@ -31,6 +33,7 @@ public class Value {
     }
 
     @RdfId
+    @RdfProperty("odf:type")
     @XmlAttribute
     public String getType() {
         return type;
@@ -41,7 +44,7 @@ public class Value {
     }
 
     @RdfId
-    @RdfProperty("odf:dateTime")
+    @RdfProperty("dct:dateTime")
     @XmlAttribute
     public Date getDateTime() {
         return dateTime;
@@ -52,7 +55,7 @@ public class Value {
     }
 
     @RdfId
-    @RdfProperty("odf:unixTime")
+    @RdfProperty("time:unixTime")
     @XmlAttribute
     public long getUnixTime() {
         return unixTime;
@@ -63,7 +66,7 @@ public class Value {
     }
 
     @RdfId
-    @RdfProperty("odf:value")
+    @RdfProperty("rdf:value")
     @XmlValue
     public String getValue() {
         return value;

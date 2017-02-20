@@ -24,6 +24,7 @@ public class ModelWraper {
         prefixes.put("xsd", "http://www.w3.org/2001/XMLSchema#");
         prefixes.put("ex", "http://example.org/");
         prefixes.put("dct", "http://purl.org/dc/terms/");
+        prefixes.put("time", "http://www.w3.org/2006/time#");
 
         model.setNsPrefixes(prefixes);
 

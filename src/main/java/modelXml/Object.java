@@ -7,6 +7,7 @@ import com.complexible.pinto.annotations.RdfsClass;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,14 +18,14 @@ import java.util.List;
 @XmlRootElement (name = "Object")
 public class Object {
 
-    private String id;
+    private QlmID id;
     private String type;
     private String udef;
     private String description;
     private List<InfoItem> infoItem;
     private List<Object> objectList;
 
-    public Object(String id, String type, String udef, String description, List<InfoItem> infoItem, List<Object> objectList){
+    public Object(QlmID id, String type, String udef, String description, List<InfoItem> infoItem, List<Object> objectList){
         this.id = id;
         this.type = type;
         this.udef = udef;
@@ -80,7 +81,7 @@ public class Object {
     }
 
     @RdfId
-    @RdfProperty("odf:description")
+    @RdfProperty("dct:description")
     @XmlElement
     public String getDescription() {
         return description;
@@ -92,11 +93,10 @@ public class Object {
 
     @RdfId
     @RdfProperty("odf:id")
-    public String getId() {
-        return id;
-    }
+    @XmlElement (name = "id")
+    public QlmID getId() { return id; }
 
-    public void setId(String id) {
+    public void setId(QlmID id) {
         this.id = id;
     }
 }

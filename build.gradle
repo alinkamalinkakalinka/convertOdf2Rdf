@@ -62,10 +62,16 @@ dependencies {
     compile "org.slf4j:slf4j-api:1.7.7"
     compile "org.slf4j:slf4j-jdk14:1.7.7"
 
+    //compile "com.sun.xml.bind:jaxb-xjc:2.1.2"
+    compile "com.sun.xsom:xsom:20140925"
+
+
     // https://mvnrepository.com/artifact/org.apache.jena/jena-core
     compile group: 'org.apache.jena', name: 'jena-arq', version: '3.1.0'
 
+
     compile fileTree(dir: 'libs', include: 'pinto-2.0.1-SNAPSHOT.jar')
+    compile fileTree(dir: 'libs', include: 'ontmalizer-1.0.2.jar')
 
 
     testCompile 'junit:junit:4.11'

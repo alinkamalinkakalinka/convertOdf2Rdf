@@ -3,6 +3,7 @@ import org.openrdf.model.*;
 import org.openrdf.model.IRI;
 import org.openrdf.model.impl.LinkedHashModel;
 import org.openrdf.model.impl.SimpleValueFactory;
+import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.Rio;
@@ -51,8 +52,8 @@ public class ModelModifier {
                 Resource subject = st.getSubject();
                 Value object = st.getObject();
 
-                if (!st.getPredicate().toString().equals("odf:id")
-                        && !st.getPredicate().toString().equals("odf:name")) {
+                if (//!st.getPredicate().toString().equals("odf:id")
+                         !st.getPredicate().toString().equals("odf:name")) {
 
                     if (map.containsKey(st.getSubject())) {
                         subject = factory.createIRI(map.get(st.getSubject()).toString());
@@ -73,25 +74,47 @@ public class ModelModifier {
 
             for (Statement st: model) {
 
-                if (st.getSubject().toString().contains("pinto") && st.getPredicate().toString().equals("odf:value")) {
-                    mapValues.put(st.getSubject().toString(), st.getObject().stringValue());
+                if (st.getSubject().toString().contains("pinto") && st.getPredicate().equals(RDF.VALUE)) {
+                    mapValues.put(st.getSubject().toString(), "ex:" + st.getObject().stringValue());
                 }
             }
 
+            System.out.println(mapValues);
+
             for (Statement st: model) {
+
+                Resource subject = st.getSubject();
+                Value object = st.getObject();
 
                 //if (!mapValues.containsKey(st.getSubject().toString())) {
 
-                if (mapValues.containsKey(st.getObject().toString())
+
+
+/*                if (mapValues.containsKey(st.getObject().toString())
                         && !st.getSubject().toString().contains("pinto")
                         && st.getPredicate().toString().equals("odf:value")) {
 
                     model2.add(st.getSubject(), st.getPredicate(), factory.createLiteral(mapValues.get(st.getObject().toString())));
                 } else {
                     model2.add(st);
-                }
+                }*/
 
                 //}
+
+                if (!st.getPredicate().toString().equals("time:unixTime") && !st.getObject().toString().equals("0")) {
+
+
+                    if (mapValues.containsKey(st.getSubject().toString())) {
+                        subject = factory.createIRI(mapValues.get(st.getSubject().toString()));
+                    }
+                    if (mapValues.containsKey(st.getObject().toString())) {
+                        object = factory.createIRI(mapValues.get(st.getObject().toString()));
+                    }
+
+                    //if (!subject.stringValue().contains("pinto") && !object.stringValue().contains("odf:Objects")) {
+                    model2.add(subject, st.getPredicate(), object);
+                    ///}
+                }
 
             }
 
