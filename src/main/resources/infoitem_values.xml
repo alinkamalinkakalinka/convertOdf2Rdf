@@ -3,27 +3,27 @@
 <Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
     <Object type="someType">
         <id tagType="blabla">UniqueTargetID_1</id>
-        <InfoItem name="InfoItem1">
+        <InfoItem id="InfoItem1">
             <value type="blabla23">Value1</value>
             <value>Value2</value>
             <value>Value3</value>
         </InfoItem>
-        <InfoItem name="InfoItem2">
+        <InfoItem id="InfoItem2">
             <value>Value</value>
         </InfoItem>
         <Object type="someType">
             <id>SubTarget1</id>
-            <InfoItem name="SubInfoItem1"></InfoItem>
+            <InfoItem id="SubInfoItem1"></InfoItem>
             <Object type="someType">
                 <id>SubSubTarget1</id>
-                <InfoItem name="SubSubTarget1InfoItem1">
+                <InfoItem id="SubSubTarget1InfoItem1">
                     <value>22.5</value>
                 </InfoItem>
             </Object>
         </Object>
         <Object type="someType">
             <id>SubTarget2</id>
-            <InfoItem name="SubTarget2InfoItem1">
+            <InfoItem id="SubTarget2InfoItem1">
                 <value>34.6</value>
             </InfoItem>
         </Object>

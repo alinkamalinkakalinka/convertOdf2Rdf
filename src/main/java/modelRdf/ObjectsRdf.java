@@ -1,23 +1,18 @@
-/*
 package modelRdf;
 
 import com.complexible.pinto.Identifiable;
 import com.complexible.pinto.impl.IdentifiableImpl;
-import com.google.common.collect.Sets;
 import org.openrdf.model.Resource;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-*/
 /**
  * Created by aarunova on 2/12/17.
- *//*
+ */
 
 public class ObjectsRdf implements Identifiable{
 
-    private String name;
+    private String id;
     private String object;
 
     private Identifiable mIdentifiable = new IdentifiableImpl();
@@ -43,21 +38,20 @@ public class ObjectsRdf implements Identifiable{
 
         ObjectsRdf that = (ObjectsRdf) theObj;
 
-        return name == that.name
+        return id == that.id
                 && object == that.object;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, object);
+        return Objects.hash(id, object);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setObject(String object) {
         this.object = object;
     }
 }
-*/

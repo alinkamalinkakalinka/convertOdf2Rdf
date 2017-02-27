@@ -4,8 +4,10 @@
 
 import com.complexible.pinto.RDFMapper;
 //import modelRdf.ObjectsRdf;
+import modelRdf.ObjectsRdf;
 import modelXml.Objects;
 import org.openrdf.model.Model;
+import org.openrdf.model.impl.SimpleValueFactory;
 import tr.com.srdc.ontmalizer.XSD2OWLMapper;
 
 import javax.xml.bind.JAXBContext;
@@ -43,16 +45,19 @@ public class Main {
             ModelWraper modelWraper = new ModelWraper();
 
             Model aGraph2 = modelModifier.modifyModel(aGraph);
-
-            aGraph2.subjects();
-            System.out.println(aGraph2.subjects());
-
-            //ObjectsRdf objects1 = RDFMapper.create().readValue(aGraph,
-                    //ObjectsRdf.class,
-                    //SimpleValueFactory.getInstance().createIRI("ex:UniqueTargetID_1"));
-
             modelWraper.wrapModel(aGraph);
 
+
+            //TODO
+            //step: convert rdf to java beans by means of pinto library
+            //here I get only Identifiable object but id and object are null.
+            //Unsure regarding creating a new model for converting back to xml (modelRdf), maybe the same fits too (modelXml)
+
+            ObjectsRdf objects1 = RDFMapper.create().readValue(aGraph,
+                    ObjectsRdf.class,
+                    SimpleValueFactory.getInstance().createIRI("ex:UniqueTargetID_1"));
+
+            System.out.println(objects1);
 
 
         } catch (JAXBException e) {
