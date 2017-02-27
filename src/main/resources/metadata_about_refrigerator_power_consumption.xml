@@ -3,24 +3,24 @@
 <Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
     <Object>
         <id>SmartFridge22334411</id>
-        <InfoItem id="PowerConsumption">
+        <InfoItem name="PowerConsumption">
             <MetaData>
-                <InfoItem id="format">
+                <InfoItem name="format">
                     <value type="xs:string">xs:double</value>
                 </InfoItem>
-                <InfoItem id="latency">
+                <InfoItem name="latency">
                     <value type="xs:int">5</value>
                 </InfoItem>
-                <InfoItem id="readable">
+                <InfoItem name="readable">
                     <value type="xs:boolean">true</value>
                 </InfoItem>
-                <InfoItem id="writable">
+                <InfoItem name="writable">
                     <value type="xs:boolean">false</value>
                 </InfoItem>
-                <InfoItem id="unit">
+                <InfoItem name="unit">
                     <value type="xs:string">Watts</value>
                 </InfoItem>
-                <InfoItem id="accuracy">
+                <InfoItem name="accuracy">
                     <value type="xs:double">1</value>
                 </InfoItem>
             </MetaData>

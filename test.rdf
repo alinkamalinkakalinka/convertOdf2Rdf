@@ -2,9 +2,13 @@
 <tag:complexible:pinto:bdc2cd81921f521d457970ee6f41f3db> a <odf:Objects> ;
 	<odf:object> <ex:UniqueTargetID_1> .
 
+<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem2> .
+
 <ex:SubTarget2> a <odf:Object> .
 
 <ex:SubSubTarget1> <odf:type> "someType" .
+
+<ex:InfoItem1> a <odf:InfoItem> .
 
 <ex:UniqueTargetID_1> <odf:id> <ex:UniqueTargetID_1_id> .
 
@@ -16,8 +20,6 @@
 
 <ex:SubTarget2_id> a <odf:QlmID> .
 
-<ex:UniqueTargetID_1> <odf:infoItem> <tag:complexible:pinto:e46f8e4c38eb4672829544c877c27c97> .
-
 <ex:SubTarget2> <odf:type> "someType" .
 
 <ex:SubTarget1> <odf:id> <ex:SubTarget1_id> .
@@ -28,9 +30,7 @@
 
 <ex:Value2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Value2" .
 
-<tag:complexible:pinto:0d54b8b31721ff0323b304ff582ececf> a <odf:InfoItem> .
-
-<ex:SubSubTarget1> <odf:infoItem> <tag:complexible:pinto:10768bebb5ba117c1616d438c8a360ce> .
+<ex:InfoItem1> <odf:value> <ex:Value3> .
 
 <ex:Value> a <odf:Value> .
 
@@ -38,31 +38,26 @@
 
 <ex:34.6> a <odf:Value> .
 
+<ex:SubTarget1> <odf:infoItem> <ex:SubInfoItem1> .
+
+<ex:SubTarget2> <odf:infoItem> <ex:SubTarget2InfoItem1> .
+
+<ex:InfoItem2> a <odf:InfoItem> .
+
 <ex:SubSubTarget1> a <odf:Object> .
 
 <ex:UniqueTargetID_1_id> <odf:tagType> "blabla" .
 
-<tag:complexible:pinto:6c1602a476674307bb1732449fd5dd40> <odf:value> <ex:Value> .
-
 <ex:Value1> <odf:type> "blabla23" .
 
-<tag:complexible:pinto:e46f8e4c38eb4672829544c877c27c97> a <odf:InfoItem> .
+<ex:SubTarget2InfoItem1> <odf:value> <ex:34.6> .
 
-<ex:SubTarget1> <odf:type> "someType" .
-
-<tag:complexible:pinto:e46f8e4c38eb4672829544c877c27c97> <odf:value> <ex:Value2> .
-
-<ex:SubTarget1> a <odf:Object> .
-
-<tag:complexible:pinto:10768bebb5ba117c1616d438c8a360ce> <odf:value> <ex:22.5> .
-
-<tag:complexible:pinto:d41d8cd98f00b204e9800998ecf8427e> a <odf:InfoItem> .
+<ex:SubTarget1> <odf:type> "someType" ;
+	a <odf:Object> .
 
 <ex:Value> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Value" .
 
 <ex:SubTarget1_id> a <odf:QlmID> .
-
-<tag:complexible:pinto:e46f8e4c38eb4672829544c877c27c97> <odf:value> <ex:Value3> .
 
 <ex:Value1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Value1" .
 
@@ -70,36 +65,41 @@
 
 <ex:Value3> a <odf:Value> .
 
-<ex:SubTarget2> <odf:infoItem> <tag:complexible:pinto:0d54b8b31721ff0323b304ff582ececf> .
+<ex:SubSubTarget1InfoItem1> a <odf:InfoItem> .
 
 <ex:SubSubTarget1_id> <dct:id> "SubSubTarget1" .
 
 <ex:Value3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Value3" .
 
-<ex:UniqueTargetID_1> <odf:infoItem> <tag:complexible:pinto:6c1602a476674307bb1732449fd5dd40> .
-
 <ex:UniqueTargetID_1_id> <dct:id> "UniqueTargetID_1" .
 
-<tag:complexible:pinto:e46f8e4c38eb4672829544c877c27c97> <odf:value> <ex:Value1> .
-
-<tag:complexible:pinto:10768bebb5ba117c1616d438c8a360ce> a <odf:InfoItem> .
+<ex:SubInfoItem1> a <odf:InfoItem> .
 
 <ex:SubTarget2_id> <dct:id> "SubTarget2" .
+
+<ex:UniqueTargetID_1> <odf:infoItem> <ex:InfoItem1> .
 
 <ex:22.5> a <odf:Value> .
 
 <ex:Value1> a <odf:Value> .
 
+<ex:InfoItem1> <odf:value> <ex:Value2> .
+
 <ex:UniqueTargetID_1> <odf:object> <ex:SubTarget1> .
+
+<ex:InfoItem2> <odf:value> <ex:Value> .
+
+<ex:InfoItem1> <odf:value> <ex:Value1> .
+
+<ex:SubSubTarget1> <odf:infoItem> <ex:SubSubTarget1InfoItem1> .
 
 <ex:34.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "34.6" .
 
-<ex:SubTarget1> <odf:infoItem> <tag:complexible:pinto:d41d8cd98f00b204e9800998ecf8427e> ;
-	<odf:object> <ex:SubSubTarget1> .
+<ex:SubTarget1> <odf:object> <ex:SubSubTarget1> .
 
-<tag:complexible:pinto:0d54b8b31721ff0323b304ff582ececf> <odf:value> <ex:34.6> .
+<ex:SubSubTarget1InfoItem1> <odf:value> <ex:22.5> .
 
-<tag:complexible:pinto:6c1602a476674307bb1732449fd5dd40> a <odf:InfoItem> .
+<ex:SubTarget2InfoItem1> a <odf:InfoItem> .
 
 <ex:UniqueTargetID_1> a <odf:Object> ;
 	<odf:type> "someType" .

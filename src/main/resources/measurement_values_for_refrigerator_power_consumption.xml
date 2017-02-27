@@ -3,7 +3,7 @@
 <Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
     <Object type="Refrigerator Assembly Product">
         <id>SmartFridge22334411</id>
-        <InfoItem udef="b.o.9_1.1.14.13" id="Consumed Electrical Power Measure">
+        <InfoItem udef="b.o.9_1.1.14.13" name="Consumed Electrical Power Measure">
             <description>Power consumption values with timestamp.</description>
             <value dateTime="2001-10-26T15:33:21">15.5</value>
             <value dateTime="2001-10-26T15:33:50">15.7</value>
