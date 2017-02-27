@@ -8,15 +8,12 @@ import modelRdf.ObjectsRdf;
 import modelXml.Objects;
 import org.openrdf.model.Model;
 import org.openrdf.model.impl.SimpleValueFactory;
-import tr.com.srdc.ontmalizer.XSD2OWLMapper;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.net.URISyntaxException;
 
 public class Main {
 
