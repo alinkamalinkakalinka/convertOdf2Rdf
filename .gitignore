@@ -1,7 +1,7 @@
 *.class
 .idea/
 build/
-gradle/
+.gradle/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
