@@ -33,7 +33,6 @@ public class QlmID {
     public QlmID() {
     }
 
-
     @RdfId
     @RdfProperty("dct:id")
     @XmlValue

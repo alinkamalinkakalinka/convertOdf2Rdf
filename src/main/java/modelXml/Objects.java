@@ -1,51 +1,47 @@
 package modelXml;
 
-import com.complexible.pinto.annotations.RdfId;
-import com.complexible.pinto.annotations.RdfProperty;
-import com.complexible.pinto.annotations.RdfsClass;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by aarunova on 12/11/16.
  */
 
-@RdfsClass("odf:Objects")
+//@RdfsClass("odf:Objects")
 @XmlRootElement (name = "Objects")
 public class Objects {
 
     private String name;
-    private List<Object> object;
+    private Collection<Object> objects = new ArrayList<>();
 
     public Objects() {}
 
-    public Objects(String name, List<Object> object) {
+    public Objects(String name, Collection<Object> objects) {
         super();
         this.name = name;
-        this.object = object;
+        this.objects = objects;
     }
 
-    @RdfId
-    @XmlAttribute
+
     public String getName() {
         return name;
     }
 
+    @XmlAttribute
     public void setName(String name) {
         this.name = name;
     }
 
-    @RdfId
-    @RdfProperty("odf:object")
-    @XmlElement (name = "Object")
-    public List<Object> getObject() {
-        return object;
+
+    public Collection<Object> getObjects() {
+        return objects;
     }
 
-    public void setObject(List<Object> object) {
-        this.object = object;
+    @XmlElement (name = "Object")
+    public void setObjects(Collection<Object> objects) {
+        this.objects = objects;
     }
 }

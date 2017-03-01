@@ -1,5 +1,15 @@
+import modelXml.Objects;
+import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
 import org.openrdf.model.*;
 import org.openrdf.model.IRI;
+import org.openrdf.model.Model;
+import org.openrdf.model.Resource;
+import org.openrdf.model.Statement;
+import org.openrdf.model.Value;
+import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.LinkedHashModel;
 import org.openrdf.model.impl.SimpleValueFactory;
 import org.openrdf.model.vocabulary.RDF;
@@ -7,8 +17,10 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.Rio;
 
+import javax.xml.bind.JAXB;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import static org.openrdf.rio.RDFFormat.TURTLE;
@@ -18,6 +30,9 @@ import static org.openrdf.rio.RDFFormat.TURTLE;
  */
 public class ModelModifier {
 
+    private final static String BASE_URI = "http://eis-biotope.iais.fraunhofer.de/";
+
+    private String hostname = "localhost";
 
 
     public Model modifyModel(Model aGraph) throws FileNotFoundException {
@@ -134,6 +149,33 @@ public class ModelModifier {
         return model2;
     }
 
+
+    public org.eclipse.rdf4j.model.Model odf2rdf() throws FileNotFoundException {
+        InputStream odfStructure = getClass().getResourceAsStream("simpleOdf.xml");
+
+        Objects beans = JAXB.unmarshal(odfStructure, Objects.class);
+
+        org.eclipse.rdf4j.model.ValueFactory vf = new MemValueFactory();
+        String objectBaseIri = BASE_URI + hostname + "/obj/";
+        String infoItemBaseIri = BASE_URI + hostname + "/infoitem/";
+
+        org.eclipse.rdf4j.model.Model model = new ModelBuilder().build();
+        beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
+        dumpModel(model);
+
+        return model;
+    }
+
+    private void dumpModel(org.eclipse.rdf4j.model.Model model) throws FileNotFoundException {
+        //RDFWriter rdfWriter = new TurtleWriter(System.out);
+
+        FileOutputStream stream = new FileOutputStream("test3.rdf");
+        org.eclipse.rdf4j.rio.RDFWriter rdfWriter = org.eclipse.rdf4j.rio.Rio.createWriter(RDFFormat.TURTLE, stream);
+
+        rdfWriter.startRDF();
+        model.forEach(statment -> rdfWriter.handleStatement(statment));
+        rdfWriter.endRDF();
+    }
 
 
 }

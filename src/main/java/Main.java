@@ -14,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class Main {
 
@@ -55,6 +56,9 @@ public class Main {
                     SimpleValueFactory.getInstance().createIRI("ex:UniqueTargetID_1"));
 
             System.out.println(objects1);
+
+            //InputStream odfStructure = getClass().getResourceAsStream("/resources/infoitem_values.xml");
+            modelModifier.odf2rdf();
 
 
         } catch (JAXBException e) {

@@ -1,102 +1,139 @@
 package modelXml;
 
-import com.complexible.pinto.annotations.RdfId;
-import com.complexible.pinto.annotations.RdfProperty;
-import com.complexible.pinto.annotations.RdfsClass;
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
+import vocabs.NS;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 /**
  * Created by aarunova on 12/11/16.
  */
 
-@RdfsClass("odf:Object")
+//@RdfsClass("odf:Object")
 @XmlRootElement (name = "Object")
 public class Object {
 
-    private QlmID id;
+    private String id;
     private String type;
     private String udef;
     private String description;
-    private List<InfoItem> infoItem;
-    private List<Object> objectList;
+    private Collection<InfoItem> infoItems = new ArrayList<>();
+    private Collection<Object> objects = new ArrayList<>();
 
-    public Object(QlmID id, String type, String udef, String description, List<InfoItem> infoItem, List<Object> objectList){
+    public Object(String id, String type, String udef, String description, List<InfoItem> infoItems, Collection<Object> objects){
         this.id = id;
         this.type = type;
         this.udef = udef;
         this.description = description;
-        this.infoItem = infoItem;
-        this.objectList = objectList;
+        this.infoItems = infoItems;
+        this.objects = objects;
     }
 
     public Object(){}
 
-    @RdfId
-    @RdfProperty("odf:type")
-    @XmlAttribute
+
     public String getType() {
         return type;
     }
 
+    @XmlAttribute
     public void setType(String type) {
         this.type = type;
     }
 
-    @RdfId
-    @RdfProperty("odf:infoItem")
+
+    public Collection<InfoItem> getInfoItems() {
+        return infoItems;
+    }
+
     @XmlElement (name = "InfoItem")
-    public List<InfoItem> getInfoItem() {
-        return infoItem;
+    public void setInfoItems(Collection<InfoItem> infoItems) {
+        this.infoItems = infoItems;
     }
 
-    public void setInfoItem(List<InfoItem> infoItem) {
-        this.infoItem = infoItem;
+
+    public Collection<Object> getObjects() {
+        return objects;
     }
 
-    @RdfId
-    @RdfProperty("odf:object")
     @XmlElement (name = "Object")
-    public List<Object> getObjectList() {
-        return objectList;
+    public void setObjects(Collection<Object> objects) {
+        this.objects = objects;
     }
 
-    public void setObjectList(List<Object> objectList) {
-        this.objectList = objectList;
-    }
 
-    @RdfId
-    @RdfProperty("odf:udef")
-    @XmlAttribute
     public String getUdef() {
         return udef;
     }
 
+    @XmlAttribute (name = "udef")
     public void setUdef(String udef) {
         this.udef = udef;
     }
 
-    @RdfId
-    @RdfProperty("dct:description")
-    @XmlElement
+
     public String getDescription() {
         return description;
     }
 
+    @XmlElement (name = "description")
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @RdfId
-    @RdfProperty("odf:id")
-    @XmlElement (name = "id")
-    public QlmID getId() { return id; }
 
-    public void setId(QlmID id) {
+    public String getId() { return id; }
+
+    @XmlElement (name = "id")
+    public void setId(String id) {
         this.id = id;
     }
+
+
+    public Model serialize(ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
+
+        IRI subject = vf.createIRI(objectBaseIri + id);
+
+        ModelBuilder builder = new ModelBuilder();
+        builder.setNamespace("dct", NS.DCT)
+                .setNamespace("odf", NS.ODF)
+                .setNamespace("rdf", RDF.NAMESPACE)
+
+                .subject(subject)
+                .add("rdf:type", "odf:Object")
+                .add("skos:notation", id);
+
+        Collection<Model> infoItemModels = new HashSet<>();
+        String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
+        infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(vf, objRelatedInfoItemBaseIri)));
+
+        Collection<Model> nestedObjectsModels = new HashSet<>();
+        String nestedObjectsBaseIri = subject.toString() + "/";
+        objects.forEach(object -> nestedObjectsModels.add(object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
+
+        infoItemModels.forEach(model -> {
+            builder.add("odf:infoitem", model.iterator().next().getSubject());
+        });
+
+        nestedObjectsModels.forEach(model -> {
+            builder.add("odf:object", model.iterator().next().getSubject());
+        });
+
+        Model objectModel = builder.build();
+        infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
+        nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
+
+        return objectModel;
+    }
+
 }

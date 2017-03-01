@@ -1,0 +1,7 @@
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/SmartHouse> a <http://eis-biotope.iais.fraunhofer.de/odf#Object> ;
+	<http://www.w3.org/2004/02/skos/core#notation> "SmartHouse" ;
+	<http://eis-biotope.iais.fraunhofer.de/odf#infoitem> <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/SmartHouse/BackDoor> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/SmartHouse/BackDoor> a <http://eis-biotope.iais.fraunhofer.de/odf#InfoItem> ;
+	<http://purl.org/dc/terms/title> "BackDoor" .
