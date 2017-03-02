@@ -2,6 +2,7 @@ package modelXml;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Namespace;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
@@ -10,10 +11,7 @@ import vocabs.NS;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by aarunova on 12/11/16.
@@ -99,19 +97,32 @@ public class Object {
         this.id = id;
     }
 
-
     public Model serialize(ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
 
         IRI subject = vf.createIRI(objectBaseIri + id);
 
+        //todo: namespaces
+        HashMap<String, String> elementsAndAttributes = new HashMap<>();
+        elementsAndAttributes.put("skos:notation", id);
+        elementsAndAttributes.put("odf:type", type);
+        elementsAndAttributes.put("dct:description", description);
+        elementsAndAttributes.put("odf:udef", udef);
+
         ModelBuilder builder = new ModelBuilder();
+
         builder.setNamespace("dct", NS.DCT)
                 .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE)
+                .setNamespace("rdf", RDF.NAMESPACE);
 
-                .subject(subject)
-                .add("rdf:type", "odf:Object")
-                .add("skos:notation", id);
+        builder.subject(subject)
+                .add("rdf:type", "odf:Object");
+                //.add("skos:notation", id);
+
+        for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
+            if (entry.getValue() != null) {
+                builder.add(entry.getKey(), entry.getValue());
+            }
+        }
 
         Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
@@ -132,6 +143,7 @@ public class Object {
         Model objectModel = builder.build();
         infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
         nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
+        Set<Namespace> nameSpaces = objectModel.getNamespaces();
 
         return objectModel;
     }

@@ -40,46 +40,42 @@ public class Value {
         this.value = value;
     }
 
-    @RdfId
-    @RdfProperty("odf:type")
-    @XmlAttribute
+
     public String getType() {
         return type;
     }
 
+    @XmlAttribute (name = "type")
     public void setType(String type) {
         this.type = type;
     }
 
-    @RdfId
-    @RdfProperty("dct:dateTime")
-    @XmlAttribute
+
     public String getDateTime() {
         return dateTime;
     }
 
+    @XmlAttribute (name = "dateTime")
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
-    @RdfId
-    @RdfProperty("time:unixTime")
-    @XmlAttribute
+
     public long getUnixTime() {
         return unixTime;
     }
 
+    @XmlAttribute
     public void setUnixTime(long unixTime) {
         this.unixTime = unixTime;
     }
 
-    @RdfId
-    @RdfProperty("rdf:value")
-    @XmlValue
+
     public String getValue() {
         return value;
     }
 
+    @XmlValue
     public void setValue(String value) {
         this.value = value;
     }

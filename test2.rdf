@@ -4,49 +4,84 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix time:  <http://www.w3.org/2006/time#> .
 
-<tag:complexible:pinto:c4e6059b6925fbcc60e6c6a727f8b5bd>
-        <tag:complexible:pinto:name>  "InfoItem2" .
-
-<tag:complexible:pinto:a105aeaebd8289c452a07e647b4b110a>
-        <tag:complexible:pinto:name>  "SubInfoItem1" .
-
-<tag:complexible:pinto:229c93b1d4d8e43f8cab7bb8ffcebd8a>
-        <tag:complexible:pinto:name>  "SubSubTarget1InfoItem1" .
-
-<tag:complexible:pinto:c61390a3508a23cdc0c82d4f6895dbf5>
+<tag:complexible:pinto:7ad81a3c5cb2ac874d55d792e9f46b1f>
         <tag:complexible:pinto:id>    "SubSubTarget1" ;
         <tag:complexible:pinto:infoItems>
-                <tag:complexible:pinto:229c93b1d4d8e43f8cab7bb8ffcebd8a> ;
+                <tag:complexible:pinto:98dedb4efacc99f971ab86aa45aac12d> ;
         <tag:complexible:pinto:type>  "someType" .
 
-<tag:complexible:pinto:eab2ed2b59e666694788e8600197a33d>
+<tag:complexible:pinto:7105eb4e4331ba6b39a6e34cd1376e60>
+        <tag:complexible:pinto:unixTime>
+                "0" ;
+        <tag:complexible:pinto:value>  "Value3" .
+
+<tag:complexible:pinto:d8d4a36cb29c5879631ed259d550feef>
         <tag:complexible:pinto:objects>
-                <tag:complexible:pinto:0587340028630fa682a77df0fb44b8ca> .
+                <tag:complexible:pinto:0706b963939fd319e2b6590333457eae> .
 
-<tag:complexible:pinto:35d0a69b0e43f5737dff6b547a328020>
-        <tag:complexible:pinto:id>    "SubTarget2" ;
-        <tag:complexible:pinto:infoItems>
-                <tag:complexible:pinto:dc53964f692edd5dbfce8d45c81a1e78> ;
-        <tag:complexible:pinto:type>  "someType" .
+<tag:complexible:pinto:f89296995702d3cea4417fde17fcd151>
+        <tag:complexible:pinto:unixTime>
+                "0" ;
+        <tag:complexible:pinto:value>  "22.5" .
 
-<tag:complexible:pinto:0587340028630fa682a77df0fb44b8ca>
-        <tag:complexible:pinto:id>    "UniqueTargetID_1" ;
-        <tag:complexible:pinto:infoItems>
-                <tag:complexible:pinto:09ad2606f744e9f96208d9c4e494f567> , <tag:complexible:pinto:c4e6059b6925fbcc60e6c6a727f8b5bd> ;
-        <tag:complexible:pinto:objects>
-                <tag:complexible:pinto:2ad17688e35cce9953973669cebacb1e> , <tag:complexible:pinto:35d0a69b0e43f5737dff6b547a328020> ;
-        <tag:complexible:pinto:type>  "someType" .
-
-<tag:complexible:pinto:09ad2606f744e9f96208d9c4e494f567>
-        <tag:complexible:pinto:name>  "InfoItem1" .
-
-<tag:complexible:pinto:2ad17688e35cce9953973669cebacb1e>
+<tag:complexible:pinto:0d8f37a4dc080261758ac3a54e67948f>
         <tag:complexible:pinto:id>    "SubTarget1" ;
         <tag:complexible:pinto:infoItems>
-                <tag:complexible:pinto:a105aeaebd8289c452a07e647b4b110a> ;
+                <tag:complexible:pinto:6860a219c3b64a420c9d3d68ad8617c8> ;
         <tag:complexible:pinto:objects>
-                <tag:complexible:pinto:c61390a3508a23cdc0c82d4f6895dbf5> ;
+                <tag:complexible:pinto:7ad81a3c5cb2ac874d55d792e9f46b1f> ;
         <tag:complexible:pinto:type>  "someType" .
 
-<tag:complexible:pinto:dc53964f692edd5dbfce8d45c81a1e78>
-        <tag:complexible:pinto:name>  "SubTarget2InfoItem1" .
+<tag:complexible:pinto:6860a219c3b64a420c9d3d68ad8617c8>
+        <tag:complexible:pinto:name>  "SubInfoItem1" .
+
+<tag:complexible:pinto:f0f5e097465ebae35abdfe151eae49e6>
+        <tag:complexible:pinto:name>    "InfoItem2" ;
+        <tag:complexible:pinto:values>  <tag:complexible:pinto:f212a6acbe11ba2a52e548e4f1c736dd> .
+
+<tag:complexible:pinto:60f1a066c2f74c6bfeb6b2c4c523a491>
+        <tag:complexible:pinto:type>   "blabla23" ;
+        <tag:complexible:pinto:unixTime>
+                "0" ;
+        <tag:complexible:pinto:value>  "Value1" .
+
+<tag:complexible:pinto:f212a6acbe11ba2a52e548e4f1c736dd>
+        <tag:complexible:pinto:unixTime>
+                "0" ;
+        <tag:complexible:pinto:value>  "Value" .
+
+<tag:complexible:pinto:0706b963939fd319e2b6590333457eae>
+        <tag:complexible:pinto:id>    "UniqueTargetID_1" ;
+        <tag:complexible:pinto:infoItems>
+                <tag:complexible:pinto:f0f5e097465ebae35abdfe151eae49e6> , <tag:complexible:pinto:13ecd9697d5a3c1d3478406f0227ee0d> ;
+        <tag:complexible:pinto:objects>
+                <tag:complexible:pinto:0d8f37a4dc080261758ac3a54e67948f> , <tag:complexible:pinto:9d12a86bb3915b69175767fea7b44247> ;
+        <tag:complexible:pinto:type>  "someType" .
+
+<tag:complexible:pinto:98dedb4efacc99f971ab86aa45aac12d>
+        <tag:complexible:pinto:name>    "SubSubTarget1InfoItem1" ;
+        <tag:complexible:pinto:values>  <tag:complexible:pinto:f89296995702d3cea4417fde17fcd151> .
+
+<tag:complexible:pinto:8052692c5053bc160aee70f23e1c53f5>
+        <tag:complexible:pinto:unixTime>
+                "0" ;
+        <tag:complexible:pinto:value>  "34.6" .
+
+<tag:complexible:pinto:13ecd9697d5a3c1d3478406f0227ee0d>
+        <tag:complexible:pinto:name>    "InfoItem1" ;
+        <tag:complexible:pinto:values>  <tag:complexible:pinto:7105eb4e4331ba6b39a6e34cd1376e60> , <tag:complexible:pinto:ece82b3f6a978c00352038c9183540f0> , <tag:complexible:pinto:60f1a066c2f74c6bfeb6b2c4c523a491> .
+
+<tag:complexible:pinto:a66fefe89ea2081450f2d1c37e1402ba>
+        <tag:complexible:pinto:name>    "SubTarget2InfoItem1" ;
+        <tag:complexible:pinto:values>  <tag:complexible:pinto:8052692c5053bc160aee70f23e1c53f5> .
+
+<tag:complexible:pinto:ece82b3f6a978c00352038c9183540f0>
+        <tag:complexible:pinto:unixTime>
+                "0" ;
+        <tag:complexible:pinto:value>  "Value2" .
+
+<tag:complexible:pinto:9d12a86bb3915b69175767fea7b44247>
+        <tag:complexible:pinto:id>    "SubTarget2" ;
+        <tag:complexible:pinto:infoItems>
+                <tag:complexible:pinto:a66fefe89ea2081450f2d1c37e1402ba> ;
+        <tag:complexible:pinto:type>  "someType" .

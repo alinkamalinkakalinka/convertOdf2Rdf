@@ -12,10 +12,7 @@ import vocabs.NS;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by aarunova on 12/11/16.
@@ -57,7 +54,7 @@ public class InfoItem {
         return values;
     }
 
-    @XmlElement (name = "values")
+    @XmlElement (name = "value")
     public void setValues(Collection<Value> values) {
         this.values = values;
     }
@@ -106,19 +103,31 @@ public class InfoItem {
     public Model serialize(ValueFactory vf, String infoItemBaseIri) {
         IRI subject = vf.createIRI(infoItemBaseIri + name);
 
+        HashMap<String, String> elementsAndAttributes = new HashMap<>();
+        elementsAndAttributes.put("dct:description", description);
+        elementsAndAttributes.put("odf:name", name);
+        elementsAndAttributes.put("odf:name1", name1);
+        elementsAndAttributes.put("odf:udef", udef);
+
         ModelBuilder builder = new ModelBuilder();
         builder.setNamespace("dct", NS.DCT)
                 .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE)
+                .setNamespace("rdf", RDF.NAMESPACE);
 
-                .subject(subject)
-                .add("rdf:type", "odf:InfoItem")
-                .add("dct:title", name);
+        builder.subject(subject)
+                .add("rdf:type", "odf:InfoItem");
+                //.add("dct:title", name);
 
 
-        if (description != null){
-            builder.add("dct:description", description);
+        for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
+            if (entry.getValue() != null) {
+                builder.add(entry.getKey(), entry.getValue());
+            }
         }
+
+        /*if (description != null){
+            builder.add("dct:description", description);
+        }*/
 
         Collection<Model> valueModels = new HashSet<>();
         values.forEach(value -> valueModels.add(value.serialize(vf)));

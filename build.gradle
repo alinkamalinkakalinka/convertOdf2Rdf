@@ -41,6 +41,10 @@ repositories {
     maven {
         url "http://maven.stardog.com"
     }
+
+    maven {
+        url "http://jenabean.googlecode.com/svn/trunk/repo"
+    }
 }
 
 dependencies {
@@ -73,6 +77,9 @@ dependencies {
     compile "org.eclipse.rdf4j:rdf4j-repository-sail:2.2"
     compile "org.eclipse.rdf4j:rdf4j-rio-rdfxml:2.2"
     compile "org.eclipse.rdf4j:rdf4j-repository-sparql:2.2"
+
+    // https://mvnrepository.com/artifact/com.thewebsemantic/jenabean
+    compile group: 'com.thewebsemantic', name: 'jenabean', version: '1.0.6'
 
 
     compile fileTree(dir: 'libs', include: 'pinto-2.0.1-SNAPSHOT.jar')

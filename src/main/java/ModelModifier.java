@@ -1,5 +1,7 @@
+import modelXml.Object;
 import modelXml.Objects;
 import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.model.Namespace;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.sail.memory.model.MemValueFactory;
@@ -16,12 +18,16 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.Rio;
+import vocabs.NS;
 
 import javax.xml.bind.JAXB;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import static org.openrdf.rio.RDFFormat.TURTLE;
 
@@ -156,11 +162,23 @@ public class ModelModifier {
         Objects beans = JAXB.unmarshal(odfStructure, Objects.class);
 
         org.eclipse.rdf4j.model.ValueFactory vf = new MemValueFactory();
+        String baseIRI = BASE_URI + hostname;
         String objectBaseIri = BASE_URI + hostname + "/obj/";
         String infoItemBaseIri = BASE_URI + hostname + "/infoitem/";
 
         org.eclipse.rdf4j.model.Model model = new ModelBuilder().build();
-        beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
+
+        Collection<Object> objects = beans.getObjects();
+
+        for (Object object : objects) {
+            org.eclipse.rdf4j.model.Model partialModel = object.serialize(vf, objectBaseIri, infoItemBaseIri);
+            model.addAll(partialModel);
+            Set<Namespace> nameSpaces = partialModel.getNamespaces();
+            nameSpaces.forEach(nameSpace -> model.setNamespace(nameSpace));
+
+        }
+
+        //beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
         dumpModel(model);
 
         return model;
@@ -173,6 +191,8 @@ public class ModelModifier {
         org.eclipse.rdf4j.rio.RDFWriter rdfWriter = org.eclipse.rdf4j.rio.Rio.createWriter(RDFFormat.TURTLE, stream);
 
         rdfWriter.startRDF();
+        Set<Namespace> nameSpaces = model.getNamespaces();
+        nameSpaces.forEach(nameSpace -> rdfWriter.handleNamespace(nameSpace.getPrefix(), nameSpace.getName()));
         model.forEach(statment -> rdfWriter.handleStatement(statment));
         rdfWriter.endRDF();
     }

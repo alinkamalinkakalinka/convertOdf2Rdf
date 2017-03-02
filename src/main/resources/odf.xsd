@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by Kary Främling (Aalto University) -->
-<!-- Root Data Model Schema -->
+<!-- Root Data BaseModel Schema -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="Object" type="ObjectType"/>
     <xs:element name="InfoItem" type="InfoItemType"/>
