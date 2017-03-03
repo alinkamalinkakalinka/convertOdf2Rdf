@@ -3,10 +3,7 @@ package modelXml;
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfProperty;
 import com.complexible.pinto.annotations.RdfsClass;
-import org.eclipse.rdf4j.model.BNode;
-import org.eclipse.rdf4j.model.Literal;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import vocabs.NS;
@@ -19,6 +16,7 @@ import javax.xml.bind.annotation.XmlValue;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by aarunova on 12/11/16.
@@ -84,18 +82,19 @@ public class QlmID {
     }
 
     public Model serialize(ValueFactory vf) {
-        Literal startDateValue = vf.createLiteral(DatatypeConverter.parseDateTime(startDate).getTime());
-        Literal endDateValue = vf.createLiteral(DatatypeConverter.parseDateTime(endDate).getTime());
+        //Literal startDateValue = vf.createLiteral(DatatypeConverter.parseDateTime(startDate).getTime());
+        //Literal endDateValue = vf.createLiteral(DatatypeConverter.parseDateTime(endDate).getTime());
         //Literal idValue = vf.createLiteral(id);
 
-        HashMap<String, Literal> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put("time:startDate", startDateValue);
-        elementsAndAttributes.put("time:endDate", endDateValue);
+        HashMap<String, String> elementsAndAttributes = new HashMap<>();
+        elementsAndAttributes.put("time:startDate", startDate);
+        elementsAndAttributes.put("time:endDate", endDate);
 
         BNode subject = vf.createBNode();
 
         ModelBuilder builder = new ModelBuilder();
         builder.setNamespace("dct", NS.DCT)
+                .setNamespace("time", NS.TIME)
                 .setNamespace("odf", NS.ODF)
                 .setNamespace("rdf", RDF.NAMESPACE);
 
@@ -103,12 +102,13 @@ public class QlmID {
                 .add("rdf:type", "odf:QlmID");
 
         if (id != null) {
-            builder.add("dct:id", id);
+            builder.add("odf:idValue", id);
         }
 
-        for (Map.Entry<String, Literal> entry : elementsAndAttributes.entrySet()) {
+        for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
-                builder.add(entry.getKey(), entry.getValue());
+                Literal dateValue = vf.createLiteral(DatatypeConverter.parseDateTime(entry.getValue()).getTime());
+                builder.add(entry.getKey(), dateValue);
             }
         }
 

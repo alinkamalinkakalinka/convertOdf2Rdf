@@ -1,3 +1,5 @@
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import modelXml.Object;
 import modelXml.Objects;
 import org.eclipse.rdf4j.model.*;
@@ -18,12 +20,16 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.Rio;
+import thewebsemantic.RDF2Bean;
 import vocabs.NS;
 
 import javax.xml.bind.JAXB;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -195,6 +201,24 @@ public class ModelModifier {
         nameSpaces.forEach(nameSpace -> rdfWriter.handleNamespace(nameSpace.getPrefix(), nameSpace.getName()));
         model.forEach(statment -> rdfWriter.handleStatement(statment));
         rdfWriter.endRDF();
+    }
+
+    public Collection<Objects> convert () throws FileNotFoundException, MalformedURLException {
+        URL url=getClass().getClassLoader().getResource("test3.rdf");
+        String path=url.toString();
+
+        FileOutputStream stream = new FileOutputStream("test3.rdf");
+        //final OntModel m = ModelFactory.createOntologyModel();
+        //m.write(stream);
+
+        com.hp.hpl.jena.rdf.model.Model m = ModelFactory.createDefaultModel() ;
+        m.read(new File("test3.rdf").toURL().toString()) ;
+
+        final RDF2Bean reader = new RDF2Bean(m);
+        final Collection<Objects> objectsCollection = reader.load(Objects.class);
+
+        return objectsCollection;
+
     }
 
 

@@ -1,9 +1,7 @@
 package modelXml;
 
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Namespace;
-import org.eclipse.rdf4j.model.ValueFactory;
+import org.apache.commons.collections.CollectionUtils;
+import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import vocabs.NS;
@@ -21,14 +19,14 @@ import java.util.*;
 @XmlRootElement (name = "Object")
 public class Object {
 
-    private String id;
+    private QlmID id;
     private String type;
     private String udef;
     private String description;
     private Collection<InfoItem> infoItems = new ArrayList<>();
     private Collection<Object> objects = new ArrayList<>();
 
-    public Object(String id, String type, String udef, String description, List<InfoItem> infoItems, Collection<Object> objects){
+    public Object(QlmID id, String type, String udef, String description, Collection<InfoItem> infoItems, Collection<Object> objects){
         this.id = id;
         this.type = type;
         this.udef = udef;
@@ -90,20 +88,20 @@ public class Object {
     }
 
 
-    public String getId() { return id; }
+    public QlmID getId() { return id; }
 
     @XmlElement (name = "id")
-    public void setId(String id) {
+    public void setId(QlmID id) {
         this.id = id;
     }
 
     public Model serialize(ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
 
-        IRI subject = vf.createIRI(objectBaseIri + id);
+        IRI subject = vf.createIRI(objectBaseIri + id.getId());
 
         //todo: namespaces
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put("skos:notation", id);
+        //elementsAndAttributes.put("skos:notation", id);
         elementsAndAttributes.put("odf:type", type);
         elementsAndAttributes.put("dct:description", description);
         elementsAndAttributes.put("odf:udef", udef);
@@ -124,13 +122,45 @@ public class Object {
             }
         }
 
+        Model objectModel = builder.build();
+
+        Model idModel = new ModelBuilder().build();
+        idModel.addAll(id.serialize(vf));
+        for (Namespace namespace : idModel.getNamespaces()) {
+            objectModel.setNamespace(namespace.getPrefix(), namespace.getName());
+        }
+
+
+        Resource idValue = idModel.iterator().next().getSubject();
+        builder.add("odf:id", idValue);
+
+
         Collection<Model> infoItemModels = new HashSet<>();
-        String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
-        infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(vf, objRelatedInfoItemBaseIri)));
+        String objRelatedInfoItemBaseIri = infoItemBaseIri + id.getId() + "/";
+        //infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(vf, objRelatedInfoItemBaseIri)));
+
+        for(InfoItem infoItem : infoItems) {
+            Model infoItemModel = infoItem.serialize(vf, objRelatedInfoItemBaseIri);
+            infoItemModels.add(infoItemModel);
+            for (Namespace namespace : infoItemModel.getNamespaces()) {
+                objectModel.setNamespace(namespace.getPrefix(), namespace.getName());
+            }
+        }
+
+
 
         Collection<Model> nestedObjectsModels = new HashSet<>();
         String nestedObjectsBaseIri = subject.toString() + "/";
-        objects.forEach(object -> nestedObjectsModels.add(object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
+        //objects.forEach(object -> nestedObjectsModels.add(object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
+
+        for(Object object : objects) {
+            Model nestedObjectsModel = object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri);
+            nestedObjectsModels.add(nestedObjectsModel);
+            for (Namespace namespace : nestedObjectsModel.getNamespaces()) {
+                objectModel.setNamespace(namespace.getPrefix(), namespace.getName());
+            }
+        }
+
 
         infoItemModels.forEach(model -> {
             builder.add("odf:infoitem", model.iterator().next().getSubject());
@@ -140,10 +170,10 @@ public class Object {
             builder.add("odf:object", model.iterator().next().getSubject());
         });
 
-        Model objectModel = builder.build();
+
+        objectModel.addAll(idModel);
         infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
         nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
-        Set<Namespace> nameSpaces = objectModel.getNamespaces();
 
         return objectModel;
     }

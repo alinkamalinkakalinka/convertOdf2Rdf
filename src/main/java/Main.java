@@ -4,24 +4,28 @@
 
 import com.complexible.pinto.RDFMapper;
 //import modelRdf.ObjectsRdf;
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import modelRdf.ObjectsRdf;
 import modelXml.Objects;
+
 import org.openrdf.model.Model;
 import org.openrdf.model.impl.SimpleValueFactory;
+import thewebsemantic.RDF2Bean;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.util.Collection;
 
 public class Main {
 
 
     private final Helper helper = new Helper();
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, MalformedURLException {
 
         try {
 
@@ -59,6 +63,12 @@ public class Main {
 
             //InputStream odfStructure = getClass().getResourceAsStream("/resources/infoitem_values.xml");
             modelModifier.odf2rdf();
+
+
+            //FileInputStream stream = new FileInputStream(new File("test3.rdf").toURL().toString());
+
+            //Collection<Objects> objectsCollection = modelModifier.convert();
+
 
 
         } catch (JAXBException e) {

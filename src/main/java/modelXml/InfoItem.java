@@ -1,10 +1,7 @@
 package modelXml;
 
 import com.complexible.pinto.annotations.RdfsClass;
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import vocabs.NS;
@@ -112,12 +109,14 @@ public class InfoItem {
         ModelBuilder builder = new ModelBuilder();
         builder.setNamespace("dct", NS.DCT)
                 .setNamespace("odf", NS.ODF)
+                .setNamespace("time", NS.TIME)
                 .setNamespace("rdf", RDF.NAMESPACE);
 
         builder.subject(subject)
                 .add("rdf:type", "odf:InfoItem");
                 //.add("dct:title", name);
 
+        Model infoItemModel = builder.build();
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
@@ -130,22 +129,40 @@ public class InfoItem {
         }*/
 
         Collection<Model> valueModels = new HashSet<>();
-        values.forEach(value -> valueModels.add(value.serialize(vf)));
+        //values.forEach(value -> valueModels.add(value.serialize(vf)));
+        for(Value value : values) {
+            Model valueModel = value.serialize(vf);
+            valueModels.add(valueModel);
+            for (Namespace namespace : valueModel.getNamespaces()) {
+                infoItemModel.setNamespace(namespace.getPrefix(), namespace.getName());
+            }
+        }
+
+
+
 
         valueModels.forEach(model -> {
             Resource valueId = model.iterator().next().getSubject();
-            builder.add("odf:values", valueId);
+            builder.add("odf:value", valueId);
         });
 
         Collection<Model> metaDataModels = new HashSet<>();
-        metaData.forEach(md -> metaDataModels.add(md.serialize(vf, subject + "/")));
+        //metaData.forEach(md -> metaDataModels.add(md.serialize(vf, subject + "/")));
+        for(MetaData metaDataValue : metaData) {
+            Model metaDataModel = metaDataValue.serialize(vf, subject + "/");
+            metaDataModels.add(metaDataModel);
+            for (Namespace namespace : metaDataModel.getNamespaces()) {
+                infoItemModel.setNamespace(namespace.getPrefix(), namespace.getName());
+            }
+        }
+
 
         metaDataModels.forEach(model -> {
             Resource metadataId = model.iterator().next().getSubject();
             builder.add("odf:metadata", metadataId);
         });
 
-        Model infoItemModel = builder.build();
+
         valueModels.forEach(valueModel -> infoItemModel.addAll(valueModel));
         metaDataModels.forEach(metadataModel -> infoItemModel.addAll(metadataModel));
 
