@@ -83,7 +83,6 @@ dependencies {
 
 
     compile fileTree(dir: 'libs', include: 'pinto-2.0.1-SNAPSHOT.jar')
-    compile fileTree(dir: 'libs', include: 'ontmalizer-1.0.2.jar')
 
 
     testCompile 'junit:junit:4.11'
