@@ -1,7 +1,10 @@
 package modelXml;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.Statement;
 import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import vocabs.NS;
@@ -176,6 +179,61 @@ public class Object {
         nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
 
         return objectModel;
+    }
+
+
+
+
+
+    public Object deserialize(org.apache.jena.rdf.model.Resource subject, Collection<Statement> statements) {
+
+        Object objectClass = new Object();
+        QlmID qlmIDClass = new QlmID();
+        InfoItem infoItemClass = new InfoItem();
+
+        Collection<InfoItem> infoItems = new ArrayList<>();
+        Collection<Object> objects = new ArrayList<>();
+
+        for (Statement statement : statements) {
+
+            Property property = statement.getPredicate();
+            org.apache.jena.rdf.model.Resource object = ResourceFactory.createResource(statement.getObject().toString());
+
+            if (subject.equals(statement.getSubject())) {
+                if (property.toString().contains("type")) {
+                    objectClass.setType(object.toString());
+                }
+
+                if (property.toString().contains("udef")) {
+                    objectClass.setUdef(object.toString());
+                }
+
+                if (property.toString().contains("description")) {
+                    objectClass.setDescription(object.toString());
+                }
+
+                if (property.toString().contains("id")) {
+                    QlmID id = qlmIDClass.deserialize(object, statements);
+                    objectClass.setId(id);
+                }
+
+                if (property.toString().contains("infoitem")) {
+                    infoItems.add(infoItemClass.deserialize(object, statements));
+                }
+
+                if (property.toString().contains("object")) {
+                    objects.add(objectClass.deserialize(object, statements));
+                }
+
+            }
+
+
+        }
+
+        objectClass.setInfoItems(infoItems);
+        objectClass.setObjects(objects);
+
+        return objectClass;
     }
 
 }

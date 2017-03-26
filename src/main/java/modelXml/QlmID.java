@@ -3,7 +3,11 @@ package modelXml;
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfProperty;
 import com.complexible.pinto.annotations.RdfsClass;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.Statement;
 import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.model.Literal;
+import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import vocabs.NS;
@@ -13,10 +17,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by aarunova on 12/11/16.
@@ -113,5 +114,37 @@ public class QlmID {
         }
 
         return builder.build();
+    }
+
+    public QlmID deserialize (org.apache.jena.rdf.model.Resource subject, Collection<Statement> statements) {
+
+        QlmID qlmIDClass = new QlmID();
+
+        for (Statement statement : statements) {
+
+            Property property = statement.getPredicate();
+            org.apache.jena.rdf.model.Resource object = ResourceFactory.createResource(statement.getObject().toString());
+
+            if (subject.toString().equals(statement.getSubject().toString())) {
+
+                if (property.toString().contains("idValue")) {
+                    qlmIDClass.setId(object.toString());
+                }
+
+                if (property.toString().contains("tagType")) {
+                    qlmIDClass.setTagType(object.toString());
+                }
+
+                if (property.toString().contains("startDate")) {
+                    qlmIDClass.setStartDate(object.toString());
+                }
+
+                if (property.toString().contains("endDate")) {
+                    qlmIDClass.setStartDate(object.toString());
+                }
+            }
+        }
+
+        return qlmIDClass;
     }
 }

@@ -39,7 +39,11 @@ public class Main {
             ModelModifier modelModifier = new ModelModifier();
 
             //InputStream odfStructure = getClass().getResourceAsStream("/resources/infoitem_values.xml");
-            modelModifier.odf2rdf();
+            //modelModifier.odf2rdf();
+
+            Deserializer deserializer = new Deserializer();
+            String baseOdfURI = "http://eis-biotope.iais.fraunhofer.de/odf#";
+            deserializer.deserialize("test3.rdf", baseOdfURI);
 
 
             //FileInputStream stream = new FileInputStream(new File("test3.rdf").toURL().toString());

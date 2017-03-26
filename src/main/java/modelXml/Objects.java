@@ -1,5 +1,8 @@
 package modelXml;
 
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.vocabulary.RDF;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,5 +46,28 @@ public class Objects {
     @XmlElement (name = "Object")
     public void setObjects(Collection<Object> objects) {
         this.objects = objects;
+    }
+
+
+    public Objects deserialize (Collection<Statement> statements, String baseOdfURI) {
+
+        Objects objectsClass = new Objects();
+        Object objectClass = new Object();
+
+        for (Statement statement : statements) {
+
+            if (statement.getPredicate().equals(RDF.type)
+                    && (baseOdfURI + "Object").equals(statement.getObject().toString())) {
+
+                Object object = objectClass.deserialize(statement.getSubject(), statements);
+
+                objects.add(object);
+            }
+        }
+
+        objectsClass.setObjects(objects);
+
+        return objectsClass;
+
     }
 }

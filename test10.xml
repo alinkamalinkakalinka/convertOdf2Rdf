@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Objects>
+    <Object type="http://eis-biotope.iais.fraunhofer.de/odf#Object">
+        <id startDate="2016-12-21T14:11:43.055+03:00^^http://www.w3.org/2001/XMLSchema#dateTime">SmartHouse</id>
+        <InfoItem name="BackDoor" udef="hkhjkhj">
+            <description>doooooor</description>
+            <value unixTime="0"/>
+        </InfoItem>
+    </Object>
+</Objects>

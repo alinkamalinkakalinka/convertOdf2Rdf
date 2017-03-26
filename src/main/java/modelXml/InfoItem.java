@@ -1,9 +1,14 @@
 package modelXml;
 
 import com.complexible.pinto.annotations.RdfsClass;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.Statement;
 import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.eclipse.rdf4j.query.algebra.In;
 import vocabs.NS;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -167,5 +172,55 @@ public class InfoItem {
         metaDataModels.forEach(metadataModel -> infoItemModel.addAll(metadataModel));
 
         return infoItemModel;
+    }
+
+
+    public InfoItem deserialize (org.apache.jena.rdf.model.Resource subject, Collection<Statement> statements) {
+
+        InfoItem infoItemClass = new InfoItem();
+        Value valueClass = new Value();
+        MetaData metaDataClass = new MetaData();
+
+        Collection<Value> values = new ArrayList<>();
+        Collection<MetaData> metaDatas = new ArrayList<>();
+
+        for (Statement statement : statements) {
+
+            Property property = statement.getPredicate();
+            org.apache.jena.rdf.model.Resource object = ResourceFactory.createResource(statement.getObject().toString());
+
+            if (subject.equals(statement.getSubject())) {
+
+                if (property.toString().contains("name")) {
+                    infoItemClass.setName(object.toString());
+                }
+
+                //TODO: name1 ????
+                if (property.toString().contains("name1")) {
+                    infoItemClass.setName1(object.toString());
+                }
+
+                if (property.toString().contains("udef")) {
+                    infoItemClass.setUdef(object.toString());
+                }
+
+                if (property.toString().contains("description")) {
+                    infoItemClass.setDescription(object.toString());
+                }
+
+                if (property.toString().contains("metadata")) {
+                    metaDatas.add(metaDataClass.deserialize(object, statements));
+                }
+
+                if (property.toString().contains("value")) {
+                    values.add(valueClass.deserialize(object,statements));
+                }
+            }
+        }
+
+        infoItemClass.setValues(values);
+        infoItemClass.setMetaData(metaDatas);
+
+        return infoItemClass;
     }
 }

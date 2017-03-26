@@ -2,6 +2,10 @@ package modelXml;
 
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfsClass;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
 import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
@@ -65,5 +69,30 @@ public class MetaData {
         infoItemModels.forEach(infoItemModel -> metadataModel.addAll(infoItemModel));
 
         return metadataModel;
+    }
+
+    public MetaData deserialize (Resource subject, Collection<Statement> statements) {
+
+        MetaData metaDataClass = new MetaData();
+        InfoItem infoItemClass = new InfoItem();
+
+        Collection<InfoItem> infoitems = new ArrayList<>();
+
+        for (Statement statement : statements) {
+
+            Property property = statement.getPredicate();
+            Resource object = ResourceFactory.createResource(statement.getObject().toString());
+
+            if (subject.equals(statement.getSubject())) {
+
+                if (property.toString().contains("infoitem")) {
+                    infoitems.add(infoItemClass.deserialize(object, statements));
+                }
+            }
+        }
+
+        metaDataClass.setInfoItems(infoitems);
+
+        return metaDataClass;
     }
 }

@@ -3,6 +3,10 @@ package modelXml;
 import com.complexible.pinto.annotations.RdfId;
 import com.complexible.pinto.annotations.RdfProperty;
 import com.complexible.pinto.annotations.RdfsClass;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
 import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
@@ -15,6 +19,7 @@ import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -98,5 +103,34 @@ public class Value {
                 .add("odf:dataValue", dataValue);
 
         return builder.build();
+    }
+
+
+
+    public Value deserialize (Resource subject, Collection<Statement> statements) {
+        Value valueClass = new Value();
+
+        for (Statement statement : statements) {
+
+            Property property = statement.getPredicate();
+            Resource object = ResourceFactory.createResource(statement.getObject().toString());
+
+            if (subject.equals(statement.getSubject())) {
+
+                if (property.toString().contains("type")){
+                    valueClass.setType(object.toString());
+                }
+
+                if (property.toString().contains("created")) {
+                    valueClass.setDateTime(object.toString());
+                }
+
+                if (property.toString().contains("dataValue")) {
+                    valueClass.setValue(object.toString());
+                }
+            }
+        }
+
+        return valueClass;
     }
 }
