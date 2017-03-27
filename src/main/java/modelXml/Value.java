@@ -3,12 +3,7 @@ package modelXml;
 import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.TypeMapper;
 import org.apache.jena.rdf.model.*;
-import org.eclipse.rdf4j.model.BNode;
-import org.eclipse.rdf4j.model.Literal;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
 
 import javax.xml.bind.DatatypeConverter;
@@ -79,40 +74,21 @@ public class Value implements Deserializable{
     }
 
 
-    public Model serialize(ValueFactory vf) {
-        Literal createdValue = vf.createLiteral(DatatypeConverter.parseDateTime(dateTime).getTime());
-        Literal dataValue = vf.createLiteral(value, vf.createIRI(type));
-
-        BNode subject = vf.createBNode();
-
-        ModelBuilder builder = new ModelBuilder();
-        builder.setNamespace("dct", NS.DCT)
-                .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE)
-
-                .subject(subject)
-                .add("rdf:type", "odf:Value")
-                .add("dct:created", createdValue)
-                .add("odf:dataValue", dataValue);
-
-        return builder.build();
-    }
-
-    public org.apache.jena.rdf.model.Model serialize () {
+    public Model serialize () {
 
         RDFDatatype datatype = TypeMapper.getInstance().getTypeByName(type);
 
-        org.apache.jena.rdf.model.Literal createdValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(dateTime).getTime());
-        org.apache.jena.rdf.model.Literal dataValue = ResourceFactory.createTypedLiteral(value, datatype);
+        Literal createdValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(dateTime).getTime());
+        Literal dataValue = ResourceFactory.createTypedLiteral(value, datatype);
 
-        org.apache.jena.rdf.model.Model model = ModelFactory.createDefaultModel();
+        Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource();
 
         model.setNsPrefix("dct", NS.DCT)
                 .setNsPrefix("odf", NS.ODF)
-                .setNsPrefix("rdf", RDF.NAMESPACE);
+                .setNsPrefix("rdf", NS.RDF);
 
-        subject.addProperty(org.apache.jena.vocabulary.RDF.type, ResourceFactory.createResource(NS.ODF + "Value"))
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "Value"))
                 .addProperty(ResourceFactory.createProperty(NS.DCT + "created"), createdValue)
                 .addProperty(ResourceFactory.createProperty(NS.ODF + "dataValue"), dataValue);
 

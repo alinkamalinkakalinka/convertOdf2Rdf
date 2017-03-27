@@ -1,11 +1,7 @@
 package modelXml;
 
 import org.apache.jena.rdf.model.*;
-import org.eclipse.rdf4j.model.BNode;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -40,44 +36,19 @@ public class MetaData implements Deserializable{
     }
 
 
+    public Model serialize (String baseIri) {
 
-    public Model serialize(ValueFactory vf, String baseIri) {
-        BNode subject = vf.createBNode();
-
-        ModelBuilder builder = new ModelBuilder();
-        builder.setNamespace("dct", NS.DCT)
-                .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE)
-
-                .subject(subject)
-                .add("rdf:type", "odf:MetaData");
-
-        Collection<Model> infoItemModels = new HashSet<>();
-        infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(vf, baseIri)));
-
-        infoItemModels.forEach(model -> {
-            builder.add("odf:infoitem", model.iterator().next().getSubject());
-        });
-
-        Model metadataModel = builder.build();
-        infoItemModels.forEach(infoItemModel -> metadataModel.addAll(infoItemModel));
-
-        return metadataModel;
-    }
-
-    public org.apache.jena.rdf.model.Model serialize (String baseIri) {
-
-        org.apache.jena.rdf.model.Model model = ModelFactory.createDefaultModel();
+        Model model = ModelFactory.createDefaultModel();
 
         Resource subject = model.createResource();
 
         model.setNsPrefix("dct", NS.DCT)
                 .setNsPrefix("odf", NS.ODF)
-                .setNsPrefix("rdf", RDF.NAMESPACE);
+                .setNsPrefix("rdf", NS.RDF);
 
-        subject.addProperty(org.apache.jena.vocabulary.RDF.type, ResourceFactory.createResource(NS.ODF + "MetaData"));
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "MetaData"));
 
-        Collection<org.apache.jena.rdf.model.Model> infoItemModels = new HashSet<>();
+        Collection<Model> infoItemModels = new HashSet<>();
         infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(baseIri)));
 
         return model;

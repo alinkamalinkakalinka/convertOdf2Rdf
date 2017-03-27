@@ -1,13 +1,7 @@
 package modelXml;
 
 import org.apache.jena.rdf.model.*;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Statement;
-import org.eclipse.rdf4j.model.*;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -98,93 +92,7 @@ public class Object implements Deserializable{
         this.id = id;
     }
 
-    public Model serialize(ValueFactory vf, String objectBaseIri, String infoItemBaseIri) {
-
-        IRI subject = vf.createIRI(objectBaseIri + id.getId());
-
-        //todo: namespaces
-        HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        //elementsAndAttributes.put("skos:notation", id);
-        elementsAndAttributes.put("odf:type", type);
-        elementsAndAttributes.put("dct:description", description);
-        elementsAndAttributes.put("odf:udef", udef);
-
-        ModelBuilder builder = new ModelBuilder();
-
-        builder.setNamespace("dct", NS.DCT)
-                .setNamespace("odf", NS.ODF)
-                .setNamespace("rdf", RDF.NAMESPACE);
-
-        builder.subject(subject)
-                .add("rdf:type", "odf:Object");
-                //.add("skos:notation", id);
-
-        for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
-            if (entry.getValue() != null) {
-                builder.add(entry.getKey(), entry.getValue());
-            }
-        }
-
-        Model objectModel = builder.build();
-
-        Model idModel = new ModelBuilder().build();
-        idModel.addAll(id.serialize(vf));
-        for (Namespace namespace : idModel.getNamespaces()) {
-            objectModel.setNamespace(namespace.getPrefix(), namespace.getName());
-        }
-
-
-        Resource idValue = idModel.iterator().next().getSubject();
-        builder.add("odf:id", idValue);
-
-
-        Collection<Model> infoItemModels = new HashSet<>();
-        String objRelatedInfoItemBaseIri = infoItemBaseIri + id.getId() + "/";
-        //infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(vf, objRelatedInfoItemBaseIri)));
-
-        for(InfoItem infoItem : infoItems) {
-            Model infoItemModel = infoItem.serialize(vf, objRelatedInfoItemBaseIri);
-            infoItemModels.add(infoItemModel);
-            for (Namespace namespace : infoItemModel.getNamespaces()) {
-                objectModel.setNamespace(namespace.getPrefix(), namespace.getName());
-            }
-        }
-
-
-
-        Collection<Model> nestedObjectsModels = new HashSet<>();
-        String nestedObjectsBaseIri = subject.toString() + "/";
-        //objects.forEach(object -> nestedObjectsModels.add(object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
-
-        for(Object object : objects) {
-            Model nestedObjectsModel = object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri);
-            nestedObjectsModels.add(nestedObjectsModel);
-            for (Namespace namespace : nestedObjectsModel.getNamespaces()) {
-                objectModel.setNamespace(namespace.getPrefix(), namespace.getName());
-            }
-        }
-
-
-        infoItemModels.forEach(model -> {
-            builder.add("odf:infoitem", model.iterator().next().getSubject());
-        });
-
-        nestedObjectsModels.forEach(model -> {
-            builder.add("odf:object", model.iterator().next().getSubject());
-        });
-
-
-        objectModel.addAll(idModel);
-        infoItemModels.forEach(infoItemModel -> objectModel.addAll(infoItemModel));
-        nestedObjectsModels.forEach(nestedObjectsModel -> objectModel.addAll(nestedObjectsModel));
-
-        return objectModel;
-    }
-
-
-    public org.apache.jena.rdf.model.Model serialize (String objectBaseIri, String infoItemBaseIri) {
-
-
+    public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         //todo: namespaces
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
@@ -193,17 +101,14 @@ public class Object implements Deserializable{
         elementsAndAttributes.put(NS.DCT + "description", description);
         elementsAndAttributes.put(NS.ODF + "udef", udef);
 
-        org.apache.jena.rdf.model.Model model = ModelFactory.createDefaultModel();
-        org.apache.jena.rdf.model.Resource subject = model.createResource(objectBaseIri + id.getId());
-
-
-
+        Model model = ModelFactory.createDefaultModel();
+        Resource subject = model.createResource(objectBaseIri + id.getId());
 
         model.setNsPrefix("dct", NS.DCT)
                 .setNsPrefix("odf", NS.ODF)
-                .setNsPrefix("rdf", RDF.NAMESPACE);
+                .setNsPrefix("rdf", NS.RDF);
 
-        model.add(subject, org.apache.jena.vocabulary.RDF.type, ResourceFactory.createResource(NS.ODF + "Object"));
+        model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + "Object"));
 
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
@@ -213,48 +118,34 @@ public class Object implements Deserializable{
         }
 
         //id Model
-        org.apache.jena.rdf.model.Model idModel = ModelFactory.createDefaultModel();
+        Model idModel = ModelFactory.createDefaultModel();
         idModel.add(id.serialize());
 
-        for (Map.Entry<String, String> namespace : idModel.getNsPrefixMap().entrySet()) {
-            model.setNsPrefix(namespace.getKey(), namespace.getValue());
-        }
 
-
-        org.apache.jena.rdf.model.Resource idValue = idModel.listStatements().next().getSubject();
+        Resource idValue = idModel.listStatements().next().getSubject();
         subject.addProperty(ResourceFactory.createProperty(NS.ODF, "id"), idValue);
 
         //infoitem Model
-
-        Collection<org.apache.jena.rdf.model.Model> infoItemModels = new HashSet<>();
+        Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id.getId() + "/";
-        //infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(vf, objRelatedInfoItemBaseIri)));
 
         for(InfoItem infoItem : infoItems) {
-            org.apache.jena.rdf.model.Model infoItemModel = infoItem.serialize(objRelatedInfoItemBaseIri);
+            Model infoItemModel = infoItem.serialize(objRelatedInfoItemBaseIri);
             infoItemModels.add(infoItemModel);
-            for (Map.Entry<String, String> namespace : infoItemModel.getNsPrefixMap().entrySet()) {
-                model.setNsPrefix(namespace.getKey(), namespace.getValue());
-            }
         }
 
 
-        Collection<org.apache.jena.rdf.model.Model> nestedObjectsModels = new HashSet<>();
+        Collection<Model> nestedObjectsModels = new HashSet<>();
         String nestedObjectsBaseIri = subject.toString() + "/";
-        //objects.forEach(object -> nestedObjectsModels.add(object.serialize(vf, nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
 
         for(Object object : objects) {
-            org.apache.jena.rdf.model.Model nestedObjectsModel = object.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri);
+            Model nestedObjectsModel = object.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri);
             nestedObjectsModels.add(nestedObjectsModel);
-
-            for (Map.Entry<String, String> namespace : nestedObjectsModel.getNsPrefixMap().entrySet()) {
-                model.setNsPrefix(namespace.getKey(), namespace.getValue());
-            }
         }
 
 
         infoItemModels.forEach(infoItemModel -> {
-            org.apache.jena.rdf.model.Resource infoItemId = null;
+            Resource infoItemId = null;
             StmtIterator iterator = infoItemModel.listStatements();
             while (iterator.hasNext()) {
                 Statement stmt = iterator.nextStatement();
@@ -264,7 +155,6 @@ public class Object implements Deserializable{
             }
             subject.addProperty(ResourceFactory.createProperty(NS.ODF + "infoitem"), infoItemId);
         });
-
 
         nestedObjectsModels.forEach(nestedObjectsModel -> {
             subject.addProperty(ResourceFactory.createProperty(NS.ODF + "object"), nestedObjectsModel.listStatements().next().getSubject());
@@ -278,11 +168,8 @@ public class Object implements Deserializable{
         return model;
     }
 
-
-
-
     @Override
-    public Object deserialize(org.apache.jena.rdf.model.Resource subject, Collection<Statement> statements) {
+    public Object deserialize(Resource subject, Collection<Statement> statements) {
 
         Object objectClass = new Object();
         QlmID qlmIDClass = new QlmID();
@@ -294,7 +181,7 @@ public class Object implements Deserializable{
         for (Statement statement : statements) {
 
             Property property = statement.getPredicate();
-            org.apache.jena.rdf.model.Resource object = ResourceFactory.createResource(statement.getObject().toString());
+            Resource object = ResourceFactory.createResource(statement.getObject().toString());
 
             if (subject.equals(statement.getSubject())) {
                 if (property.toString().contains("type") && !object.toString().contains("Object")) {
