@@ -5,11 +5,8 @@ import modelXml.Object;
 import modelXml.Objects;
 import modelXml.QlmID;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.*;
 
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
 import utils.Loggable;
 import utils.RegexHelper;
@@ -26,23 +23,35 @@ import javax.xml.bind.Marshaller;
 
 public class Deserializer implements Loggable{
 
-    public Object deserialize (String rdfFile, String baseOdfURI) {
+    public void deserialize (String rdfFile) {
 
         try {
 
             Objects objectsClass = new Objects();
+            Object objectClass = new Object();
+            Collection<Object> objects = new ArrayList<>();
 
             Collection<Statement> statements = getStatementsFromFile(rdfFile);
 
-            Objects objects = objectsClass.deserialize(statements, baseOdfURI);
+            if (statements != null) {
 
-            //Collection<Object> objectCollection = getBaseObjects(statements, baseOdfURI);
+                Collection<Resource> rootObjects = getRootObjects(statements);
 
-            JAXBContext contextObj = JAXBContext.newInstance(objects.getClass());
-            Marshaller marshallerObj = contextObj.createMarshaller();
-            marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                for (Resource rootObject : rootObjects) {
 
-            marshallerObj.marshal(objects, new FileOutputStream("test10.xml"));
+                    Object object = objectClass.deserialize(rootObject, statements);
+                    objects.add(object);
+                }
+
+                objectsClass.setObjects(objects);
+
+
+                JAXBContext contextObj = JAXBContext.newInstance(objectsClass.getClass());
+                Marshaller marshallerObj = contextObj.createMarshaller();
+                marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+                marshallerObj.marshal(objectsClass, new FileOutputStream("test10.xml"));
+            }
 
         } catch (JAXBException e) {
             logger().warn("JAXBException", e);
@@ -50,56 +59,37 @@ public class Deserializer implements Loggable{
             logger().warn("FileNotFoundException", e);
         }
 
-        return null;
-
     }
 
-    //look for main parents
-    private Collection<Object> getBaseObjects(Collection<Statement> statements, String baseOdfURI) {
+    public Collection<Resource> getRootObjects (Collection<Statement> statements) {
 
-        Collection<Object> objectCollection = new ArrayList<>();
+        Collection<String> stringRootObjects = new ArrayList<>();
+        Collection<Resource> rootObjects = new ArrayList<>();
 
-        Collection<String> objectIds = new ArrayList<>();
+        for (Statement statement : statements) {
 
-        if (statements != null) {
-
-            //look for parents (objects)
-            for (Statement statement : statements) {
-
-                if (statement.getPredicate().equals(RDF.type)
-                        && (baseOdfURI + "Object").equals(statement.getObject().toString())) {
-
-                    String id = RegexHelper.getObjectName(statement.getSubject().toString());
-                    objectIds.add(id);
-                }
+            if (statement.getPredicate().equals(RDF.type) &&
+                    statement.getObject().toString().contains("Object")) {
+                stringRootObjects.add(statement.getSubject().toString());
             }
-
-            for (Statement statement : statements) {
-
-                if (statement.getPredicate().toString().equals(baseOdfURI + "object")) {
-
-                    String id = RegexHelper.getObjectName(statement.getObject().toString());
-                    if (objectIds.contains(id)) {
-                        objectIds.remove(id);
-                    }
-                }
-
-            }
-
-            // set id Properties method
-            for (String id : objectIds) {
-
-                Object object = new Object();
-                QlmID qlmID = new QlmID();
-                qlmID.setId(id);
-                object.setId(qlmID);
-                objectCollection.add(object);
-            }
-
-
         }
 
-        return objectCollection;
+        for (Statement statement : statements) {
+
+            if (statement.getPredicate().toString().contains("object") &&
+                    stringRootObjects.contains(statement.getObject().toString())) {
+                stringRootObjects.remove(statement.getObject().toString());
+            }
+        }
+
+        for (String stringRootObject : stringRootObjects) {
+
+            Resource rootObject = ResourceFactory.createResource(stringRootObject);
+            rootObjects.add(rootObject);
+        }
+
+        return rootObjects;
+
     }
 
 

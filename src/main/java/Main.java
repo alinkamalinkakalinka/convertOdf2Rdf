@@ -42,8 +42,7 @@ public class Main {
             //modelModifier.odf2rdf();
 
             Deserializer deserializer = new Deserializer();
-            String baseOdfURI = "http://eis-biotope.iais.fraunhofer.de/odf#";
-            deserializer.deserialize("test3.rdf", baseOdfURI);
+            deserializer.deserialize("test3.rdf");
 
 
             //FileInputStream stream = new FileInputStream(new File("test3.rdf").toURL().toString());

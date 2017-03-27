@@ -200,7 +200,7 @@ public class Object {
             org.apache.jena.rdf.model.Resource object = ResourceFactory.createResource(statement.getObject().toString());
 
             if (subject.equals(statement.getSubject())) {
-                if (property.toString().contains("type")) {
+                if (property.toString().contains("type") && !object.toString().contains("Object")) {
                     objectClass.setType(object.toString());
                 }
 
