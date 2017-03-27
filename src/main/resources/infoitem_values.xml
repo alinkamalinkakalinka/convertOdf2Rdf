@@ -4,7 +4,7 @@
     <Object type="someType">
         <id tagType="blabla">UniqueTargetID_1</id>
         <InfoItem name="InfoItem1">
-            <value type="blabla23">Value1</value>
+            <value>Value1</value>
             <value>Value2</value>
             <value>Value3</value>
         </InfoItem>

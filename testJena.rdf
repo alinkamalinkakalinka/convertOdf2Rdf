@@ -1,11 +1,78 @@
 @prefix odf:   <http://eis-biotope.iais.fraunhofer.de/odf#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix time:  <http://www.w3.org/2006/time#> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/SmartHouse>
-        a       "odf:Object" ;
-        odf:id  [ a               "odf:QlmID" ;
-                  odf:idValue     "SmartHouse" ;
-                  time:startDate  "Wed Dec 21 12:11:43 CET 2016"
-                ] .
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem1>
+        a          odf:InfoItem ;
+        odf:name   "InfoItem1" ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value2"
+                   ] ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value3"
+                   ] ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value1"
+                   ] .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubSubTarget1/SubSubTarget1InfoItem1>
+        a          odf:InfoItem ;
+        odf:name   "SubSubTarget1InfoItem1" ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "22.5"
+                   ] .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubInfoItem1>
+        a         odf:InfoItem ;
+        odf:name  "SubInfoItem1" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1/SubSubTarget1>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SubSubTarget1"
+                      ] ;
+        odf:infoitem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubSubTarget1/SubSubTarget1InfoItem1> ;
+        odf:type      "someType" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget2>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SubTarget2"
+                      ] ;
+        odf:infoitem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget2/SubTarget2InfoItem1> ;
+        odf:type      "someType" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SubTarget1"
+                      ] ;
+        odf:infoitem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubInfoItem1> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1/SubSubTarget1> ;
+        odf:type      "someType" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget2/SubTarget2InfoItem1>
+        a          odf:InfoItem ;
+        odf:name   "SubTarget2InfoItem1" ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "34.6"
+                   ] .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "UniqueTargetID_1" ;
+                        dct:tagType  "blabla"
+                      ] ;
+        odf:infoitem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem1> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem2> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget2> , <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1/SubSubTarget1> ;
+        odf:type      "someType" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem2>
+        a          odf:InfoItem ;
+        odf:name   "InfoItem2" ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value"
+                   ] .

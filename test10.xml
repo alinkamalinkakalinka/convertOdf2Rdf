@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Objects>
-    <Object>
-        <id startDate="Wed Dec 21 12:11:43 CET 2016">SmartHouse</id>
+    <Object type="someType">
+        <id>SubTarget1</id>
+        <InfoItem name="SubInfoItem1"/>
+        <Object type="someType">
+            <id>SubSubTarget1</id>
+            <InfoItem name="SubSubTarget1InfoItem1">
+                <value>22.5</value>
+            </InfoItem>
+        </Object>
+    </Object>
+    <Object type="someType">
+        <id tagType="blabla">UniqueTargetID_1</id>
+        <InfoItem name="InfoItem2">
+            <value>Value</value>
+        </InfoItem>
+        <InfoItem name="InfoItem1">
+            <value>Value1</value>
+            <value>Value3</value>
+            <value>Value2</value>
+        </InfoItem>
+        <Object type="someType">
+            <id>SubSubTarget1</id>
+            <InfoItem name="SubSubTarget1InfoItem1">
+                <value>22.5</value>
+            </InfoItem>
+        </Object>
+        <Object type="someType">
+            <id>SubTarget2</id>
+            <InfoItem name="SubTarget2InfoItem1">
+                <value>34.6</value>
+            </InfoItem>
+        </Object>
     </Object>
 </Objects>

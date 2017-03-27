@@ -2,6 +2,7 @@ package modelXml;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import utils.ModelHelper;
 import vocabs.NS;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -97,53 +98,59 @@ public class InfoItem implements Deserializable{
     public Model serialize (String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
-        Resource subject = model.createResource(infoItemBaseIri + name);
+        Resource subject = model.createResource(infoItemBaseIri + getName());
+
+        model.setNsPrefix("rdf", NS.RDF);
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "InfoItem"));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put(NS.DCT + "description", description);
-        elementsAndAttributes.put(NS.ODF + "name", name);
-        elementsAndAttributes.put(NS.ODF + "name1", name1);
-        elementsAndAttributes.put(NS.ODF + "udef", udef);
-
-        model.setNsPrefix("dct", NS.DCT)
-                .setNsPrefix("odf", NS.ODF)
-                .setNsPrefix("time", NS.TIME)
-                .setNsPrefix("rdf", NS.RDF);
-
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "InfoItem"));
+        elementsAndAttributes.put(NS.DCT + "description", getDescription());
+        elementsAndAttributes.put(NS.ODF + "name", getName());
+        elementsAndAttributes.put(NS.DCT + "title", getName1());
+        elementsAndAttributes.put(NS.ODF + "udef", getUdef());
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
+                if (entry.getKey().contains(NS.DCT)) {
+                    model.setNsPrefix("dct", NS.DCT);
+                } else {
+                    model.setNsPrefix("odf", NS.ODF);
+                }
                 subject.addProperty(ResourceFactory.createProperty(entry.getKey()), entry.getValue());
             }
         }
 
-        Collection<Model> valueModels = new HashSet<>();
-        for(Value value : values) {
-            Model valueModel = value.serialize();
-            valueModels.add(valueModel);
-        }
+        // VALUE MODEL
+        if (getValues() != null) {
+            Collection<Model> valueModels = new HashSet<>();
+            getValues().forEach(value -> valueModels.add(value.serialize()));
 
-        valueModels.forEach(valueModel -> {
-            Resource valueId = valueModel.listStatements().next().getSubject();
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF + "value"), valueId);
-        });
+            valueModels.forEach(valueModel -> {
+                Resource valueId = ModelHelper.getIdToConnectWith(valueModel, "Value");
+                if (valueId != null) {
+                    subject.addProperty(ResourceFactory.createProperty(NS.ODF + "value"), valueId);
+                }
+            });
 
-
-        Collection<Model> metaDataModels = new HashSet<>();
-        for(MetaData metaDataValue : metaData) {
-            Model metaDataModel = metaDataValue.serialize(subject + "/");
-            metaDataModels.add(metaDataModel);
+            valueModels.forEach(valueModel -> model.add(valueModel));
         }
 
 
-        metaDataModels.forEach(metsDataModel -> {
-            Resource metadataId = model.listStatements().next().getSubject();
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF + "metadata"), metadataId);
-        });
+        // METADATA MODEL
+        if (getMetaData() != null) {
+            Collection<Model> metaDataModels = new HashSet<>();
+            getMetaData().forEach(metaDataValue -> metaDataModels.add(metaDataValue.serialize(subject + "/")));
 
-        valueModels.forEach(valueModel -> model.add(valueModel));
-        metaDataModels.forEach(metadataModel -> model.add(metadataModel));
+            metaDataModels.forEach(metsDataModel -> {
+                Resource metadataId = ModelHelper.getIdToConnectWith(metsDataModel, "MetaData");
+                if (metadataId != null) {
+                    subject.addProperty(ResourceFactory.createProperty(NS.ODF + "metadata"), metadataId);
+                }
+            });
+
+            metaDataModels.forEach(metadataModel -> model.add(metadataModel));
+        }
+
 
         return model;
     }
@@ -194,6 +201,8 @@ public class InfoItem implements Deserializable{
 
         infoItemClass.setValues(values);
         infoItemClass.setMetaData(metaDatas);
+
+        //TODO: no dataValue
 
         return infoItemClass;
     }

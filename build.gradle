@@ -59,35 +59,17 @@ repositories {
 }
 
 dependencies {
-    compile (group: "com.google.guava", name: "guava", version: "18.0") {
-        exclude group: "com.google.code.findbugs"
-    }
 
-    compile "commons-beanutils:commons-beanutils:1.9.2"
-    compile "commons-codec:commons-codec:1.10"
+    //compile "org.slf4j:slf4j-api:1.7.7"
 
-    compile "com.complexible.common:cp-openrdf-utils:4.0.2"
-    compile ("com.complexible.common:cp-common-utils:5.0.1") {
-        exclude group: "org.slf4j"
-    }
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 
-    // these should be coming from cp-openrdf-utils, but it's missing these
-    compile "org.openrdf.sesame:sesame-rio-ntriples:4.0.0"
-
-    compile "org.slf4j:slf4j-api:1.7.7"
-    compile "org.slf4j:slf4j-jdk14:1.7.7"
-
-    //compile "com.sun.xml.bind:jaxb-xjc:2.1.2"
-    compile "com.sun.xsom:xsom:20140925"
-
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 
     // https://mvnrepository.com/artifact/org.apache.jena/jena-core
     compile group: 'org.apache.jena', name: 'jena-arq', version: '3.1.0'
-
-    compile "org.eclipse.rdf4j:rdf4j-sail-memory:2.2"
-    compile "org.eclipse.rdf4j:rdf4j-repository-sail:2.2"
-    compile "org.eclipse.rdf4j:rdf4j-rio-rdfxml:2.2"
-    compile "org.eclipse.rdf4j:rdf4j-repository-sparql:2.2"
 
     testCompile 'junit:junit:4.11'
 }

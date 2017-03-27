@@ -2,6 +2,7 @@ package modelXml;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import utils.ModelHelper;
 import vocabs.NS;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -94,75 +95,70 @@ public class Object implements Deserializable{
 
     public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
-        //todo: namespaces
-        HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        //elementsAndAttributes.put("skos:notation", id);
-        elementsAndAttributes.put(NS.ODF + "type", type);
-        elementsAndAttributes.put(NS.DCT + "description", description);
-        elementsAndAttributes.put(NS.ODF + "udef", udef);
-
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource(objectBaseIri + id.getId());
 
-        model.setNsPrefix("dct", NS.DCT)
-                .setNsPrefix("odf", NS.ODF)
-                .setNsPrefix("rdf", NS.RDF);
-
+        model.setNsPrefix("rdf", NS.RDF);
         model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + "Object"));
 
+        //todo: namespaces
+        HashMap<String, String> elementsAndAttributes = new HashMap<>();
+        //elementsAndAttributes.put("skos:notation", id);
+        elementsAndAttributes.put(NS.ODF + "type", getType());
+        elementsAndAttributes.put(NS.DCT + "description", getDescription());
+        elementsAndAttributes.put(NS.ODF + "udef", getUdef());
+
+        //TODO: namespace udef !!!
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
-                model.add(subject, ResourceFactory.createProperty(entry.getKey()), entry.getValue());
+                if (entry.getKey().contains(NS.DCT)) {
+                    model.setNsPrefix("dct", NS.DCT);
+                } else {
+                    model.setNsPrefix("odf", NS.ODF);
+                }
+                subject.addProperty(ResourceFactory.createProperty(entry.getKey()), entry.getValue());
             }
         }
 
-        //id Model
+        // ID MODEL
         Model idModel = ModelFactory.createDefaultModel();
-        idModel.add(id.serialize());
-
+        idModel.add(getId().serialize());
 
         Resource idValue = idModel.listStatements().next().getSubject();
         subject.addProperty(ResourceFactory.createProperty(NS.ODF, "id"), idValue);
 
-        //infoitem Model
+        model.add(idModel);
+
+        // INFOITEM MODEL
         Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id.getId() + "/";
 
-        for(InfoItem infoItem : infoItems) {
-            Model infoItemModel = infoItem.serialize(objRelatedInfoItemBaseIri);
-            infoItemModels.add(infoItemModel);
-        }
+        getInfoItems().forEach(infoItem -> infoItemModels.add(infoItem.serialize(objRelatedInfoItemBaseIri)));
 
+        infoItemModels.forEach(infoItemModel -> {
+            Resource infoItemId = ModelHelper.getIdToConnectWith(infoItemModel, "InfoItem");
+            if (infoItemId != null) {
+                subject.addProperty(ResourceFactory.createProperty(NS.ODF + "infoitem"), infoItemId);
+            }
+        });
 
+        infoItemModels.forEach(infoItemModel -> model.add(infoItemModel));
+
+        // NESTED OBJECT MODEL
         Collection<Model> nestedObjectsModels = new HashSet<>();
         String nestedObjectsBaseIri = subject.toString() + "/";
 
-        for(Object object : objects) {
-            Model nestedObjectsModel = object.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri);
-            nestedObjectsModels.add(nestedObjectsModel);
-        }
-
-
-        infoItemModels.forEach(infoItemModel -> {
-            Resource infoItemId = null;
-            StmtIterator iterator = infoItemModel.listStatements();
-            while (iterator.hasNext()) {
-                Statement stmt = iterator.nextStatement();
-                if (stmt.getObject().toString().contains("InfoItem")) {
-                    infoItemId = stmt.getSubject();
-                }
-            }
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF + "infoitem"), infoItemId);
-        });
+        getObjects().forEach(nestedObject -> nestedObjectsModels
+                .add(nestedObject.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
 
         nestedObjectsModels.forEach(nestedObjectsModel -> {
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF + "object"), nestedObjectsModel.listStatements().next().getSubject());
+            Resource nestedObjectId = ModelHelper.getIdToConnectWith(nestedObjectsModel, "Object");
+            if (nestedObjectId != null) {
+                subject.addProperty(ResourceFactory.createProperty(NS.ODF + "object"), nestedObjectId);
+            }
         });
 
-
-        model.add(idModel);
-        infoItemModels.forEach(infoItemModel -> model.add(infoItemModel));
         nestedObjectsModels.forEach(nestedObjectsModel -> model.add(nestedObjectsModel));
 
         return model;

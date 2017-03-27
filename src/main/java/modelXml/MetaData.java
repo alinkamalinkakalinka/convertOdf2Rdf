@@ -2,6 +2,7 @@ package modelXml;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import utils.ModelHelper;
 import vocabs.NS;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -39,17 +40,28 @@ public class MetaData implements Deserializable{
     public Model serialize (String baseIri) {
 
         Model model = ModelFactory.createDefaultModel();
-
         Resource subject = model.createResource();
 
-        model.setNsPrefix("dct", NS.DCT)
-                .setNsPrefix("odf", NS.ODF)
-                .setNsPrefix("rdf", NS.RDF);
+        model.setNsPrefix("rdf", NS.RDF);
 
         subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "MetaData"));
 
-        Collection<Model> infoItemModels = new HashSet<>();
-        infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(baseIri)));
+        if (getInfoItems() != null) {
+            model.setNsPrefix("odf", NS.ODF);
+
+            Collection<Model> infoItemModels = new HashSet<>();
+            getInfoItems().forEach(infoitem -> infoItemModels.add(infoitem.serialize(baseIri)));
+
+
+            infoItemModels.forEach(infoItemModel -> {
+                Resource infoItemId = ModelHelper.getIdToConnectWith(infoItemModel, "InfoItem");
+                if (infoItemId != null) {
+                    subject.addProperty(ResourceFactory.createProperty(NS.ODF + "infoitem"), infoItemId);
+                }
+            });
+
+            infoItemModels.forEach(metadataModel -> model.add(metadataModel));
+        }
 
         return model;
     }

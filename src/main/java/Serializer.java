@@ -22,7 +22,7 @@ public class Serializer {
 
 
     public Model odf2rdf() throws FileNotFoundException {
-        InputStream odfStructure = getClass().getResourceAsStream("simpleOdf.xml");
+        InputStream odfStructure = getClass().getResourceAsStream("infoitem_values.xml");
 
         Objects beans = JAXB.unmarshal(odfStructure, Objects.class);
 

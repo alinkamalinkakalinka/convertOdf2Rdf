@@ -1,9 +1,9 @@
 package modelXml;
 
-import org.apache.jena.datatypes.RDFDatatype;
-import org.apache.jena.datatypes.TypeMapper;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import utils.RegexHelper;
 import vocabs.NS;
 
 import javax.xml.bind.DatatypeConverter;
@@ -21,12 +21,12 @@ public class Value implements Deserializable{
 
     private String type;
     private String dateTime;
-    private long unixTime;
+    private String unixTime;
     private String value;
 
     public Value(){}
 
-    public Value(String type, String dateTime, long unixTime, String value){
+    public Value(String type, String dateTime, String unixTime, String value){
         this.type = type;
         this.dateTime = dateTime;
         this.unixTime = unixTime;
@@ -54,12 +54,12 @@ public class Value implements Deserializable{
     }
 
 
-    public long getUnixTime() {
+    public String getUnixTime() {
         return unixTime;
     }
 
     @XmlAttribute
-    public void setUnixTime(long unixTime) {
+    public void setUnixTime(String unixTime) {
         this.unixTime = unixTime;
     }
 
@@ -76,21 +76,44 @@ public class Value implements Deserializable{
 
     public Model serialize () {
 
-        RDFDatatype datatype = TypeMapper.getInstance().getTypeByName(type);
-
-        Literal createdValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(dateTime).getTime());
-        Literal dataValue = ResourceFactory.createTypedLiteral(value, datatype);
-
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource();
 
-        model.setNsPrefix("dct", NS.DCT)
-                .setNsPrefix("odf", NS.ODF)
-                .setNsPrefix("rdf", NS.RDF);
+        model.setNsPrefix("rdf", NS.RDF);
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "Value"));
 
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "Value"))
-                .addProperty(ResourceFactory.createProperty(NS.DCT + "created"), createdValue)
-                .addProperty(ResourceFactory.createProperty(NS.ODF + "dataValue"), dataValue);
+        //TODO: define type somehow
+
+        if (getDateTime() != null || getValue() != null || getUnixTime() != null) {
+            model.setNsPrefix("xsd", NS.XSD);
+
+            if (getUnixTime() != null) {
+                Literal unixTimeValue = ResourceFactory.createTypedLiteral(unixTime);
+            }
+
+            if (getDateTime() != null) {
+                Literal createdValue = ResourceFactory.createTypedLiteral(
+                        DatatypeConverter.parseDateTime(getDateTime()).getTime().toString(),
+                        XSDDatatype.XSDdateTime);
+
+                model.setNsPrefix("dct", NS.DCT);
+                subject.addProperty(ResourceFactory.createProperty(NS.DCT + "created"), createdValue);
+            }
+
+            if (getValue() != null) {
+                XSDDatatype datatype = null;
+
+                if (getType() != null) {
+                    datatype = new XSDDatatype(RegexHelper.getObjectType(getType()), String.class);
+                }
+
+                Literal dataValue = ResourceFactory.createTypedLiteral(getValue(), datatype);
+
+                model.setNsPrefix("odf", NS.ODF);
+                subject.addProperty(ResourceFactory.createProperty(NS.ODF + "dataValue"), dataValue);
+
+            }
+        }
 
         return model;
     }
@@ -106,9 +129,9 @@ public class Value implements Deserializable{
             Property property = statement.getPredicate();
             Resource object = ResourceFactory.createResource(statement.getObject().toString());
 
-            if (subject.equals(statement.getSubject())) {
+            if (subject.toString().equals(statement.getSubject().toString())) {
 
-                if (property.toString().contains("type")){
+                if (property.toString().contains("type") && !object.toString().contains("Value")){
                     valueClass.setType(object.toString());
                 }
 

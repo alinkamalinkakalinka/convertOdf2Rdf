@@ -77,27 +77,37 @@ public class QlmID implements Deserializable{
 
     public Model serialize() {
 
-        HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put(NS.TIME + "startDate", startDate);
-        elementsAndAttributes.put(NS.TIME + "endDate", endDate);
-
         Model model = ModelFactory.createDefaultModel();
-
         Resource subject = model.createResource();
+
+        model.setNsPrefix("rdf", NS.RDF);
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "QlmID"));
+
+        HashMap<String, String> elementsAndAttributes = new HashMap<>();
+        elementsAndAttributes.put(NS.TIME + "startDate", getStartDate());
+        elementsAndAttributes.put(NS.TIME + "endDate", getEndDate());
 
         model.setNsPrefix("dct", NS.DCT)
                 .setNsPrefix("time", NS.TIME)
                 .setNsPrefix("odf", NS.ODF)
                 .setNsPrefix("rdf", NS.RDF);
 
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "QlmID"));
 
-        if (id != null) {
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "idValue"), id);
+        if (getId() != null) {
+            model.setNsPrefix("odf", NS.ODF);
+            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "idValue"), getId());
+        }
+
+        if (getTagType() != null) {
+            //TODO: namespace ???
+            model.setNsPrefix("dct", NS.DCT);
+            subject.addProperty(ResourceFactory.createProperty(NS.DCT, "tagType"), getTagType());
         }
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
+                model.setNsPrefix("time", NS.TIME);
+                //TODO: dateTime xsd type???
                 Literal dateValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(entry.getValue()).getTime());
                 subject.addProperty(ResourceFactory.createProperty(entry.getKey()), dateValue);
             }
@@ -135,6 +145,8 @@ public class QlmID implements Deserializable{
                 }
             }
         }
+
+        //TODO: no tagType
 
         return qlmIDClass;
     }
