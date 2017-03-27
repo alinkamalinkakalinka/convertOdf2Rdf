@@ -36,6 +36,17 @@ ext {
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 repositories {
     mavenCentral()
     maven {
@@ -77,13 +88,6 @@ dependencies {
     compile "org.eclipse.rdf4j:rdf4j-repository-sail:2.2"
     compile "org.eclipse.rdf4j:rdf4j-rio-rdfxml:2.2"
     compile "org.eclipse.rdf4j:rdf4j-repository-sparql:2.2"
-
-    // https://mvnrepository.com/artifact/com.thewebsemantic/jenabean
-    compile group: 'com.thewebsemantic', name: 'jenabean', version: '1.0.6'
-
-
-    compile fileTree(dir: 'libs', include: 'pinto-2.0.1-SNAPSHOT.jar')
-
 
     testCompile 'junit:junit:4.11'
 }

@@ -1,31 +1,28 @@
 package modelXml;
 
-import com.complexible.pinto.annotations.RdfId;
-import com.complexible.pinto.annotations.RdfProperty;
-import com.complexible.pinto.annotations.RdfsClass;
 import org.apache.jena.rdf.model.*;
-import org.apache.jena.rdf.model.Statement;
-import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import vocabs.NS;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by aarunova on 12/11/16.
  */
 
-@RdfsClass("odf:QlmID")
 @XmlRootElement(name = "id")
-public class QlmID {
+public class QlmID implements Deserializable{
 
     private String id;
     private String tagType;
@@ -83,9 +80,6 @@ public class QlmID {
     }
 
     public Model serialize(ValueFactory vf) {
-        //Literal startDateValue = vf.createLiteral(DatatypeConverter.parseDateTime(startDate).getTime());
-        //Literal endDateValue = vf.createLiteral(DatatypeConverter.parseDateTime(endDate).getTime());
-        //Literal idValue = vf.createLiteral(id);
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
         elementsAndAttributes.put("time:startDate", startDate);
@@ -116,6 +110,39 @@ public class QlmID {
         return builder.build();
     }
 
+
+    public org.apache.jena.rdf.model.Model serialize() {
+
+        HashMap<String, String> elementsAndAttributes = new HashMap<>();
+        elementsAndAttributes.put(NS.TIME + "startDate", startDate);
+        elementsAndAttributes.put(NS.TIME + "endDate", endDate);
+
+        org.apache.jena.rdf.model.Model model = ModelFactory.createDefaultModel();
+
+        Resource subject = model.createResource();
+
+        model.setNsPrefix("dct", NS.DCT)
+                .setNsPrefix("time", NS.TIME)
+                .setNsPrefix("odf", NS.ODF)
+                .setNsPrefix("rdf", RDF.NAMESPACE);
+
+        subject.addProperty(org.apache.jena.vocabulary.RDF.type, ResourceFactory.createResource(NS.ODF + "QlmID"));
+
+        if (id != null) {
+            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "idValue"), id);
+        }
+
+        for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
+            if (entry.getValue() != null) {
+                org.apache.jena.rdf.model.Literal dateValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(entry.getValue()).getTime());
+                subject.addProperty(ResourceFactory.createProperty(entry.getKey()), dateValue);
+            }
+        }
+
+        return model;
+    }
+
+    @Override
     public QlmID deserialize (org.apache.jena.rdf.model.Resource subject, Collection<Statement> statements) {
 
         QlmID qlmIDClass = new QlmID();

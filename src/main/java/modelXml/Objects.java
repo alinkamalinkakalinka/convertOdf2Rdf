@@ -17,7 +17,6 @@ import java.util.List;
  * Created by aarunova on 12/11/16.
  */
 
-//@RdfsClass("odf:Objects")
 @XmlRootElement (name = "Objects")
 public class Objects {
 

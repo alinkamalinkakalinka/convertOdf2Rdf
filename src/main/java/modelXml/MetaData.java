@@ -1,11 +1,6 @@
 package modelXml;
 
-import com.complexible.pinto.annotations.RdfId;
-import com.complexible.pinto.annotations.RdfsClass;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.*;
 import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
@@ -18,15 +13,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by aarunova on 12/11/16.
  */
 
-//@RdfsClass("odf:MetaData")
 @XmlRootElement
-public class MetaData {
+public class MetaData implements Deserializable{
 
     private Collection<InfoItem> infoItems = new ArrayList<>();
 
@@ -37,7 +30,6 @@ public class MetaData {
         this.infoItems = infoItems;
     }
 
-
     public Collection<InfoItem> getInfoItems() {
         return infoItems;
     }
@@ -46,6 +38,8 @@ public class MetaData {
     public void setInfoItems(Collection<InfoItem> infoItems) {
         this.infoItems = infoItems;
     }
+
+
 
     public Model serialize(ValueFactory vf, String baseIri) {
         BNode subject = vf.createBNode();
@@ -71,6 +65,25 @@ public class MetaData {
         return metadataModel;
     }
 
+    public org.apache.jena.rdf.model.Model serialize (String baseIri) {
+
+        org.apache.jena.rdf.model.Model model = ModelFactory.createDefaultModel();
+
+        Resource subject = model.createResource();
+
+        model.setNsPrefix("dct", NS.DCT)
+                .setNsPrefix("odf", NS.ODF)
+                .setNsPrefix("rdf", RDF.NAMESPACE);
+
+        subject.addProperty(org.apache.jena.vocabulary.RDF.type, ResourceFactory.createResource(NS.ODF + "MetaData"));
+
+        Collection<org.apache.jena.rdf.model.Model> infoItemModels = new HashSet<>();
+        infoItems.forEach(infoitem -> infoItemModels.add(infoitem.serialize(baseIri)));
+
+        return model;
+    }
+
+    @Override
     public MetaData deserialize (Resource subject, Collection<Statement> statements) {
 
         MetaData metaDataClass = new MetaData();

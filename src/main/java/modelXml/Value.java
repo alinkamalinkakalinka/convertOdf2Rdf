@@ -1,12 +1,8 @@
 package modelXml;
 
-import com.complexible.pinto.annotations.RdfId;
-import com.complexible.pinto.annotations.RdfProperty;
-import com.complexible.pinto.annotations.RdfsClass;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.datatypes.RDFDatatype;
+import org.apache.jena.datatypes.TypeMapper;
+import org.apache.jena.rdf.model.*;
 import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
@@ -20,16 +16,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by aarunova on 12/11/16.
  */
 
-//@RdfsClass("odf:Value")
 @XmlRootElement (name = "value")
-public class Value {
+public class Value implements Deserializable{
 
     private String type;
     private String dateTime;
@@ -105,8 +98,30 @@ public class Value {
         return builder.build();
     }
 
+    public org.apache.jena.rdf.model.Model serialize () {
+
+        RDFDatatype datatype = TypeMapper.getInstance().getTypeByName(type);
+
+        org.apache.jena.rdf.model.Literal createdValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(dateTime).getTime());
+        org.apache.jena.rdf.model.Literal dataValue = ResourceFactory.createTypedLiteral(value, datatype);
+
+        org.apache.jena.rdf.model.Model model = ModelFactory.createDefaultModel();
+        Resource subject = model.createResource();
+
+        model.setNsPrefix("dct", NS.DCT)
+                .setNsPrefix("odf", NS.ODF)
+                .setNsPrefix("rdf", RDF.NAMESPACE);
+
+        subject.addProperty(org.apache.jena.vocabulary.RDF.type, ResourceFactory.createResource(NS.ODF + "Value"))
+                .addProperty(ResourceFactory.createProperty(NS.DCT + "created"), createdValue)
+                .addProperty(ResourceFactory.createProperty(NS.ODF + "dataValue"), dataValue);
+
+        return model;
+    }
 
 
+
+    @Override
     public Value deserialize (Resource subject, Collection<Statement> statements) {
         Value valueClass = new Value();
 

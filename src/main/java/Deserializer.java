@@ -1,19 +1,15 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import modelXml.Object;
 import modelXml.Objects;
-import modelXml.QlmID;
-
 import org.apache.jena.rdf.model.*;
-
 import org.apache.jena.vocabulary.RDF;
 import utils.Loggable;
-import utils.RegexHelper;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by aarunova on 3/26/17.
@@ -23,7 +19,7 @@ import javax.xml.bind.Marshaller;
 
 public class Deserializer implements Loggable{
 
-    public void deserialize (String rdfFile) {
+    public void deserialize (String rdfFile, String xmlFilePath) {
 
         try {
 
@@ -50,7 +46,7 @@ public class Deserializer implements Loggable{
                 Marshaller marshallerObj = contextObj.createMarshaller();
                 marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-                marshallerObj.marshal(objectsClass, new FileOutputStream("test10.xml"));
+                marshallerObj.marshal(objectsClass, new FileOutputStream(xmlFilePath));
             }
 
         } catch (JAXBException e) {

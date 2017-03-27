@@ -1,0 +1,11 @@
+@prefix odf:   <http://eis-biotope.iais.fraunhofer.de/odf#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/SmartHouse>
+        a       "odf:Object" ;
+        odf:id  [ a               "odf:QlmID" ;
+                  odf:idValue     "SmartHouse" ;
+                  time:startDate  "Wed Dec 21 12:11:43 CET 2016"
+                ] .

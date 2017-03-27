@@ -2,9 +2,7 @@
  * Created by aarunova on 12/11/16.
  */
 
-import com.complexible.pinto.RDFMapper;
 import modelXml.Objects;
-import org.openrdf.model.Model;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -33,28 +31,26 @@ public class Main {
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             Objects objects= (Objects) jaxbUnmarshaller.unmarshal(file);
 
-            Model aGraph = RDFMapper.builder()
-                    .build().writeValue(objects);
 
-            ModelModifier modelModifier = new ModelModifier();
+            Serializer serializer = new Serializer();
+            serializer.odf2rdf();
 
             //InputStream odfStructure = getClass().getResourceAsStream("/resources/infoitem_values.xml");
-            //modelModifier.odf2rdf();
+            //serializer.odf2rdf();
 
             Deserializer deserializer = new Deserializer();
-            deserializer.deserialize("test3.rdf");
+            deserializer.deserialize("testJena.rdf", "test10.xml");
 
 
             //FileInputStream stream = new FileInputStream(new File("test3.rdf").toURL().toString());
 
-            //Collection<Objects> objectsCollection = modelModifier.convert();
+            //Collection<Objects> objectsCollection = serializer.convert();
 
 
 
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-
 
     }
 
