@@ -5,6 +5,7 @@
         <id tagType="blabla">UniqueTargetID_1</id>
         <description lang = "en">balalal</description>
         <InfoItem name="InfoItem1">
+            <name>blablapppppp</name>
             <value dateTime="2016-11-21T12:11:43.055+01:00">Value1</value>
             <value>Value2</value>
             <value>Value3</value>

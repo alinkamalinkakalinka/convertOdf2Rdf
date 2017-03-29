@@ -12,13 +12,15 @@
     </Object>
     <Object type="someType">
         <id tagType="blabla">UniqueTargetID_1</id>
-        <InfoItem name="InfoItem2">
-            <value>Value</value>
-        </InfoItem>
+        <description>balalal@en</description>
         <InfoItem name="InfoItem1">
-            <value>Value1</value>
+            <name>blablapppppp</name>
+            <value dateTime="Mon Nov 21 12:11:43 CET 2016^^http://www.w3.org/2001/XMLSchema#dateTime">Value1</value>
             <value>Value3</value>
             <value>Value2</value>
+        </InfoItem>
+        <InfoItem name="InfoItem2">
+            <value>Value</value>
         </InfoItem>
         <Object type="someType">
             <id>SubSubTarget1</id>

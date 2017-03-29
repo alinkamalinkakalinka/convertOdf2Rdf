@@ -24,7 +24,7 @@ public class InfoItem implements Deserializable{
 
     //TODO: name one as id and list
     //TODO: any attribute
-    private String name1;
+    private QlmID name1;
     private String name;
     private String udef;
     private Collection<Value> values = new ArrayList<>();
@@ -35,14 +35,14 @@ public class InfoItem implements Deserializable{
     public InfoItem(){}
 
     public InfoItem(String name,
-                    String name1,
+                    QlmID name1,
                     String udef,
                     List<Value> values,
                     Description description,
                     Collection<MetaData> metaData,
                     Map<QName, String> otherAttributes){
         this.name = name;
-        this.name = name1;
+        this.name1 = name1;
         this.udef = udef;
         this.values = values;
         this.description = description;
@@ -100,12 +100,12 @@ public class InfoItem implements Deserializable{
     }
 
 
-    public String getName1() {
+    public QlmID getName1() {
         return name1;
     }
 
     @XmlElement (name = "name")
-    public void setName1(String name1) {
+    public void setName1(QlmID name1) {
         this.name1 = name1;
     }
 
@@ -129,8 +129,8 @@ public class InfoItem implements Deserializable{
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
         //elementsAndAttributes.put(NS.DCT + "description", getDescription());
-        elementsAndAttributes.put(NS.ODF + "name", getName());
-        elementsAndAttributes.put(NS.DCT + "title", getName1());
+        elementsAndAttributes.put(NS.DCT + "name", getName());
+        //elementsAndAttributes.put(NS.ODF + "name", getName1());
         elementsAndAttributes.put(NS.ODF + "udef", getUdef());
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
@@ -143,6 +143,18 @@ public class InfoItem implements Deserializable{
                 subject.addProperty(ResourceFactory.createProperty(entry.getKey()), entry.getValue());
             }
         }
+
+        // ID MODEL
+        if (getName1() != null) {
+            Model idModel = ModelFactory.createDefaultModel();
+            idModel.add(getName1().serialize());
+
+            Resource idValue = idModel.listStatements().next().getSubject();
+            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "id"), idValue);
+
+            model.add(idModel);
+        }
+
 
         //DESCRIPTION MODEL
         if (getDescription() != null) {
@@ -198,6 +210,7 @@ public class InfoItem implements Deserializable{
         Value valueClass = new Value();
         MetaData metaDataClass = new MetaData();
         Description descriptionClass = new Description();
+        QlmID qlmIDClass = new QlmID();
 
         Collection<Value> values = new ArrayList<>();
         Collection<MetaData> metaDatas = new ArrayList<>();
@@ -214,8 +227,8 @@ public class InfoItem implements Deserializable{
                 }
 
                 //TODO: name1 ????
-                if (property.toString().contains("name1")) {
-                    infoItemClass.setName1(object.toString());
+                if (property.toString().contains(NS.ODF + "id")) {
+                    infoItemClass.setName1(qlmIDClass.deserialize(object, statements));
                 }
 
                 if (property.toString().contains("udef")) {

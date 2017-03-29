@@ -6,7 +6,9 @@
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem1>
         a          odf:InfoItem ;
-        odf:name   "InfoItem1" ;
+        odf:id     [ a            odf:QlmID ;
+                     odf:idValue  "blablapppppp"
+                   ] ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "Value2"
                    ] ;
@@ -16,18 +18,19 @@
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "Value1" ;
                      dct:created    "Mon Nov 21 12:11:43 CET 2016"^^xsd:dateTime
-                   ] .
+                   ] ;
+        dct:name   "InfoItem1" .
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubSubTarget1/SubSubTarget1InfoItem1>
         a          odf:InfoItem ;
-        odf:name   "SubSubTarget1InfoItem1" ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "22.5"
-                   ] .
+                   ] ;
+        dct:name   "SubSubTarget1InfoItem1" .
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubInfoItem1>
         a         odf:InfoItem ;
-        odf:name  "SubInfoItem1" .
+        dct:name  "SubInfoItem1" .
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1/SubSubTarget1>
         a             odf:Object ;
@@ -56,10 +59,10 @@
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget2/SubTarget2InfoItem1>
         a          odf:InfoItem ;
-        odf:name   "SubTarget2InfoItem1" ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "34.6"
-                   ] .
+                   ] ;
+        dct:name   "SubTarget2InfoItem1" .
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1>
         a                odf:Object ;
@@ -76,7 +79,7 @@
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem2>
         a          odf:InfoItem ;
-        odf:name   "InfoItem2" ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "Value"
-                   ] .
+                   ] ;
+        dct:name   "InfoItem2" .
