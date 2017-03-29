@@ -7,5 +7,5 @@ import org.apache.jena.rdf.model.Model;
  */
 public interface Serializable {
 
-    Model serialize (String baseURI);
+    Model serialize (String objectBaseIri, String infoItemBaseIri);
 }

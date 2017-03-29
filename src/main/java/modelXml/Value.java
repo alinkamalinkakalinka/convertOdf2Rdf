@@ -18,7 +18,7 @@ import java.util.Map;
  */
 
 @XmlRootElement (name = "value")
-public class Value implements Deserializable{
+public class Value implements Deserializable, Serializable{
 
     private String type;
     private String dateTime;
@@ -90,7 +90,8 @@ public class Value implements Deserializable{
     }
 
 
-    public Model serialize () {
+    @Override
+    public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource();

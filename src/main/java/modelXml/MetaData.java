@@ -16,7 +16,7 @@ import java.util.HashSet;
  */
 
 @XmlRootElement
-public class MetaData implements Deserializable{
+public class MetaData implements Deserializable, Serializable{
 
     private Collection<InfoItem> infoItems = new ArrayList<>();
 
@@ -37,7 +37,8 @@ public class MetaData implements Deserializable{
     }
 
 
-    public Model serialize (String baseIri) {
+    @Override
+    public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource();
@@ -50,7 +51,7 @@ public class MetaData implements Deserializable{
             model.setNsPrefix("odf", NS.ODF);
 
             Collection<Model> infoItemModels = new HashSet<>();
-            getInfoItems().forEach(infoitem -> infoItemModels.add(infoitem.serialize(baseIri)));
+            getInfoItems().forEach(infoitem -> infoItemModels.add(infoitem.serialize(null, infoItemBaseIri)));
 
 
             infoItemModels.forEach(infoItemModel -> {

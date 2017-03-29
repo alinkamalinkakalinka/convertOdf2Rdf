@@ -20,7 +20,7 @@ import java.util.*;
         "infoItems",
         "objects"
 })
-public class Object implements Deserializable{
+public class Object implements Deserializable, Serializable{
 
     private QlmID id;
     private String type;
@@ -118,6 +118,7 @@ public class Object implements Deserializable{
     }
 
 
+    @Override
     public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
@@ -148,7 +149,7 @@ public class Object implements Deserializable{
 
         // ID MODEL
         Model idModel = ModelFactory.createDefaultModel();
-        idModel.add(getId().serialize());
+        idModel.add(getId().serialize(null, null));
 
         Resource idValue = idModel.listStatements().next().getSubject();
         subject.addProperty(ResourceFactory.createProperty(NS.ODF, "id"), idValue);
@@ -170,7 +171,7 @@ public class Object implements Deserializable{
         Collection<Model> infoItemModels = new HashSet<>();
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id.getId() + "/";
 
-        getInfoItems().forEach(infoItem -> infoItemModels.add(infoItem.serialize(objRelatedInfoItemBaseIri)));
+        getInfoItems().forEach(infoItem -> infoItemModels.add(infoItem.serialize(null, objRelatedInfoItemBaseIri)));
 
         infoItemModels.forEach(infoItemModel -> {
             Resource infoItemId = ModelHelper.getIdToConnectWith(infoItemModel, "InfoItem");

@@ -20,11 +20,11 @@ import java.util.*;
         "metaData",
         "values"
 })
-public class InfoItem implements Deserializable{
+public class InfoItem implements Deserializable, Serializable{
 
     //TODO: name one as id and list
     //TODO: any attribute
-    private QlmID name1;
+    private Collection<QlmID> name1;
     private String name;
     private String udef;
     private Collection<Value> values = new ArrayList<>();
@@ -35,7 +35,7 @@ public class InfoItem implements Deserializable{
     public InfoItem(){}
 
     public InfoItem(String name,
-                    QlmID name1,
+                    Collection<QlmID> name1,
                     String udef,
                     List<Value> values,
                     Description description,
@@ -100,12 +100,12 @@ public class InfoItem implements Deserializable{
     }
 
 
-    public QlmID getName1() {
+    public Collection<QlmID> getName1() {
         return name1;
     }
 
     @XmlElement (name = "name")
-    public void setName1(QlmID name1) {
+    public void setName1(Collection<QlmID> name1) {
         this.name1 = name1;
     }
 
@@ -119,7 +119,8 @@ public class InfoItem implements Deserializable{
     }
 
 
-    public Model serialize (String infoItemBaseIri) {
+    @Override
+    public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource(infoItemBaseIri + getName());
@@ -146,13 +147,17 @@ public class InfoItem implements Deserializable{
 
         // ID MODEL
         if (getName1() != null) {
-            Model idModel = ModelFactory.createDefaultModel();
-            idModel.add(getName1().serialize());
+            Collection<Model> idModels = new HashSet<>();
+            getName1().forEach(nameValue -> idModels.add(nameValue.serialize(null, null)));
 
-            Resource idValue = idModel.listStatements().next().getSubject();
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "id"), idValue);
+            idModels.forEach(idModel -> {
+                Resource idValue = ModelHelper.getIdToConnectWith(idModel, "QlmID");
+                if (idValue != null) {
+                    subject.addProperty(ResourceFactory.createProperty(NS.ODF, "name"), idValue);
+                }
+            });
 
-            model.add(idModel);
+            idModels.forEach(idModel -> model.add(idModel));
         }
 
 
@@ -171,7 +176,7 @@ public class InfoItem implements Deserializable{
         // VALUE MODEL
         if (getValues() != null) {
             Collection<Model> valueModels = new HashSet<>();
-            getValues().forEach(value -> valueModels.add(value.serialize()));
+            getValues().forEach(value -> valueModels.add(value.serialize(null, null)));
 
             valueModels.forEach(valueModel -> {
                 Resource valueId = ModelHelper.getIdToConnectWith(valueModel, "Value");
@@ -187,7 +192,7 @@ public class InfoItem implements Deserializable{
         // METADATA MODEL
         if (getMetaData() != null) {
             Collection<Model> metaDataModels = new HashSet<>();
-            getMetaData().forEach(metaDataValue -> metaDataModels.add(metaDataValue.serialize(subject + "/")));
+            getMetaData().forEach(metaDataValue -> metaDataModels.add(metaDataValue.serialize(null, subject + "/")));
 
             metaDataModels.forEach(metsDataModel -> {
                 Resource metadataId = ModelHelper.getIdToConnectWith(metsDataModel, "MetaData");
@@ -214,6 +219,7 @@ public class InfoItem implements Deserializable{
 
         Collection<Value> values = new ArrayList<>();
         Collection<MetaData> metaDatas = new ArrayList<>();
+        Collection<QlmID> ids = new ArrayList<>();
 
         for (Statement statement : statements) {
 
@@ -222,13 +228,13 @@ public class InfoItem implements Deserializable{
 
             if (subject.equals(statement.getSubject())) {
 
-                if (property.toString().contains("name")) {
+                if (property.toString().contains(NS.DCT + "name")) {
                     infoItemClass.setName(object.toString());
                 }
 
                 //TODO: name1 ????
-                if (property.toString().contains(NS.ODF + "id")) {
-                    infoItemClass.setName1(qlmIDClass.deserialize(object, statements));
+                if (property.toString().contains(NS.ODF + "name")) {
+                    ids.add(qlmIDClass.deserialize(object, statements));
                 }
 
                 if (property.toString().contains("udef")) {
@@ -243,7 +249,7 @@ public class InfoItem implements Deserializable{
                     metaDatas.add(metaDataClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains("value")) {
+                if (property.toString().contains(NS.ODF + "value")) {
                     values.add(valueClass.deserialize(object,statements));
                 }
             }
@@ -251,9 +257,9 @@ public class InfoItem implements Deserializable{
 
         infoItemClass.setValues(values);
         infoItemClass.setMetaData(metaDatas);
+        infoItemClass.setName1(ids);
 
-        //TODO: no dataValue
-
+        //TODO: fix double id!!!
         return infoItemClass;
     }
 }

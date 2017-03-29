@@ -16,7 +16,7 @@ import java.util.Map;
  */
 
 //@XmlRootElement(name = "id")
-public class QlmID implements Deserializable{
+public class QlmID implements Deserializable, Serializable{
 
     //TODO: gregorian calendar ????
 
@@ -93,7 +93,8 @@ public class QlmID implements Deserializable{
     }
 
 
-    public Model serialize() {
+    @Override
+    public Model serialize(String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource();
