@@ -5,9 +5,8 @@ import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
 
 import javax.xml.bind.DatatypeConverter;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,19 +15,27 @@ import java.util.Map;
  * Created by aarunova on 12/11/16.
  */
 
-@XmlRootElement(name = "id")
+//@XmlRootElement(name = "id")
 public class QlmID implements Deserializable{
+
+    //TODO: gregorian calendar ????
 
     private String id;
     private String tagType;
     private String startDate;
     private String endDate;
+    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
-    public QlmID(String id, String tagType, String startDate, String endDate) {
+    public QlmID(String id,
+                 String tagType,
+                 String startDate,
+                 String endDate,
+                 Map<QName, String> otherAttributes) {
         this.id = id;
         this.tagType = tagType;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.otherAttributes = otherAttributes;
     }
 
     public QlmID() {
@@ -60,6 +67,7 @@ public class QlmID implements Deserializable{
     }
 
     @XmlAttribute (name = "startDate")
+    @XmlSchemaType(name = "dateTime")
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
@@ -70,8 +78,18 @@ public class QlmID implements Deserializable{
     }
 
     @XmlAttribute (name = "endDate")
+    @XmlSchemaType(name = "dateTime")
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public Map<QName, String> getOtherAttributes() {
+        return otherAttributes;
+    }
+
+    @XmlAnyAttribute
+    public void setOtherAttributes(Map<QName, String> otherAttributes) {
+        this.otherAttributes = otherAttributes;
     }
 
 
@@ -145,8 +163,6 @@ public class QlmID implements Deserializable{
                 }
             }
         }
-
-        //TODO: no tagType
 
         return qlmIDClass;
     }

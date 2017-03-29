@@ -5,9 +5,8 @@ import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
 import vocabs.NS;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.*;
 
 /**
@@ -15,24 +14,40 @@ import java.util.*;
  */
 
 @XmlRootElement (name = "InfoItem")
+@XmlType(propOrder = {
+        "name1",
+        "description",
+        "metaData",
+        "values"
+})
 public class InfoItem implements Deserializable{
 
+    //TODO: name one as id and list
+    //TODO: any attribute
     private String name1;
     private String name;
     private String udef;
     private Collection<Value> values = new ArrayList<>();
-    private String description;
+    private Description description;
     private Collection<MetaData> metaData = new ArrayList<>();
+    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
     public InfoItem(){}
 
-    public InfoItem(String name, String name1, String udef, List<Value> values, String description, Collection<MetaData> metaData){
+    public InfoItem(String name,
+                    String name1,
+                    String udef,
+                    List<Value> values,
+                    Description description,
+                    Collection<MetaData> metaData,
+                    Map<QName, String> otherAttributes){
         this.name = name;
         this.name = name1;
         this.udef = udef;
         this.values = values;
         this.description = description;
         this.metaData = metaData;
+        this.otherAttributes = otherAttributes;
     }
 
     public String getUdef() {
@@ -55,12 +70,12 @@ public class InfoItem implements Deserializable{
     }
 
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
     @XmlElement (name = "description")
-    public void setDescription(String description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
@@ -94,6 +109,15 @@ public class InfoItem implements Deserializable{
         this.name1 = name1;
     }
 
+    public Map<QName, String> getOtherAttributes() {
+        return otherAttributes;
+    }
+
+    @XmlAnyAttribute
+    public void setOtherAttributes(Map<QName, String> otherAttributes) {
+        this.otherAttributes = otherAttributes;
+    }
+
 
     public Model serialize (String infoItemBaseIri) {
 
@@ -104,7 +128,7 @@ public class InfoItem implements Deserializable{
         subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "InfoItem"));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put(NS.DCT + "description", getDescription());
+        //elementsAndAttributes.put(NS.DCT + "description", getDescription());
         elementsAndAttributes.put(NS.ODF + "name", getName());
         elementsAndAttributes.put(NS.DCT + "title", getName1());
         elementsAndAttributes.put(NS.ODF + "udef", getUdef());
@@ -119,6 +143,18 @@ public class InfoItem implements Deserializable{
                 subject.addProperty(ResourceFactory.createProperty(entry.getKey()), entry.getValue());
             }
         }
+
+        //DESCRIPTION MODEL
+        if (getDescription() != null) {
+            Model descriptionModel = ModelFactory.createDefaultModel();
+            descriptionModel.add(getDescription().serialize());
+
+            Resource descriptionValue = descriptionModel.listStatements().next().getSubject();
+            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "description"), descriptionValue);
+
+            model.add(descriptionModel);
+        }
+
 
         // VALUE MODEL
         if (getValues() != null) {
@@ -161,6 +197,7 @@ public class InfoItem implements Deserializable{
         InfoItem infoItemClass = new InfoItem();
         Value valueClass = new Value();
         MetaData metaDataClass = new MetaData();
+        Description descriptionClass = new Description();
 
         Collection<Value> values = new ArrayList<>();
         Collection<MetaData> metaDatas = new ArrayList<>();
@@ -185,8 +222,8 @@ public class InfoItem implements Deserializable{
                     infoItemClass.setUdef(object.toString());
                 }
 
-                if (property.toString().contains("description")) {
-                    infoItemClass.setDescription(object.toString());
+                if (property.toString().contains(NS.ODF + "description")) {
+                    infoItemClass.setDescription(descriptionClass.deserialize(object, statements));
                 }
 
                 if (property.toString().contains("metadata")) {

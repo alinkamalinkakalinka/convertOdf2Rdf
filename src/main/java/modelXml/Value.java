@@ -7,10 +7,11 @@ import utils.RegexHelper;
 import vocabs.NS;
 
 import javax.xml.bind.DatatypeConverter;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by aarunova on 12/11/16.
@@ -21,12 +22,17 @@ public class Value implements Deserializable{
 
     private String type;
     private String dateTime;
-    private String unixTime;
+    private String unixTime; //TODO: Long
     private String value;
+    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
     public Value(){}
 
-    public Value(String type, String dateTime, String unixTime, String value){
+    public Value(String type,
+                 String dateTime,
+                 String unixTime,
+                 String value,
+                 Map<QName, String> otherAttributes){
         this.type = type;
         this.dateTime = dateTime;
         this.unixTime = unixTime;
@@ -49,6 +55,7 @@ public class Value implements Deserializable{
     }
 
     @XmlAttribute (name = "dateTime")
+    @XmlSchemaType(name = "dateTime")
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
@@ -71,6 +78,15 @@ public class Value implements Deserializable{
     @XmlValue
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Map<QName, String> getOtherAttributes() {
+        return otherAttributes;
+    }
+
+    @XmlAnyAttribute
+    public void setOtherAttributes(Map<QName, String> otherAttributes) {
+        this.otherAttributes = otherAttributes;
     }
 
 

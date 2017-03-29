@@ -1,17 +1,10 @@
 package modelXml;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.vocabulary.RDF;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by aarunova on 12/11/16.
@@ -21,13 +14,15 @@ import java.util.List;
 public class Objects {
 
     private String name;
+    private String version;
     private Collection<Object> objects = new ArrayList<>();
 
     public Objects() {}
 
-    public Objects(String name, Collection<Object> objects) {
+    public Objects(String name, String version, Collection<Object> objects) {
         super();
         this.name = name;
+        this.version = version;
         this.objects = objects;
     }
 
@@ -51,4 +46,12 @@ public class Objects {
         this.objects = objects;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    @XmlAttribute (name = "version")
+    public void setVersion(String version) {
+        this.version = version;
+    }
 }

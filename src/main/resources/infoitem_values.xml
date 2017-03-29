@@ -3,8 +3,9 @@
 <Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
     <Object type="someType">
         <id tagType="blabla">UniqueTargetID_1</id>
+        <description lang = "en">balalal</description>
         <InfoItem name="InfoItem1">
-            <value>Value1</value>
+            <value dateTime="2016-11-21T12:11:43.055+01:00">Value1</value>
             <value>Value2</value>
             <value>Value3</value>
         </InfoItem>
