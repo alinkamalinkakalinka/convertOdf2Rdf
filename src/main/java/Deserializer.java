@@ -1,5 +1,5 @@
-import modelXml.Object;
-import modelXml.Objects;
+import model.Object;
+import model.Objects;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.Loggable;

@@ -2,7 +2,7 @@
  * Created by aarunova on 12/11/16.
  */
 
-import modelXml.Objects;
+import model.Objects;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

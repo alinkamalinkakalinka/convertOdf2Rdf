@@ -1,4 +1,4 @@
-package modelXml;
+package model;
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.*;
@@ -89,6 +89,9 @@ public class Value implements Deserializable, Serializable{
         this.otherAttributes = otherAttributes;
     }
 
+    public Model serialize () {
+        return serialize(null, null);
+    }
 
     @Override
     public Model serialize (String objectBaseIri, String infoItemBaseIri) {

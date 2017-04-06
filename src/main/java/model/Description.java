@@ -1,4 +1,4 @@
-package modelXml;
+package model;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 import java.lang.*;
-import java.lang.Object;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +19,7 @@ import java.util.Map;
  */
 
 @XmlRootElement (name = "description")
-public class Description implements Deserializable{
+public class Description implements Deserializable, Serializable{
 
     private String description;
     private String lang;
@@ -63,7 +62,12 @@ public class Description implements Deserializable{
         this.otherAttributes = otherAttributes;
     }
 
-    public Model serialize() {
+    public Model serialize (){
+        return serialize(null, null);
+    }
+
+    @Override
+    public Model serialize(String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource();

@@ -1,4 +1,4 @@
-package modelXml;
+package model;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
@@ -90,6 +90,10 @@ public class QlmID implements Deserializable, Serializable{
     @XmlAnyAttribute
     public void setOtherAttributes(Map<QName, String> otherAttributes) {
         this.otherAttributes = otherAttributes;
+    }
+
+    public Model serialize () {
+        return serialize(null, null);
     }
 
 

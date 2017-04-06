@@ -1,5 +1,6 @@
-package modelXml;
+package model;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
@@ -16,7 +17,7 @@ import java.util.HashSet;
  */
 
 @XmlRootElement
-public class MetaData implements Deserializable, Serializable{
+public class MetaData extends ModelGenerator implements Deserializable, Serializable {
 
     private Collection<InfoItem> infoItems = new ArrayList<>();
 
@@ -36,12 +37,17 @@ public class MetaData implements Deserializable, Serializable{
         this.infoItems = infoItems;
     }
 
+    public Model serialize (String infoItemBaseIri) {
+        return serialize(null, infoItemBaseIri);
+    }
 
     @Override
     public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
         Resource subject = model.createResource();
+
+        Object object = new Object();
 
         model.setNsPrefix("rdf", NS.RDF);
 
@@ -50,17 +56,7 @@ public class MetaData implements Deserializable, Serializable{
         if (getInfoItems() != null) {
             model.setNsPrefix("odf", NS.ODF);
 
-            Collection<Model> infoItemModels = new HashSet<>();
-            getInfoItems().forEach(infoitem -> infoItemModels.add(infoitem.serialize(null, infoItemBaseIri)));
-
-
-            infoItemModels.forEach(infoItemModel -> {
-                Resource infoItemId = ModelHelper.getIdToConnectWith(infoItemModel, "InfoItem");
-                if (infoItemId != null) {
-                    subject.addProperty(ResourceFactory.createProperty(NS.ODF + "infoitem"), infoItemId);
-                }
-            });
-
+            Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, object.getId().getId(), subject);
             infoItemModels.forEach(metadataModel -> model.add(metadataModel));
         }
 

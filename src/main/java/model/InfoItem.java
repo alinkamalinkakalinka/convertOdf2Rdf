@@ -1,4 +1,4 @@
-package modelXml;
+package model;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
@@ -20,7 +20,7 @@ import java.util.*;
         "metaData",
         "values"
 })
-public class InfoItem implements Deserializable, Serializable{
+public class InfoItem extends ModelGenerator implements Deserializable, Serializable {
 
     //TODO: name one as id and list
     //TODO: any attribute
@@ -118,6 +118,9 @@ public class InfoItem implements Deserializable, Serializable{
         this.otherAttributes = otherAttributes;
     }
 
+    public Model serialize (String infoItemBaseIri) {
+        return serialize(null, infoItemBaseIri);
+    }
 
     @Override
     public Model serialize (String objectBaseIri, String infoItemBaseIri) {
@@ -129,9 +132,7 @@ public class InfoItem implements Deserializable, Serializable{
         subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "InfoItem"));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        //elementsAndAttributes.put(NS.DCT + "description", getDescription());
         elementsAndAttributes.put(NS.DCT + "name", getName());
-        //elementsAndAttributes.put(NS.ODF + "name", getName1());
         elementsAndAttributes.put(NS.ODF + "udef", getUdef());
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
@@ -147,60 +148,28 @@ public class InfoItem implements Deserializable, Serializable{
 
         // ID MODEL
         if (getName1() != null) {
-            Collection<Model> idModels = new HashSet<>();
-            getName1().forEach(nameValue -> idModels.add(nameValue.serialize(null, null)));
-
-            idModels.forEach(idModel -> {
-                Resource idValue = ModelHelper.getIdToConnectWith(idModel, "QlmID");
-                if (idValue != null) {
-                    subject.addProperty(ResourceFactory.createProperty(NS.ODF, "name"), idValue);
-                }
-            });
-
+            Collection<Model> idModels = getIdModels(subject, getName1(), "name");
             idModels.forEach(idModel -> model.add(idModel));
         }
 
 
         //DESCRIPTION MODEL
         if (getDescription() != null) {
-            Model descriptionModel = ModelFactory.createDefaultModel();
-            descriptionModel.add(getDescription().serialize());
-
-            Resource descriptionValue = descriptionModel.listStatements().next().getSubject();
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "description"), descriptionValue);
-
+            Model descriptionModel = getDescriptionModel(getDescription(), subject);
             model.add(descriptionModel);
         }
 
 
         // VALUE MODEL
         if (getValues() != null) {
-            Collection<Model> valueModels = new HashSet<>();
-            getValues().forEach(value -> valueModels.add(value.serialize(null, null)));
-
-            valueModels.forEach(valueModel -> {
-                Resource valueId = ModelHelper.getIdToConnectWith(valueModel, "Value");
-                if (valueId != null) {
-                    subject.addProperty(ResourceFactory.createProperty(NS.ODF + "value"), valueId);
-                }
-            });
-
+            Collection<Model> valueModels = getValueModels(subject, getValues());
             valueModels.forEach(valueModel -> model.add(valueModel));
         }
 
 
         // METADATA MODEL
         if (getMetaData() != null) {
-            Collection<Model> metaDataModels = new HashSet<>();
-            getMetaData().forEach(metaDataValue -> metaDataModels.add(metaDataValue.serialize(null, subject + "/")));
-
-            metaDataModels.forEach(metsDataModel -> {
-                Resource metadataId = ModelHelper.getIdToConnectWith(metsDataModel, "MetaData");
-                if (metadataId != null) {
-                    subject.addProperty(ResourceFactory.createProperty(NS.ODF + "metadata"), metadataId);
-                }
-            });
-
+            Collection<Model> metaDataModels = getMetaDataModels(subject, getMetaData());
             metaDataModels.forEach(metadataModel -> model.add(metadataModel));
         }
 

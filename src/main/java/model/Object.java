@@ -1,4 +1,4 @@
-package modelXml;
+package model;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
@@ -20,7 +20,7 @@ import java.util.*;
         "infoItems",
         "objects"
 })
-public class Object implements Deserializable, Serializable{
+public class Object extends ModelGenerator implements Deserializable, Serializable{
 
     private QlmID id;
     private String type;
@@ -129,9 +129,7 @@ public class Object implements Deserializable, Serializable{
 
         //todo: namespaces
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        //elementsAndAttributes.put("skos:notation", id);
         elementsAndAttributes.put(NS.ODF + "type", getType());
-        //elementsAndAttributes.put(NS.DCT + "description", getDescription());
         elementsAndAttributes.put(NS.ODF + "udef", getUdef());
 
         //TODO: namespace udef !!!
@@ -149,53 +147,22 @@ public class Object implements Deserializable, Serializable{
 
         // ID MODEL
         Model idModel = ModelFactory.createDefaultModel();
-        idModel.add(getId().serialize(null, null));
-
-        Resource idValue = idModel.listStatements().next().getSubject();
-        subject.addProperty(ResourceFactory.createProperty(NS.ODF, "id"), idValue);
-
+        idModel.add(getId().serialize());
+        addConnectingProperty(subject, idModel, "QlmID", "id");
         model.add(idModel);
 
         //DESCRIPTION MODEL
         if (getDescription() != null) {
-            Model descriptionModel = ModelFactory.createDefaultModel();
-            descriptionModel.add(getDescription().serialize());
-
-            Resource descriptionValue = descriptionModel.listStatements().next().getSubject();
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "description"), descriptionValue);
-
+            Model descriptionModel = getDescriptionModel(getDescription(), subject);
             model.add(descriptionModel);
         }
 
         // INFOITEM MODEL
-        Collection<Model> infoItemModels = new HashSet<>();
-        String objRelatedInfoItemBaseIri = infoItemBaseIri + id.getId() + "/";
-
-        getInfoItems().forEach(infoItem -> infoItemModels.add(infoItem.serialize(null, objRelatedInfoItemBaseIri)));
-
-        infoItemModels.forEach(infoItemModel -> {
-            Resource infoItemId = ModelHelper.getIdToConnectWith(infoItemModel, "InfoItem");
-            if (infoItemId != null) {
-                subject.addProperty(ResourceFactory.createProperty(NS.ODF + "infoitem"), infoItemId);
-            }
-        });
-
+        Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, id.getId(), subject);
         infoItemModels.forEach(infoItemModel -> model.add(infoItemModel));
 
         // NESTED OBJECT MODEL
-        Collection<Model> nestedObjectsModels = new HashSet<>();
-        String nestedObjectsBaseIri = subject.toString() + "/";
-
-        getObjects().forEach(nestedObject -> nestedObjectsModels
-                .add(nestedObject.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
-
-        nestedObjectsModels.forEach(nestedObjectsModel -> {
-            Resource nestedObjectId = ModelHelper.getIdToConnectWith(nestedObjectsModel, "Object");
-            if (nestedObjectId != null) {
-                subject.addProperty(ResourceFactory.createProperty(NS.ODF + "object"), nestedObjectId);
-            }
-        });
-
+        Collection<Model> nestedObjectsModels = getNestedObjectsModels(subject, getObjects(), infoItemBaseIri, id.getId());
         nestedObjectsModels.forEach(nestedObjectsModel -> model.add(nestedObjectsModel));
 
         return model;
@@ -244,7 +211,6 @@ public class Object implements Deserializable, Serializable{
                 }
 
             }
-
 
         }
 

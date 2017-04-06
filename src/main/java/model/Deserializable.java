@@ -1,4 +1,4 @@
-package modelXml;
+package model;
 
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
