@@ -74,7 +74,6 @@ public class Description implements Deserializable, Serializable{
 
         model.setNsPrefix("rdf", NS.RDF);
         subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "Description"));
-        //TODO: odf:Description??
 
         if (getDescription() != null) {
             model.setNsPrefix("dct", NS.DCT);

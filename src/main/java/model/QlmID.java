@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.jena.datatypes.xsd.XSDDatatype;
+import org.apache.jena.datatypes.xsd.impl.XSDAbstractDateTimeType;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
@@ -122,7 +124,6 @@ public class QlmID implements Deserializable, Serializable{
         }
 
         if (getTagType() != null) {
-            //TODO: namespace ???
             model.setNsPrefix("dct", NS.DCT);
             subject.addProperty(ResourceFactory.createProperty(NS.DCT, "tagType"), getTagType());
         }
@@ -130,7 +131,7 @@ public class QlmID implements Deserializable, Serializable{
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
                 model.setNsPrefix("time", NS.TIME);
-                //TODO: dateTime xsd type???
+                //TODO: parse date
                 Literal dateValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(entry.getValue()).getTime());
                 subject.addProperty(ResourceFactory.createProperty(entry.getKey()), dateValue);
             }

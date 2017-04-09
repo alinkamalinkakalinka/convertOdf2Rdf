@@ -56,7 +56,14 @@ public class MetaData extends ModelGenerator implements Deserializable, Serializ
         if (getInfoItems() != null) {
             model.setNsPrefix("odf", NS.ODF);
 
-            Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, object.getId().getId(), subject);
+            String idValue = "";
+            if (object.getId().size() < 2) {
+                idValue = object.getId().iterator().next().getId();
+            } else {
+                idValue = String.valueOf(object.getId().hashCode());
+            }
+
+            Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, idValue, subject);
             infoItemModels.forEach(metadataModel -> model.add(metadataModel));
         }
 

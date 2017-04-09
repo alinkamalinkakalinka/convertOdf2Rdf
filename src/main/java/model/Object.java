@@ -4,6 +4,7 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
 import vocabs.NS;
+import vocabs.ODFProp;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
@@ -22,7 +23,7 @@ import java.util.*;
 })
 public class Object extends ModelGenerator implements Deserializable, Serializable{
 
-    private QlmID id;
+    private Collection<QlmID> id;
     private String type;
     private String udef;
     private Description description;
@@ -33,7 +34,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
     //TODO: take care other attributes in deserialization and serialization
     //TODO: id as a list
 
-    public Object(QlmID id,
+    public Object(Collection<QlmID> id,
                   String type,
                   String udef,
                   Description description,
@@ -101,7 +102,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         this.description = description;
     }
 
-    public QlmID getId() { return id; }
+    public Collection<QlmID> getId() { return id; }
 
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
@@ -113,7 +114,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
     }
 
     @XmlElement (name = "id", required = true)
-    public void setId(QlmID id) {
+    public void setId(Collection<QlmID> id) {
         this.id = id;
     }
 
@@ -122,7 +123,14 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
     public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
-        Resource subject = model.createResource(objectBaseIri + id.getId());
+        String idValue = "";
+        if (getId().size() < 2) {
+            idValue = getId().iterator().next().getId();
+        } else {
+            idValue = String.valueOf(getId().hashCode());
+        }
+
+        Resource subject = model.createResource(objectBaseIri +idValue);
 
         model.setNsPrefix("rdf", NS.RDF);
         model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + "Object"));
@@ -146,10 +154,13 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         }
 
         // ID MODEL
-        Model idModel = ModelFactory.createDefaultModel();
+        Collection<Model> idModels = getIdModels(subject, getId(), ODFProp.ID);
+        idModels.forEach(idModel -> model.add(idModel));
+
+        /*Model idModel = ModelFactory.createDefaultModel();
         idModel.add(getId().serialize());
         addConnectingProperty(subject, idModel, "QlmID", "id");
-        model.add(idModel);
+        model.add(idModel);*/
 
         //DESCRIPTION MODEL
         if (getDescription() != null) {
@@ -158,11 +169,11 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         }
 
         // INFOITEM MODEL
-        Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, id.getId(), subject);
+        Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, idValue, subject);
         infoItemModels.forEach(infoItemModel -> model.add(infoItemModel));
 
         // NESTED OBJECT MODEL
-        Collection<Model> nestedObjectsModels = getNestedObjectsModels(subject, getObjects(), infoItemBaseIri, id.getId());
+        Collection<Model> nestedObjectsModels = getNestedObjectsModels(subject, getObjects(), infoItemBaseIri, idValue);
         nestedObjectsModels.forEach(nestedObjectsModel -> model.add(nestedObjectsModel));
 
         return model;
@@ -178,6 +189,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
 
         Collection<InfoItem> infoItems = new ArrayList<>();
         Collection<Object> objects = new ArrayList<>();
+        Collection<QlmID> ids = new ArrayList<>();
 
         for (Statement statement : statements) {
 
@@ -198,8 +210,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
                 }
 
                 if (property.toString().contains("id")) {
-                    QlmID id = qlmIDClass.deserialize(object, statements);
-                    objectClass.setId(id);
+                    ids.add(qlmIDClass.deserialize(object, statements));
                 }
 
                 if (property.toString().contains("infoitem")) {
@@ -216,6 +227,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
 
         objectClass.setInfoItems(infoItems);
         objectClass.setObjects(objects);
+        objectClass.setId(ids);
 
         return objectClass;
     }

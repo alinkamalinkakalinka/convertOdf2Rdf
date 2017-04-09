@@ -4,63 +4,21 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix time:  <http://www.w3.org/2006/time#> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem1>
-        a          odf:InfoItem ;
-        odf:name   [ a            odf:QlmID ;
-                     odf:idValue  "blablapppppp"
-                   ] ;
-        odf:name   [ a            odf:QlmID ;
-                     odf:idValue  "666"
-                   ] ;
-        odf:value  [ a              odf:Value ;
-                     odf:dataValue  "Value1" ;
-                     dct:created    "Mon Nov 21 12:11:43 CET 2016"^^xsd:dateTime
-                   ] ;
-        odf:value  [ a              odf:Value ;
-                     odf:dataValue  "Value3"
-                   ] ;
-        odf:value  [ a              odf:Value ;
-                     odf:dataValue  "Value2"
-                   ] ;
-        dct:name   "InfoItem1" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubSubTarget1/SubSubTarget1InfoItem1>
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/SubTarget1/SubSubTarget1/SubSubTarget1InfoItem1>
         a          odf:InfoItem ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "22.5"
                    ] ;
         dct:name   "SubSubTarget1InfoItem1" .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubInfoItem1>
-        a         odf:InfoItem ;
-        dct:name  "SubInfoItem1" .
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/InfoItem2>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value"
+                   ] ;
+        dct:name   "InfoItem2" .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget2>
-        a             odf:Object ;
-        odf:id        [ a            odf:QlmID ;
-                        odf:idValue  "SubTarget2"
-                      ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget2/SubTarget2InfoItem1> ;
-        odf:type      "someType" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1/SubSubTarget1>
-        a             odf:Object ;
-        odf:id        [ a            odf:QlmID ;
-                        odf:idValue  "SubSubTarget1"
-                      ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubSubTarget1/SubSubTarget1InfoItem1> ;
-        odf:type      "someType" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1>
-        a             odf:Object ;
-        odf:id        [ a            odf:QlmID ;
-                        odf:idValue  "SubTarget1"
-                      ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget1/SubInfoItem1> ;
-        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1/SubSubTarget1> ;
-        odf:type      "someType" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1>
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1>
         a                odf:Object ;
         odf:description  [ a                odf:Description ;
                            dct:description  "balalal"@en
@@ -69,20 +27,66 @@
                            odf:idValue  "UniqueTargetID_1" ;
                            dct:tagType  "blabla"
                          ] ;
-        odf:infoItem     <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem2> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem1> ;
-        odf:object       <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget2> , <http://eis-biotope.iais.fraunhofer.de/localhost/obj/UniqueTargetID_1/SubTarget1/SubSubTarget1> ;
+        odf:infoItem     <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/InfoItem2> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/InfoItem1> ;
+        odf:object       <http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1/SubTarget2> , <http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1/SubTarget1> ;
         odf:type         "someType" .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/SubTarget2/SubTarget2InfoItem1>
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/SubTarget2/SubTarget2InfoItem1>
         a          odf:InfoItem ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "34.6"
                    ] ;
         dct:name   "SubTarget2InfoItem1" .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/UniqueTargetID_1/InfoItem2>
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298>
+        a           odf:Objects ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1/SubTarget1> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/InfoItem1>
         a          odf:InfoItem ;
-        odf:value  [ a              odf:Value ;
-                     odf:dataValue  "Value"
+        odf:name   [ a            odf:QlmID ;
+                     odf:idValue  "666"
                    ] ;
-        dct:name   "InfoItem2" .
+        odf:name   [ a            odf:QlmID ;
+                     odf:idValue  "blablapppppp"
+                   ] ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value2"
+                   ] ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value1" ;
+                     dct:created    "Mon Nov 21 12:11:43 CET 2016"^^xsd:dateTime
+                   ] ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Value3"
+                   ] ;
+        dct:name   "InfoItem1" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/SubTarget1/SubInfoItem1>
+        a         odf:InfoItem ;
+        dct:name  "SubInfoItem1" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1/SubTarget2>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SubTarget2"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/SubTarget2/SubTarget2InfoItem1> ;
+        odf:type      "someType" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1/SubTarget1/SubSubTarget1>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SubSubTarget1"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/SubTarget1/SubSubTarget1/SubSubTarget1InfoItem1> ;
+        odf:type      "someType" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1/SubTarget1>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SubTarget1"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1603198180/UniqueTargetID_1/SubTarget1/SubInfoItem1> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/885284298/UniqueTargetID_1/SubTarget1/SubSubTarget1> ;
+        odf:type      "someType" .

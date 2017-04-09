@@ -71,7 +71,7 @@ public abstract class ModelGenerator {
             addConnectingProperty(subject, idModel, "QlmID", propertyName);
             Resource idValue = ModelHelper.getIdToConnectWith(idModel, "QlmID");
             if (idValue != null) {
-                subject.addProperty(ResourceFactory.createProperty(NS.ODF, "name"), idValue);
+                subject.addProperty(ResourceFactory.createProperty(NS.ODF, propertyName), idValue);
             }
         });
 

@@ -32,12 +32,13 @@ public class Serializer {
 
         Model modelJena = ModelFactory.createDefaultModel();
 
-        Collection<Object> objects = beans.getObjects();
+        modelJena.add(beans.serialize(objectBaseIri, infoItemBaseIri));
 
-        for (Object object : objects) {
+
+        /*for (Object object : objects) {
             Model partialModelJena = object.serialize(objectBaseIri, infoItemBaseIri);
             modelJena.add(partialModelJena);
-        }
+        }*/
 
         RDFDataMgr.write(new FileOutputStream("testJena1.rdf"), modelJena, RDFFormat.TURTLE) ;
         //beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
