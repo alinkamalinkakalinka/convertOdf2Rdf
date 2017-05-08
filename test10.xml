@@ -3,12 +3,6 @@
     <Object type="someType">
         <id>SubTarget1</id>
         <InfoItem name="SubInfoItem1"/>
-        <Object type="someType">
-            <id>SubSubTarget1</id>
-            <InfoItem name="SubSubTarget1InfoItem1">
-                <value>22.5</value>
-            </InfoItem>
-        </Object>
     </Object>
     <Object type="someType">
         <id tagType="blabla">UniqueTargetID_1</id>
@@ -23,17 +17,5 @@
             <value>Value2</value>
             <value dateTime="Mon Nov 21 12:11:43 CET 2016^^http://www.w3.org/2001/XMLSchema#dateTime">Value1</value>
         </InfoItem>
-        <Object type="someType">
-            <id>SubTarget2</id>
-            <InfoItem name="SubTarget2InfoItem1">
-                <value>34.6</value>
-            </InfoItem>
-        </Object>
-        <Object type="someType">
-            <id>SubSubTarget1</id>
-            <InfoItem name="SubSubTarget1InfoItem1">
-                <value>22.5</value>
-            </InfoItem>
-        </Object>
     </Object>
 </Objects>

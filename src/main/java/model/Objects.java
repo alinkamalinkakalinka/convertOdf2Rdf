@@ -97,6 +97,8 @@ public class Objects extends ModelGenerator implements Serializable, Deserializa
 
     @Override
     public Objects deserialize(Resource subject, Collection<Statement> statements) {
+
+
         return null;
     }
 }

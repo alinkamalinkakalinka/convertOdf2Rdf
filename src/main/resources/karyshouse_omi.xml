@@ -1,0 +1,69 @@
+<omi:omiEnvelope ttl="10.0" version="1.0" xmlns="odf.xsd" xmlns:omi="omi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <omi:response>
+        <omi:result msgformat="odf">
+            <omi:return returnCode="200">
+            </omi:return>
+            <omi:msg>
+                <Objects>
+                    <Object type="House">
+                        <id>KarysHouse</id>
+                        <InfoItem name="Air Handling Unit">
+                            <value unixTime="1478183791" dateTime="2016-11-03T16:36:31.271+02:00" type="xs:string">https://otaniemi3d.cs.hut.fi/omi/node/Objects/2013001000@enervent.fi</value>
+                        </InfoItem>
+                        <Object type="Room">
+                            <id>BasementRoom1</id>
+                            <Object type="http://www.fuchs-shop.com/en/shop/6/1/13372059/">
+                                <id>Sensor2</id>
+                                <InfoItem name="Temperature">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">20.375</value>
+                                </InfoItem>
+                                <InfoItem name="Humidity">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">42.1723</value>
+                                </InfoItem>
+                                <InfoItem name="location">
+                                    <value unixTime="1459539306" dateTime="2016-04-01T22:35:06.417+03:00" type="xs:string">Sensor inside outer wall, in Upper left corner</value>
+                                </InfoItem>
+                            </Object>
+                            <Object type="http://www.fuchs-shop.com/en/shop/6/1/13372059/">
+                                <id>Sensor3</id>
+                                <InfoItem name="location">
+                                    <value unixTime="1459539266" dateTime="2016-04-01T22:34:26.738+03:00" type="xs:string">Sensor inside outer wall, in Lower right corner, under window</value>
+                                </InfoItem>
+                                <InfoItem name="Temperature">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">20.0313</value>
+                                </InfoItem>
+                                <InfoItem name="Humidity">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">49.2947</value>
+                                </InfoItem>
+                            </Object>
+                            <Object type="http://www.fuchs-shop.com/en/shop/6/1/13372059/">
+                                <id>Sensor4</id>
+                                <InfoItem name="location">
+                                    <value unixTime="1459539233" dateTime="2016-04-01T22:33:53.878+03:00" type="xs:string">Sensor inside outer wall, in Upper right corner, left to window</value>
+                                </InfoItem>
+                                <InfoItem name="Humidity">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">47.0785</value>
+                                </InfoItem>
+                                <InfoItem name="Temperature">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">20.0313</value>
+                                </InfoItem>
+                            </Object>
+                            <Object type="http://www.fuchs-shop.com/en/shop/6/1/13372059/">
+                                <id>Sensor1</id>
+                                <InfoItem name="Humidity">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">51.5305</value>
+                                </InfoItem>
+                                <InfoItem name="Temperature">
+                                    <value unixTime="1494272403" dateTime="2017-05-08T22:40:03.000+03:00" type="xs:string">17.375</value>
+                                </InfoItem>
+                                <InfoItem name="location">
+                                    <value unixTime="1459539340" dateTime="2016-04-01T22:35:40.033+03:00" type="xs:string">Sensor inside outer wall, in Lower left corner</value>
+                                </InfoItem>
+                            </Object>
+                        </Object>
+                    </Object>
+                </Objects>
+            </omi:msg>
+        </omi:result>
+    </omi:response>
+</omi:omiEnvelope>

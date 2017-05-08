@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class Main {
@@ -33,7 +34,8 @@ public class Main {
 
 
             Serializer serializer = new Serializer();
-            serializer.odf2rdf();
+            //serializer.odf2rdf("infoitem_values.xml", "testJena1.rdf");
+            serializer.odf2rdf("smarthouse_omi.xml", "testJena2.rdf");
 
             //InputStream odfStructure = getClass().getResourceAsStream("/resources/infoitem_values.xml");
             //serializer.odf2rdf();
@@ -49,6 +51,8 @@ public class Main {
 
 
         } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

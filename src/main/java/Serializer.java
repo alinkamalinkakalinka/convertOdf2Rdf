@@ -1,5 +1,7 @@
 import model.Object;
 import model.Objects;
+import utils.RegexHelper;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
@@ -8,40 +10,42 @@ import org.apache.jena.riot.RDFFormat;
 import javax.xml.bind.JAXB;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 
 /**
  * Created by aarunova on 1/22/17.
  */
-public class Serializer {
+public class Serializer implements Loggable {
 
     private final static String BASE_URI = "http://eis-biotope.iais.fraunhofer.de/";
 
     private String hostname = "localhost";
 
 
-    public Model odf2rdf() throws FileNotFoundException {
-        InputStream odfStructure = getClass().getResourceAsStream("infoitem_values.xml");
+    public Model odf2rdf(String inputFileName, String outputFileName) {
 
-        Objects beans = JAXB.unmarshal(odfStructure, Objects.class);
+        Model modelJena = null;
 
-        String baseIRI = BASE_URI + hostname;
-        String objectBaseIri = BASE_URI + hostname + "/obj/";
-        String infoItemBaseIri = BASE_URI + hostname + "/infoitem/";
+        try {
+            InputStream odfStructure = getClass().getResourceAsStream(inputFileName);
 
-        Model modelJena = ModelFactory.createDefaultModel();
+            Objects beans = JAXB.unmarshal(RegexHelper.getDateBetweenTags(odfStructure), Objects.class);
 
-        modelJena.add(beans.serialize(objectBaseIri, infoItemBaseIri));
+            String objectBaseIri = BASE_URI + hostname + "/obj/";
+            String infoItemBaseIri = BASE_URI + hostname + "/infoitem/";
+
+            modelJena = ModelFactory.createDefaultModel();
+
+            modelJena.add(beans.serialize(objectBaseIri, infoItemBaseIri));
+
+            RDFDataMgr.write(new FileOutputStream(outputFileName), modelJena, RDFFormat.TURTLE) ;
 
 
-        /*for (Object object : objects) {
-            Model partialModelJena = object.serialize(objectBaseIri, infoItemBaseIri);
-            modelJena.add(partialModelJena);
-        }*/
-
-        RDFDataMgr.write(new FileOutputStream("testJena1.rdf"), modelJena, RDFFormat.TURTLE) ;
-        //beans.getObjects().forEach(objectBean -> model.addAll(objectBean.serialize(vf, objectBaseIri, infoItemBaseIri)));
+        } catch (IOException e) {
+            logger().error("IOException", e);
+        }
 
         return modelJena;
     }

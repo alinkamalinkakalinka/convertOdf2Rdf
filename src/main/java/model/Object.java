@@ -4,6 +4,7 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
 import vocabs.NS;
+import vocabs.ODFClass;
 import vocabs.ODFProp;
 
 import javax.xml.bind.annotation.*;
@@ -157,11 +158,6 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         Collection<Model> idModels = getIdModels(subject, getId(), ODFProp.ID);
         idModels.forEach(idModel -> model.add(idModel));
 
-        /*Model idModel = ModelFactory.createDefaultModel();
-        idModel.add(getId().serialize());
-        addConnectingProperty(subject, idModel, "QlmID", "id");
-        model.add(idModel);*/
-
         //DESCRIPTION MODEL
         if (getDescription() != null) {
             Model descriptionModel = getDescriptionModel(getDescription(), subject);
@@ -213,11 +209,11 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
                     ids.add(qlmIDClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains("infoitem")) {
+                if (property.toString().contains(ODFProp.INFOITEM)) {
                     infoItems.add(infoItemClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains("object")) {
+                if (property.toString().contains(ODFClass.OBJECT)) {
                     objects.add(objectClass.deserialize(object, statements));
                 }
 

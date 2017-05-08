@@ -1,0 +1,25 @@
+<Objects version="string">
+  <!--Zero or more repetitions:-->
+  <Object type="anySimpleType">
+    <!--1 or more repetitions:-->
+    <id idType="string" tagType="string" startDate="2008-09-29T03:49:45" endDate="2014-09-19T01:18:33">string</id>
+    <!--Optional:-->
+    <description lang="string">string</description>
+    <!--Zero or more repetitions:-->
+    <InfoItem name="anySimpleType">
+      <!--Zero or more repetitions:-->
+      <name idType="string" tagType="string" startDate="2006-08-19T19:27:14+02:00" endDate="2009-05-16T14:42:28">string</name>
+      <!--Optional:-->
+      <description lang="string">string</description>
+      <!--Optional:-->
+      <MetaData>
+        <!--1 or more repetitions:-->
+        <InfoItem/>
+      </MetaData>
+      <!--Zero or more repetitions:-->
+      <value type="xs:string" dateTime="2003-08-09T02:18:37+02:00" unixTime="10">string</value>
+    </InfoItem>
+    <!--Zero or more repetitions:-->
+    <Object/>
+  </Object>
+</Objects>

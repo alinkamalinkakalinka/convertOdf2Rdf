@@ -71,6 +71,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.jena/jena-core
     compile group: 'org.apache.jena', name: 'jena-arq', version: '3.1.0'
 
+    // https://mvnrepository.com/artifact/org.mockito/mockito-all
+    compile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+
     testCompile 'junit:junit:4.11'
 }
 

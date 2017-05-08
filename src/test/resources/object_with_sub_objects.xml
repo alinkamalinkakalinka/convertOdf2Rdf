@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example of Object with Sub-Objects. -->
+<Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
+    <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+        <id>UniqueObjectID_1</id>
+        <InfoItem name="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+        </InfoItem>
+        <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+            <id>SubObject1</id>
+        </Object>
+        <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+            <id>SubObject2</id>
+        </Object>
+    </Object>
+</Objects>

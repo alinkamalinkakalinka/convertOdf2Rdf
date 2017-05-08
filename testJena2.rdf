@@ -1,0 +1,103 @@
+@prefix odf:   <http://eis-biotope.iais.fraunhofer.de/odf#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/BedRoom/Temperature>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "-1.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Temperature" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/FrontDoor>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "-1.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "FrontDoor" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Oven/Temperature>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "1.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Temperature" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse/Kitchen/Oven>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "Oven"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Oven/Temperature> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Oven/Consumption> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784>
+        a           odf:Objects ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse/BedRoom>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "BedRoom"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/BedRoom/Temperature> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/BedRoom/Moisture> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Moisture>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Moisture" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse/Kitchen>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "Kitchen"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Temperature> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Moisture> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse/Kitchen/Oven> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Oven/Consumption>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Consumption" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/Kitchen/Temperature>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "1.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Temperature" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/BackDoor>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "1.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "BackDoor" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SmartHouse"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/FrontDoor> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/BackDoor> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse/BedRoom> , <http://eis-biotope.iais.fraunhofer.de/localhost/obj/668386784/SmartHouse/Kitchen> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/2012744739/SmartHouse/BedRoom/Moisture>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0.0"^^xsd:double ;
+                     dct:created    "Mon May 08 20:27:51 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Moisture" .

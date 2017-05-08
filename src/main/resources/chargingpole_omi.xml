@@ -1,0 +1,63 @@
+<omi:omiEnvelope ttl="10.0" version="1.0" xmlns="odf.xsd" xmlns:omi="omi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <omi:response>
+        <omi:result msgformat="odf">
+            <omi:return returnCode="200">
+            </omi:return>
+            <omi:msg>
+                <Objects>
+                    <Object>
+                        <id>ChargingPole</id>
+                        <Object>
+                            <id>Reservations</id>
+                            <InfoItem name="AddReservation">
+                                <value unixTime="1491465303" dateTime="2017-04-06T10:55:03.228+03:00" type="xs:string">ao:1491465391</value>
+                            </InfoItem>
+                            <Object>
+                                <id>1</id>
+                                <InfoItem name="StartsAfter">
+                                    <value unixTime="1491479075" dateTime="2017-04-06T14:44:35.495+03:00" type="xs:string">1491479134</value>
+                                </InfoItem>
+                                <InfoItem name="UserID">
+                                    <value unixTime="1491479075" dateTime="2017-04-06T14:44:35.495+03:00" type="xs:string">H</value>
+                                </InfoItem>
+                                <InfoItem name="EndsAfter">
+                                    <value unixTime="1491479075" dateTime="2017-04-06T14:44:35.495+03:00" type="xs:string">1491479159</value>
+                                </InfoItem>
+                            </Object>
+                            <Object>
+                                <id>2</id>
+                                <InfoItem name="EndsAfter">
+                                    <value unixTime="1491483063" dateTime="2017-04-06T15:51:03.462+03:00" type="xs:string">1491483119</value>
+                                </InfoItem>
+                                <InfoItem name="StartsAfter">
+                                    <value unixTime="1491483063" dateTime="2017-04-06T15:51:03.462+03:00" type="xs:string">1491483109</value>
+                                </InfoItem>
+                                <InfoItem name="UserID">
+                                    <value unixTime="1491483063" dateTime="2017-04-06T15:51:03.462+03:00" type="xs:string">A</value>
+                                </InfoItem>
+                            </Object>
+                            <Object>
+                                <id>0</id>
+                                <InfoItem name="UserID">
+                                    <value unixTime="1491824820" dateTime="2017-04-10T14:47:00.079+03:00" type="xs:string">User</value>
+                                </InfoItem>
+                                <InfoItem name="EndsAfter">
+                                    <value unixTime="1491824820" dateTime="2017-04-10T14:47:00.079+03:00" type="xs:string">1491824847</value>
+                                </InfoItem>
+                                <InfoItem name="StartsAfter">
+                                    <value unixTime="1491824820" dateTime="2017-04-10T14:47:00.079+03:00" type="xs:string">1491824827</value>
+                                </InfoItem>
+                            </Object>
+                        </Object>
+                        <Object>
+                            <id>Users</id>
+                            <InfoItem name="Register">
+                                <value unixTime="1491465295" dateTime="2017-04-06T10:54:55.720+03:00" type="xs:string">ao:2e9aed06ac37f19e27fe0bc7b1e2f6b4</value>
+                            </InfoItem>
+                        </Object>
+                    </Object>
+                </Objects>
+            </omi:msg>
+        </omi:result>
+    </omi:response>
+</omi:omiEnvelope>
