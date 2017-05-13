@@ -13,6 +13,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import static utils.ModelHelper.getOtherAttributesModel;
+
 /**
  * Created by aarunova on 12/11/16.
  */
@@ -135,6 +137,12 @@ public class QlmID implements Deserializable, Serializable{
                 Literal dateValue = ResourceFactory.createTypedLiteral(DatatypeConverter.parseDateTime(entry.getValue()).getTime());
                 subject.addProperty(ResourceFactory.createProperty(entry.getKey()), dateValue);
             }
+        }
+
+        //OTHER ATTRIBUTES
+        if (getOtherAttributes() != null) {
+            Model otherAttributesModel = getOtherAttributesModel(subject, getOtherAttributes());
+            model.add(otherAttributesModel);
         }
 
         return model;

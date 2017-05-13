@@ -11,6 +11,8 @@ import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.*;
 
+import static utils.ModelHelper.getOtherAttributesModel;
+
 /**
  * Created by aarunova on 12/11/16.
  */
@@ -165,14 +167,19 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         }
 
         // INFOITEM MODEL
-        Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, idValue, subject);
+        Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri + idValue + "/", subject);
         infoItemModels.forEach(infoItemModel -> model.add(infoItemModel));
 
         // NESTED OBJECT MODEL
         Collection<Model> nestedObjectsModels = getNestedObjectsModels(subject, getObjects(), infoItemBaseIri, idValue);
         nestedObjectsModels.forEach(nestedObjectsModel -> model.add(nestedObjectsModel));
 
-        //System.out.println(model);
+        //OTHER ATTRIBUTES
+        if (getOtherAttributes() != null) {
+            Model otherAttributesModel = getOtherAttributesModel(subject, getOtherAttributes());
+            model.add(otherAttributesModel);
+        }
+
         return model;
     }
 

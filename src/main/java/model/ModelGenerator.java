@@ -11,6 +11,9 @@ import vocabs.NS;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
+
+import javax.xml.namespace.QName;
 
 /**
  * Created by aarunova on 3/29/17.
@@ -18,6 +21,8 @@ import java.util.HashSet;
 
 public abstract class ModelGenerator implements Loggable{
 
+
+    //DESCRIPTION MODEL
     protected Model getDescriptionModel(Description description,
                                         Resource subject) {
 
@@ -28,29 +33,7 @@ public abstract class ModelGenerator implements Loggable{
         return descriptionModel;
     }
 
-    protected Collection<Model> getInfoItemModels (Collection<InfoItem> infoItems,
-                                                   String infoItemBaseIri,
-                                                   String id,
-                                                   Resource subject) {
-
-        Collection<Model> infoItemModels = new HashSet<>();
-        String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
-
-        infoItems.forEach(infoItem -> infoItemModels.add(infoItem.serialize(objRelatedInfoItemBaseIri)));
-
-        for (Model infoItemModel : infoItemModels) {
-            addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
-            System.out.println("hey");
-        }
-//11111111
-        /*infoItemModels.forEach(infoItemModel -> {
-            addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
-        });*/
-
-        //System.out.println(infoItemModels);
-        return infoItemModels;
-    }
-
+    //INFOITEM MODEL
     protected Collection<Model> getInfoItemModels (Collection<InfoItem> infoItems,
                                                    String infoItemBaseIri,
                                                    Resource subject) {
@@ -65,12 +48,13 @@ public abstract class ModelGenerator implements Loggable{
         }
 
         /*infoItemModels.forEach(infoItemModel -> {
-            addConnectingPropertyI(subject, infoItemModel, "InfoItem", "infoItem");
+            addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
         });*/
 
         return infoItemModels;
     }
 
+    //OBJECT MODEL
     protected Collection<Model> getNestedObjectsModels (Resource subject,
                                                      Collection<Object> objects,
                                                      String infoItemBaseIri,
@@ -90,6 +74,7 @@ public abstract class ModelGenerator implements Loggable{
         return nestedObjectsModels;
     }
 
+    //ID MODEL
     protected Collection<Model> getIdModels(Resource subject,
                                             Collection<QlmID> ids,
                                             String propertyName) {
@@ -107,6 +92,7 @@ public abstract class ModelGenerator implements Loggable{
         return idModels;
     }
 
+    //VALUE MODEL
     protected Collection<Model> getValueModels(Resource subject,
                                                Collection<Value> values){
         Collection<Model> valueModels = new HashSet<>();
@@ -119,6 +105,7 @@ public abstract class ModelGenerator implements Loggable{
         return valueModels;
     }
 
+    //METADATA MODEL
     protected Collection<Model> getMetaDataModels(Resource subject,
                                               Collection<MetaData> metaDatas) {
         Collection<Model> metaDataModels = new HashSet<>();
@@ -132,6 +119,7 @@ public abstract class ModelGenerator implements Loggable{
         return metaDataModels;
     }
 
+
     protected void addConnectingProperty (Resource subject,
                                           Model model,
                                           String classTypeName,
@@ -140,14 +128,6 @@ public abstract class ModelGenerator implements Loggable{
         Resource connectingValueId = ModelHelper.getIdConnectWith(model, classTypeName, propertyName);
         if (connectingValueId != null) {
             subject.addProperty(ResourceFactory.createProperty(NS.ODF + propertyName), connectingValueId);
-            //System.out.println(subject);
-            //System.out.println(ResourceFactory.createProperty(NS.ODF + propertyName));
-            //System.out.println(connectingValueId);
-        }
-
-        if (connectingValueId.toString().contains("readable") && subject.toString().contains("Smart")){
-            int a = 1;
-            System.out.println("catch");
         }
     }
 

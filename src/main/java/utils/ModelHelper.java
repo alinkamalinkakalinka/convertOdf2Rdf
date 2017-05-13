@@ -8,9 +8,15 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import javax.xml.namespace.QName;
+
+import vocabs.NS;
 
 /**
  * Created by aarunova on 3/27/17.
@@ -45,7 +51,7 @@ public class ModelHelper {
         if (model != null && model != null) {
 
             Resource id = null;
-            ArrayList<Resource> potentialIds = new ArrayList<>();
+            HashMap<String, Resource> potentialIds = new HashMap<>();
 
             StmtIterator iterator = model.listStatements();
 
@@ -53,24 +59,40 @@ public class ModelHelper {
                 Statement stmt = iterator.nextStatement();
 
                 if (stmt.getObject().toString().contains(classType)) {
-                    potentialIds.add(stmt.getSubject());
+                    potentialIds.put(stmt.getSubject().toString(), stmt.getSubject());
                 }
             }
 
-            while (iterator.hasNext()) {
-                Statement stmt = iterator.nextStatement();
+            StmtIterator iterator2 = model.listStatements();
 
-                if (potentialIds.contains(stmt.getObject()) && stmt.getPredicate().toString().contains(propertyType)) {
-                    potentialIds.remove(stmt.getObject());
+            while (iterator2.hasNext()) {
+                Statement stmt = iterator2.nextStatement();
+
+                if (potentialIds.containsKey(stmt.getObject().toString()) && stmt.getPredicate().toString().contains(propertyType)) {
+                    potentialIds.remove(stmt.getObject().toString());
                 }
             }
 
-            id = potentialIds.get(0);
+            for (Map.Entry<String, Resource> entry : potentialIds.entrySet()) {
+                id = entry.getValue();
+            }
 
             return id;
         }
 
         return null;
 
+    }
+
+    public static Model getOtherAttributesModel (Resource subject, Map<QName, String> attributesMap) {
+
+        Model otherAttributesModel = ModelFactory.createDefaultModel();
+        otherAttributesModel.setNsPrefix("ca", NS.ATTR);
+
+        for (Map.Entry<QName, String> entry : attributesMap.entrySet()) {
+            otherAttributesModel.add(subject, ResourceFactory.createProperty(NS.ATTR + entry.getKey()), entry.getValue());
+        }
+
+        return otherAttributesModel;
     }
 }

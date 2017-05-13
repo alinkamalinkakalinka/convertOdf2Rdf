@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.*;
 
+import static utils.ModelHelper.getOtherAttributesModel;
+
 /**
  * Created by aarunova on 12/11/16.
  */
@@ -173,8 +175,12 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
             metaDataModels.forEach(metadataModel -> model.add(metadataModel));
         }
 
+        //OTHER ATTRIBUTES
+        if (getOtherAttributes() != null) {
+            Model otherAttributesModel = getOtherAttributesModel(subject, getOtherAttributes());
+            model.add(otherAttributesModel);
+        }
 
-        //System.out.println(model);
         return model;
     }
 

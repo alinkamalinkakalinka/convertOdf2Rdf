@@ -91,13 +91,64 @@ public class Objects extends ModelGenerator implements Serializable, Deserializa
                     String.valueOf(objects.hashCode()));
             nestedObjectsModels.forEach(nestedObjectsModel -> model.add(nestedObjectsModel));
         }
-        //System.out.println(model);
+
         return model;
+    }
+
+    public Objects deserialize(Collection<Statement> statements) {
+        return deserialize(null, statements);
     }
 
     @Override
     public Objects deserialize(Resource subject, Collection<Statement> statements) {
 
-        return null;
+        Objects objectsClass = new Objects();
+        Object objectClass = new Object();
+
+        Collection<Object> objects = new ArrayList<>();
+
+        Collection<Resource> rootObjects = getRootObjects(statements);
+
+        for (Resource rootObject : rootObjects) {
+
+            Object object = objectClass.deserialize(rootObject, statements);
+            objects.add(object);
+        }
+
+        objectsClass.setObjects(objects);
+
+        return objectsClass;
+    }
+
+    private Collection<Resource> getRootObjects (Collection<Statement> statements) {
+
+        Collection<String> stringRootObjects = new ArrayList<>();
+        Collection<Resource> rootObjects = new ArrayList<>();
+        String mainRootObject = "";
+
+        for (Statement statement : statements) {
+
+            if (statement.getPredicate().equals(RDF.type) &&
+                statement.getObject().toString().contains("Objects")) {
+                mainRootObject = statement.getSubject().toString();
+            }
+        }
+
+        for (Statement statement : statements) {
+
+            if (statement.getSubject().toString().equals(mainRootObject)&&
+                statement.getPredicate().toString().contains("object")) {
+                stringRootObjects.add(statement.getObject().toString());
+            }
+        }
+
+        for (String stringRootObject : stringRootObjects) {
+
+            Resource rootObject = ResourceFactory.createResource(stringRootObject);
+            rootObjects.add(rootObject);
+        }
+
+        return rootObjects;
+
     }
 }

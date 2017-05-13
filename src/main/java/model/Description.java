@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import static utils.ModelHelper.getOtherAttributesModel;
+
 /**
  * Created by aarunova on 3/29/17.
  */
@@ -79,6 +81,12 @@ public class Description implements Deserializable, Serializable{
             model.setNsPrefix("dct", NS.DCT);
             subject.addProperty(ResourceFactory.createProperty(NS.DCT, "description"),
                     ResourceFactory.createLangLiteral(getDescription(), getLang()));
+        }
+
+        //OTHER ATTRIBUTES
+        if (getOtherAttributes() != null) {
+            Model otherAttributesModel = getOtherAttributesModel(subject, getOtherAttributes());
+            model.add(otherAttributesModel);
         }
 
         return model;

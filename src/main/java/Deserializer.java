@@ -24,23 +24,12 @@ public class Deserializer implements Loggable{
         try {
 
             Objects objectsClass = new Objects();
-            Object objectClass = new Object();
-            Collection<Object> objects = new ArrayList<>();
 
             Collection<Statement> statements = getStatementsFromFile(rdfFile);
 
             if (statements != null) {
 
-                Collection<Resource> rootObjects = getRootObjects(statements);
-
-                for (Resource rootObject : rootObjects) {
-
-                    Object object = objectClass.deserialize(rootObject, statements);
-                    objects.add(object);
-                }
-
-                objectsClass.setObjects(objects);
-
+                objectsClass = objectsClass.deserialize(statements);
 
                 JAXBContext contextObj = JAXBContext.newInstance(objectsClass.getClass());
                 Marshaller marshallerObj = contextObj.createMarshaller();
@@ -54,39 +43,6 @@ public class Deserializer implements Loggable{
         } catch (FileNotFoundException e) {
             logger().warn("FileNotFoundException", e);
         }
-
-    }
-
-    public Collection<Resource> getRootObjects (Collection<Statement> statements) {
-
-        Collection<String> stringRootObjects = new ArrayList<>();
-        Collection<Resource> rootObjects = new ArrayList<>();
-        String mainRootObject = "";
-
-        for (Statement statement : statements) {
-
-            if (statement.getPredicate().equals(RDF.type) &&
-                    statement.getObject().toString().contains("Objects")) {
-                mainRootObject = statement.getSubject().toString();
-                //stringRootObjects.add(statement.getSubject().toString());
-            }
-        }
-
-        for (Statement statement : statements) {
-
-            if (statement.getSubject().toString().equals(mainRootObject)&&
-                statement.getPredicate().toString().contains("object")) {
-                stringRootObjects.add(statement.getObject().toString());
-            }
-        }
-
-        for (String stringRootObject : stringRootObjects) {
-
-            Resource rootObject = ResourceFactory.createResource(stringRootObject);
-            rootObjects.add(rootObject);
-        }
-
-        return rootObjects;
 
     }
 

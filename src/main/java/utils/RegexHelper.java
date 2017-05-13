@@ -65,5 +65,19 @@ public class RegexHelper {
 
     }
 
+    public static String getLiteralValue (String typedLiteral) {
+
+        String literalValue = findMatch("^.+?(?=\\^\\^)", typedLiteral);
+
+        return literalValue;
+    }
+
+    public static String getLitralType (String typedLiteral) {
+
+        String literalType = findMatch("(?<=#).+?$", typedLiteral);
+
+        return literalType;
+    }
+
 
 }
