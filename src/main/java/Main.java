@@ -52,8 +52,6 @@ public class Main {
 
         } catch (JAXBException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }

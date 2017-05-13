@@ -50,21 +50,13 @@ public class MetaData extends ModelGenerator implements Deserializable, Serializ
         Object object = new Object();
 
         model.setNsPrefix("rdf", NS.RDF);
+        model.setNsPrefix("odf", NS.ODF);
 
         subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "MetaData"));
 
         if (getInfoItems() != null) {
-            model.setNsPrefix("odf", NS.ODF);
-
-            String idValue = "";
-            if (object.getId().size() < 2) {
-                idValue = object.getId().iterator().next().getId();
-            } else {
-                idValue = String.valueOf(object.getId().hashCode());
-            }
-
-            Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, idValue, subject);
-            infoItemModels.forEach(metadataModel -> model.add(metadataModel));
+            Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, subject);
+            infoItemModels.forEach(infoItemModel -> model.add(infoItemModel));
         }
 
         return model;
@@ -83,9 +75,9 @@ public class MetaData extends ModelGenerator implements Deserializable, Serializ
             Property property = statement.getPredicate();
             Resource object = ResourceFactory.createResource(statement.getObject().toString());
 
-            if (subject.equals(statement.getSubject())) {
+            if (subject.toString().equals(statement.getSubject().toString())) {
 
-                if (property.toString().contains("infoitem")) {
+                if (property.toString().contains("infoItem")) {
                     infoitems.add(infoItemClass.deserialize(object, statements));
                 }
             }

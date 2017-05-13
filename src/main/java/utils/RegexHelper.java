@@ -1,6 +1,8 @@
 package utils;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.jena.atlas.lib.CollectionUtils;
 import org.apache.jena.ext.com.google.common.base.Utf8;
 
 import java.io.ByteArrayInputStream;
@@ -22,19 +24,31 @@ public class RegexHelper {
         IOUtils.copy(data, writer);
         String dataString = writer.toString();
 
+        String foundData = findMatch("(\\<Objects\\>[\\S\\s]+?\\<\\/Objects\\>)", dataString);
+        if (foundData == null) {
+            foundData = findMatch("(\\<Objects[\\S\\s]+?\\<\\/Objects\\>)", dataString);
+        }
+
+        InputStream is = new ByteArrayInputStream(foundData.getBytes());
+
+        return is;
+    }
+
+    private static String findMatch(String pattern, String dataString) {
         ArrayList<String> list = new ArrayList<>();
 
-        Pattern productsPattern = Pattern.compile("(\\<Objects\\>[\\S\\s]+?\\<\\/Objects\\>)");
+        Pattern productsPattern = Pattern.compile(pattern);
 
         Matcher m = productsPattern.matcher(dataString);
         while (m.find()) {
             list.add(m.group(0));
         }
 
-        InputStream is = new ByteArrayInputStream(list.get(0).getBytes());
+        if (list.isEmpty()) {
+            return null;
+        }
 
-        return is;
-
+        return list.get(0);
     }
 
     public static String getObjectType (String url) {

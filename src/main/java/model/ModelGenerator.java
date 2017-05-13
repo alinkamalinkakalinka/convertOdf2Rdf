@@ -35,9 +35,34 @@ public abstract class ModelGenerator {
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
 
         infoItems.forEach(infoItem -> infoItemModels.add(infoItem.serialize(objRelatedInfoItemBaseIri)));
-        infoItemModels.forEach(infoItemModel -> {
+
+        for (Model infoItemModel : infoItemModels) {
             addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
-        });
+        }
+
+        /*infoItemModels.forEach(infoItemModel -> {
+            addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
+        });*/
+
+        return infoItemModels;
+    }
+
+    protected Collection<Model> getInfoItemModels (Collection<InfoItem> infoItems,
+                                                   String infoItemBaseIri,
+                                                   Resource subject) {
+
+        Collection<Model> infoItemModels = new HashSet<>();
+        String objRelatedInfoItemBaseIri = infoItemBaseIri;
+
+        infoItems.forEach(infoItem -> infoItemModels.add(infoItem.serialize(objRelatedInfoItemBaseIri)));
+
+        for (Model infoItemModel : infoItemModels) {
+            addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
+        }
+
+        /*infoItemModels.forEach(infoItemModel -> {
+            addConnectingPropertyI(subject, infoItemModel, "InfoItem", "infoItem");
+        });*/
 
         return infoItemModels;
     }
@@ -93,7 +118,8 @@ public abstract class ModelGenerator {
     protected Collection<Model> getMetaDataModels(Resource subject,
                                               Collection<MetaData> metaDatas) {
         Collection<Model> metaDataModels = new HashSet<>();
-        metaDatas.forEach(metaDataValue -> metaDataModels.add(metaDataValue.serialize(subject + "/")));
+        String metaDataUri = subject + "/" + metaDatas.hashCode() + "/";
+        metaDatas.forEach(metaDataValue -> metaDataModels.add(metaDataValue.serialize(metaDataUri)));
 
         metaDataModels.forEach(metaDataModel -> {
             addConnectingProperty(subject, metaDataModel, "MetaData", "metadata");

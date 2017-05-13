@@ -84,7 +84,7 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
         return metaData;
     }
 
-    @XmlElement (name = "metaData")
+    @XmlElement (name = "MetaData")
     public void setMetaData(Collection<MetaData> metaData) {
         this.metaData = metaData;
     }
@@ -214,7 +214,7 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
                     infoItemClass.setDescription(descriptionClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains("metadata")) {
+                if (property.toString().contains(NS.ODF + "metadata")) {
                     metaDatas.add(metaDataClass.deserialize(object, statements));
                 }
 

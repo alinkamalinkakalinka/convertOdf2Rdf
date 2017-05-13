@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example of a simple "odf" structure for a refrigerator. -->
+<Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../main/resources/odf.xsd">
+    <Object>
+        <id>SmartFridge22334411</id>
+        <InfoItem name="PowerConsumption">
+            <MetaData>
+                <InfoItem name="readable">
+                    <value type="xs:boolean">true</value>
+                </InfoItem>
+            </MetaData>
+        </InfoItem>
+    </Object>
+</Objects>

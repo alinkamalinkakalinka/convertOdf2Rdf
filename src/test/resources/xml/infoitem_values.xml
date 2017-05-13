@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Example of Object->Object->InfoItem->value(s). -->
-<Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odf.xsd">
+<Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../main/resources/odf.xsd">
     <Object type="someType">
         <id tagType="blabla">UniqueTargetID_1</id>
         <description lang = "en">balalal</description>

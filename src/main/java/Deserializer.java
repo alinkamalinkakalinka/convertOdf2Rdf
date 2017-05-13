@@ -61,20 +61,22 @@ public class Deserializer implements Loggable{
 
         Collection<String> stringRootObjects = new ArrayList<>();
         Collection<Resource> rootObjects = new ArrayList<>();
+        String mainRootObject = "";
 
         for (Statement statement : statements) {
 
             if (statement.getPredicate().equals(RDF.type) &&
-                    statement.getObject().toString().contains("Object")) {
-                stringRootObjects.add(statement.getSubject().toString());
+                    statement.getObject().toString().contains("Objects")) {
+                mainRootObject = statement.getSubject().toString();
+                //stringRootObjects.add(statement.getSubject().toString());
             }
         }
 
         for (Statement statement : statements) {
 
-            if (statement.getPredicate().toString().contains("object") &&
-                    stringRootObjects.contains(statement.getObject().toString())) {
-                stringRootObjects.remove(statement.getObject().toString());
+            if (statement.getSubject().toString().equals(mainRootObject)&&
+                statement.getPredicate().toString().contains("object")) {
+                stringRootObjects.add(statement.getObject().toString());
             }
         }
 

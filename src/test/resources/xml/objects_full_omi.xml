@@ -1,4 +1,4 @@
-<omi:omiEnvelope ttl="10.0" version="1.0" xmlns="odf.xsd" xmlns:omi="omi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<omi:omiEnvelope ttl="10.0" version="1.0" xmlns="/Users/aarunova/Documents/thesis/convertOdf2Rdf/src/test/resources/xsd/odf.xsd" xmlns:omi="omi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <omi:response>
         <omi:result msgformat="odf">
             <omi:return returnCode="200">
