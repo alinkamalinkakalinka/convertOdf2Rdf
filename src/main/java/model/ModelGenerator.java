@@ -4,6 +4,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
+
+import utils.Loggable;
 import utils.ModelHelper;
 import vocabs.NS;
 
@@ -14,7 +16,7 @@ import java.util.HashSet;
  * Created by aarunova on 3/29/17.
  */
 
-public abstract class ModelGenerator {
+public abstract class ModelGenerator implements Loggable{
 
     protected Model getDescriptionModel(Description description,
                                         Resource subject) {
@@ -38,12 +40,14 @@ public abstract class ModelGenerator {
 
         for (Model infoItemModel : infoItemModels) {
             addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
+            System.out.println("hey");
         }
-
+//11111111
         /*infoItemModels.forEach(infoItemModel -> {
             addConnectingProperty(subject, infoItemModel, "InfoItem", "infoItem");
         });*/
 
+        //System.out.println(infoItemModels);
         return infoItemModels;
     }
 
@@ -133,9 +137,17 @@ public abstract class ModelGenerator {
                                           String classTypeName,
                                           String propertyName) {
 
-        Resource connectingValueId = ModelHelper.getIdToConnectWith(model, classTypeName);
+        Resource connectingValueId = ModelHelper.getIdConnectWith(model, classTypeName, propertyName);
         if (connectingValueId != null) {
             subject.addProperty(ResourceFactory.createProperty(NS.ODF + propertyName), connectingValueId);
+            //System.out.println(subject);
+            //System.out.println(ResourceFactory.createProperty(NS.ODF + propertyName));
+            //System.out.println(connectingValueId);
+        }
+
+        if (connectingValueId.toString().contains("readable") && subject.toString().contains("Smart")){
+            int a = 1;
+            System.out.println("catch");
         }
     }
 

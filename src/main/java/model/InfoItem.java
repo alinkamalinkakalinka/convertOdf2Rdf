@@ -174,6 +174,7 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
         }
 
 
+        //System.out.println(model);
         return model;
     }
 

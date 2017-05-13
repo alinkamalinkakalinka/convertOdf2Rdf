@@ -91,7 +91,7 @@ public class Objects extends ModelGenerator implements Serializable, Deserializa
                     String.valueOf(objects.hashCode()));
             nestedObjectsModels.forEach(nestedObjectsModel -> model.add(nestedObjectsModel));
         }
-
+        //System.out.println(model);
         return model;
     }
 

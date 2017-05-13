@@ -172,6 +172,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         Collection<Model> nestedObjectsModels = getNestedObjectsModels(subject, getObjects(), infoItemBaseIri, idValue);
         nestedObjectsModels.forEach(nestedObjectsModel -> model.add(nestedObjectsModel));
 
+        //System.out.println(model);
         return model;
     }
 

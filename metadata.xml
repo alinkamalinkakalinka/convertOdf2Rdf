@@ -7,6 +7,9 @@
                 <InfoItem name="readable">
                     <value>true^^http://www.w3.org/2001/XMLSchema#boolean</value>
                 </InfoItem>
+                <InfoItem name="accuracy">
+                    <value>1^^http://www.w3.org/2001/XMLSchema#double</value>
+                </InfoItem>
             </MetaData>
         </InfoItem>
     </Object>

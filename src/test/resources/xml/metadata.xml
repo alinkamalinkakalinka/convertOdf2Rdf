@@ -5,6 +5,9 @@
         <id>SmartFridge22334411</id>
         <InfoItem name="PowerConsumption">
             <MetaData>
+                <InfoItem name="accuracy">
+                    <value type="xs:double">1</value>
+                </InfoItem>
                 <InfoItem name="readable">
                     <value type="xs:boolean">true</value>
                 </InfoItem>
