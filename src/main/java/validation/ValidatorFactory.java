@@ -16,8 +16,8 @@ public class ValidatorFactory implements Loggable {
             switch (fileType) {
                 case XML:
                     return new XSDSchemaValidator(schemaFileName);
-                case JSON:
-                    return null;
+                case RDF:
+                    return new RDFValidator();
 
             }
 

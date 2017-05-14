@@ -11,6 +11,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static utils.ModelHelper.getStatementsFromFile;
+
 /**
  * Created by aarunova on 3/26/17.
  */
@@ -42,37 +44,6 @@ public class Deserializer implements Loggable{
             logger().warn("JAXBException", e);
         } catch (FileNotFoundException e) {
             logger().warn("FileNotFoundException", e);
-        }
-
-    }
-
-
-    private Collection<Statement> getStatementsFromFile (String rdfFile) {
-
-        try {
-            InputStream inputStream = new FileInputStream(rdfFile);
-
-            //create empty model
-            Model model = ModelFactory.createDefaultModel();
-
-            // parses in turtle format
-            model.read(new InputStreamReader(inputStream), null, "TURTLE");
-
-            //generate list of statements
-            StmtIterator iterator = model.listStatements();
-            Collection<Statement> statements = new ArrayList<>();
-
-            while (iterator.hasNext()) {
-                Statement stmt = iterator.nextStatement();
-                statements.add(stmt);
-            }
-
-            return statements;
-
-        } catch (java.io.IOException e) {
-            logger().error("FileNotFoundException", e);
-
-            return null;
         }
 
     }

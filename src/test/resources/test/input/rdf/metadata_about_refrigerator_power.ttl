@@ -5,6 +5,13 @@
 @prefix time:  <http://www.w3.org/2006/time#> .
 @prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
 
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1523457779/SmartFridge22334411/PowerConsumption/943454773/accuracy>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "1"^^xsd:double
+                   ] ;
+        dct:name   "accuracy" .
+
 <http://eis-biotope.iais.fraunhofer.de/localhost/obj/231685785>
         a           odf:Objects ;
         odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/231685785/SmartFridge22334411> .
@@ -22,10 +29,3 @@
                         odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1523457779/SmartFridge22334411/PowerConsumption/943454773/accuracy>
                       ] ;
         dct:name      "PowerConsumption" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1523457779/SmartFridge22334411/PowerConsumption/943454773/accuracy>
-        a          odf:InfoItem ;
-        odf:value  [ a              odf:Value ;
-                     odf:dataValue  "1"^^xsd:double
-                   ] ;
-        dct:name   "accuracy" .

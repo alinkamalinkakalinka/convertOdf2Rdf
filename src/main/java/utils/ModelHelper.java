@@ -1,5 +1,7 @@
 package utils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
@@ -7,7 +9,11 @@ import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -22,6 +28,8 @@ import vocabs.NS;
  * Created by aarunova on 3/27/17.
  */
 public class ModelHelper {
+
+    private static final Log LOG = LogFactory.getLog(ModelHelper.class);
 
     public static Resource getIdToConnectWith (Model model, String classType) {
 
@@ -94,5 +102,34 @@ public class ModelHelper {
         }
 
         return otherAttributesModel;
+    }
+
+    public static Collection<Statement> getStatementsFromFile (String rdfFile) {
+
+        try {
+            InputStream inputStream = new FileInputStream(rdfFile);
+
+            //create empty model
+            Model model = ModelFactory.createDefaultModel();
+
+            // parses in turtle format
+            model.read(new InputStreamReader(inputStream), null, "TURTLE");
+
+            //generate list of statements
+            StmtIterator iterator = model.listStatements();
+            Collection<Statement> statements = new ArrayList<>();
+
+            while (iterator.hasNext()) {
+                Statement stmt = iterator.nextStatement();
+                statements.add(stmt);
+            }
+
+            return statements;
+
+        } catch (java.io.IOException e) {
+            LOG.error("FileNotFoundException", e);
+
+            return null;
+        }
     }
 }

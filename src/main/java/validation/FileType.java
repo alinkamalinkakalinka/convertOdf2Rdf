@@ -5,6 +5,5 @@ package validation;
  */
 public enum FileType {
     XML,
-    JSON,
     RDF
 }
