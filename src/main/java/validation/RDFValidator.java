@@ -30,6 +30,8 @@ public class RDFValidator implements SchemaValidator, Loggable {
             // parses in turtle format
             model.read(new InputStreamReader(inputStream), null, "TURTLE");
 
+            logger().info("Successfully validated");
+
         } catch (IOException e) {
             logger().warn("IOException", e);
             return false;

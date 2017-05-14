@@ -18,11 +18,9 @@ import java.util.regex.Pattern;
  */
 public class RegexHelper {
 
-    public static InputStream getDateBetweenTags (InputStream data) throws IOException {
+    public static InputStream getDateBetweenTags (String filePath) throws IOException {
 
-        StringWriter writer = new StringWriter();
-        IOUtils.copy(data, writer);
-        String dataString = writer.toString();
+        String dataString = FileToStringConverter.getFileAsStringFromFilePath(filePath);
 
         String foundData = findMatch("(\\<Objects\\>[\\S\\s]+?\\<\\/Objects\\>)", dataString);
         if (foundData == null) {

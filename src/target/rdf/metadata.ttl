@@ -5,27 +5,27 @@
 @prefix time:  <http://www.w3.org/2006/time#> .
 @prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/460332449/SmartFridge22334411>
-        a             odf:Object ;
-        odf:id        [ a            odf:QlmID ;
-                        odf:idValue  "SmartFridge22334411"
-                      ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1932274305/SmartFridge22334411/PowerConsumption> .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1932274305/SmartFridge22334411/PowerConsumption>
-        a             odf:InfoItem ;
-        odf:metadata  [ a             odf:MetaData ;
-                        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1932274305/SmartFridge22334411/PowerConsumption/1292838032/accuracy>
-                      ] ;
-        dct:name      "PowerConsumption" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1932274305/SmartFridge22334411/PowerConsumption/1292838032/accuracy>
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/171493405/SmartFridge22334411/PowerConsumption/2130192242/accuracy>
         a          odf:InfoItem ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "1"^^xsd:double
                    ] ;
         dct:name   "accuracy" .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/460332449>
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/1519280649/SmartFridge22334411>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SmartFridge22334411"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/171493405/SmartFridge22334411/PowerConsumption> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/171493405/SmartFridge22334411/PowerConsumption>
+        a             odf:InfoItem ;
+        odf:metadata  [ a             odf:MetaData ;
+                        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/171493405/SmartFridge22334411/PowerConsumption/2130192242/accuracy>
+                      ] ;
+        dct:name      "PowerConsumption" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/1519280649>
         a           odf:Objects ;
-        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/460332449/SmartFridge22334411> .
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/1519280649/SmartFridge22334411> .

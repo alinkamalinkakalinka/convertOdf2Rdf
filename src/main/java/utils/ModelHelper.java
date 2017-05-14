@@ -22,6 +22,8 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
+import validation.FileType;
+import validation.ValidatorFactory;
 import vocabs.NS;
 
 /**
@@ -130,6 +132,17 @@ public class ModelHelper {
             LOG.error("FileNotFoundException", e);
 
             return null;
+        }
+    }
+
+    public static void checkIfFileIsValid (String content, String schemaFileName, FileType fileType) {
+        //validate file
+        boolean isValid = ValidatorFactory
+            .getValidator(schemaFileName, fileType)
+            .validateAgainstSchema(content);
+
+        if (!isValid) {
+            LOG.error("Data is not valid");
         }
     }
 }

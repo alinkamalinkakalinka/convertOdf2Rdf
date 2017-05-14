@@ -3,6 +3,8 @@ import model.Objects;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.Loggable;
+import utils.ModelHelper;
+import validation.FileType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,6 +26,8 @@ public class Deserializer implements Loggable{
     public void deserialize (String rdfFile, String xmlFilePath) {
 
         try {
+
+            ModelHelper.checkIfFileIsValid(rdfFile, "/odf.xsd", FileType.RDF);
 
             Objects objectsClass = new Objects();
 

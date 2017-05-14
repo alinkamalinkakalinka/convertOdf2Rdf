@@ -22,6 +22,8 @@ import validation.RDFValidator;
  */
 public class SerializerTest extends XMLTestCase {
 
+    public static final String UTF8_BOM = "\uFEFF";
+
     @Test
     public void testOdf2rdf() throws Exception {
 
@@ -31,7 +33,7 @@ public class SerializerTest extends XMLTestCase {
 
         String xmlFile = "test/input/xml/metadata.xml";
 
-        serializer.odf2rdf(xmlFile, "src/target/rdf/metadata.ttl");
+        serializer.odf2rdf("src/test/resources/test/input/xml/metadata.xml", "src/target/rdf/metadata.ttl");
         deserializer.deserialize(getClass().getClassLoader().getResource("test/input/rdf/metadata_about_refrigerator_power.ttl").getFile(), "src/target/xml/metadata.xml");
 
         XMLDiff diff = new XMLDiff("src/test/resources/test/input/xml/metadata.xml", "src/target/xml/metadata.xml");

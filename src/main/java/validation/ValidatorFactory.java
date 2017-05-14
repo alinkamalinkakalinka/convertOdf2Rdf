@@ -1,6 +1,9 @@
 package validation;
 
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import utils.Loggable;
 
 /**
@@ -8,8 +11,9 @@ import utils.Loggable;
  */
 public class ValidatorFactory implements Loggable {
 
+    private static final Log LOG = LogFactory.getLog(ValidatorFactory.class);
 
-    public SchemaValidator getValidator (String schemaFileName, FileType fileType) {
+    public static SchemaValidator getValidator (String schemaFileName, FileType fileType) {
 
         try {
 
@@ -22,7 +26,7 @@ public class ValidatorFactory implements Loggable {
             }
 
         } catch (Exception e) {
-            logger().warn("Exception", e);
+            LOG.warn("Exception", e);
         }
 
         throw new IllegalArgumentException(String.format("File type %s not supported", fileType));

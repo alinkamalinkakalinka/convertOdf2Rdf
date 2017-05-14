@@ -2,9 +2,12 @@ package validation;
 
 import org.xml.sax.SAXException;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PushbackInputStream;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
@@ -35,7 +38,8 @@ public class XSDSchemaValidator implements SchemaValidator, Loggable {
     public boolean validateAgainstSchema(String source) {
         try {
             Validator validator = this.schema.newValidator();
-            validator.validate(new StreamSource(new ByteArrayInputStream(source.getBytes())));
+            //validator.validate(new StreamSource(new ByteArrayInputStream(source.getBytes())));
+            validator.validate(new StreamSource(checkForUtf8BOMAndDiscardIfAny(new FileInputStream(source))));
             logger().info("Successfully validated");
 
             return true;
@@ -53,4 +57,14 @@ public class XSDSchemaValidator implements SchemaValidator, Loggable {
     public FileType getFileType() {
         return FileType.XML;
     }
+
+    private static InputStream checkForUtf8BOMAndDiscardIfAny(InputStream inputStream) throws IOException {
+        PushbackInputStream pushbackInputStream = new PushbackInputStream(new BufferedInputStream(inputStream), 3);
+        byte[] bom = new byte[3];
+        if (pushbackInputStream.read(bom) != -1) {
+            if (!(bom[0] == (byte) 0xEF && bom[1] == (byte) 0xBB && bom[2] == (byte) 0xBF)) {
+                pushbackInputStream.unread(bom);
+            }
+        }
+        return pushbackInputStream; }
 }
