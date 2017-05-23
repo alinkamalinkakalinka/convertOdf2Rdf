@@ -1,0 +1,303 @@
+@prefix odf:   <http://eis-biotope.iais.fraunhofer.de/odf#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+@prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor 2>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "230"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:06 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Room temperature sensor 2" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Fresh air>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "19"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:02 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Fresh air" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Heat recovery efficiency n exhaust>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "78"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:05 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Heat recovery efficiency n exhaust" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861>
+        a           odf:Objects ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Current exhaust fan speed>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "45"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:05 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Current exhaust fan speed" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Temperature at operator panel 2>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0"^^xsd:string ;
+                     dct:created    "Wed Sep 14 15:47:33 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "Temperature at operator panel 2" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        ca:idType    "id@uri" ;
+                        odf:idValue  "2013001000@enervent.fi"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Boosting> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Temperature at operator panel 2> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room removed air> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/o-def-id> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/CO2 sensor 1> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor 2> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Current supply fan speed> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Heat recovery efficiency n exhaust> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Air humidity sensor 1> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor TE20> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Fresh air> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Current exhaust fan speed> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Controller output> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Supply air> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature average> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor TE21> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Waste air> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Air humidity sensor 2> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Exhaust air humidity> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Supply air after HRC> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/48h air humidity average> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Setpoint for supply air> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Heat recovery efficiency n supply> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/CO2 sensor 2> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Owner> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Status> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor 1> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/ManufacturerName> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Temperature control step> , <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/o-def-name> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:> ;
+        odf:type      "Air Handling Unit" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Heat recovery efficiency n supply>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "83"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:05 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Heat recovery efficiency n supply" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor 1>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "219"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:06 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Room temperature sensor 1" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Temperature control step>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  2 ;
+                     dct:created    "Mon May 08 21:30:02 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Temperature control step" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/CO2 sensor 2>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "625"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:07 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "CO2 sensor 2" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Supply air>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "174"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:03 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Supply air" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor TE21>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "222"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:04 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Room temperature sensor TE21" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature average>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0"^^xsd:string ;
+                     dct:created    "Wed Sep 14 15:47:33 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "Room temperature average" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Status>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  0 ;
+                     dct:created    "Mon May 08 21:30:02 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Status" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:>
+        a           odf:Object ;
+        odf:id      [ a            odf:QlmID ;
+                      odf:idValue  "http:"
+                    ] ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/48h air humidity average>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "28"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:04 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "48h air humidity average" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room removed air>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "202"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:04 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Room removed air" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Air humidity sensor 2>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:06 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Air humidity sensor 2" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info>
+        a           odf:Object ;
+        odf:id      [ a            odf:QlmID ;
+                      odf:idValue  "o-def.info"
+                    ] ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info/plugins> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/CO2 sensor 1>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "710"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:06 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "CO2 sensor 1" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/o-def-id>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "10;[X1]:[40101709]"^^xsd:string ;
+                     dct:created    "Wed Sep 14 15:47:33 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "o-def-id" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/ManufacturerName>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Enervent Oy"^^xsd:string ;
+                     dct:created    "Fri Apr 15 18:08:30 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "ManufacturerName" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Room temperature sensor TE20>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:04 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Room temperature sensor TE20" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Current supply fan speed>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "40"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:05 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Current supply fan speed" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info/plugins/10/X1>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "X1"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/http:/o-def.info/plugins/10/X1/73161517> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Supply air after HRC>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "171"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:03 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Supply air after HRC" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Air humidity sensor 1>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "29"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:06 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Air humidity sensor 1" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Owner>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Kary Framling"^^xsd:string ;
+                     dct:created    "Wed Sep 14 15:47:33 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "Owner" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Setpoint for supply air>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "0"^^xsd:string ;
+                     dct:created    "Wed Sep 14 15:47:33 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "Setpoint for supply air" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Controller output>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "100"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:05 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Controller output" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Boosting>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  0 ;
+                     dct:created    "Mon May 08 21:30:02 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Boosting" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Exhaust air humidity>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "26"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:04 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Exhaust air humidity" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/Waste air>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "58"^^xsd:decimal ;
+                     dct:created    "Mon May 08 21:30:03 CEST 2017"^^xsd:dateTime
+                   ] ;
+        dct:name   "Waste air" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info/plugins/10>
+        a           odf:Object ;
+        odf:id      [ a            odf:QlmID ;
+                      odf:idValue  "10"
+                    ] ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info/plugins/10/X1> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info/plugins>
+        a           odf:Object ;
+        odf:id      [ a            odf:QlmID ;
+                      odf:idValue  "plugins"
+                    ] ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/32478861/2013001000@enervent.fi/http:/o-def.info/plugins/10> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/http:/o-def.info/plugins/10/X1/73161517>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Enervent Oy"^^xsd:string ;
+                     dct:created    "Wed Sep 14 15:47:33 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "73161517" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/3476319/2013001000@enervent.fi/o-def-name>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Product;[UNSPSC]:[Air handling unit]"^^xsd:string ;
+                     dct:created    "Wed Sep 14 15:47:33 CEST 2016"^^xsd:dateTime
+                   ] ;
+        dct:name   "o-def-name" .

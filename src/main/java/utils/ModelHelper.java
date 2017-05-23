@@ -46,10 +46,6 @@ public class ModelHelper {
                 }
             }
 
-            if (id.toString().contains("readable")) {
-                System.out.println("catch2");
-            }
-
             return id;
         }
 
@@ -68,7 +64,7 @@ public class ModelHelper {
             while (iterator.hasNext()) {
                 Statement stmt = iterator.nextStatement();
 
-                if (stmt.getObject().toString().contains(classType)) {
+                if (stmt.getObject().toString().equals(NS.ODF + classType)) {
                     potentialIds.put(stmt.getSubject().toString(), stmt.getSubject());
                 }
             }

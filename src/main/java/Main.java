@@ -2,56 +2,27 @@
  * Created by aarunova on 12/11/16.
  */
 
-import model.Objects;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-
 public class Main {
 
+    public static void main(String[] args) {
 
-    private final Helper helper = new Helper();
+        if (args.length < 3) {
+            System.out.println("Enter all required parameters: odf2rdf or rdf2odf, input filepath and output filepath");
+            System.exit(0);
+        }
 
-    public static void main(String[] args) throws FileNotFoundException, MalformedURLException {
+        String converter = args[0];
+        String inputFilepath = args[1];
+        String outputFilepath = args[2];
 
-        try {
-
-            Helper helper = new Helper();
-
-            String fileName = "infoitem_values.xml";
-
-            File file = helper.getFile(fileName);
-
-            JAXBContext jaxbContext = JAXBContext.newInstance(Objects.class);
-
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Objects objects= (Objects) jaxbUnmarshaller.unmarshal(file);
-
-
+        if ("odf2rdf".equals(converter)) {
             Serializer serializer = new Serializer();
-            //serializer.odf2rdf("infoitem_values.xml", "testJena1.rdf");
-            serializer.odf2rdf("smarthouse_omi.xml", "testJena2.rdf");
-
-            //InputStream odfStructure = getClass().getResourceAsStream("/resources/infoitem_values.xml");
-            //serializer.odf2rdf();
-
+            serializer.serialize(inputFilepath, outputFilepath);
+        } else if ("rdf2odf".equals(converter)) {
             Deserializer deserializer = new Deserializer();
-            deserializer.deserialize("testJena.rdf", "test10.xml");
-
-
-            //FileInputStream stream = new FileInputStream(new File("test3.rdf").toURL().toString());
-
-            //Collection<Objects> objectsCollection = serializer.convert();
-
-
-
-        } catch (JAXBException e) {
-            e.printStackTrace();
+            deserializer.deserialize(inputFilepath, outputFilepath);
+        } else {
+            System.exit(0);
         }
 
     }

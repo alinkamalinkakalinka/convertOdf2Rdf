@@ -200,7 +200,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
             Property property = statement.getPredicate();
             Resource object = ResourceFactory.createResource(statement.getObject().toString());
 
-            if (subject.equals(statement.getSubject())) {
+            if (subject.toString().equals(statement.getSubject().toString())) {
                 if (property.toString().contains("type") && !object.toString().contains("Object")) {
                     objectClass.setType(object.toString());
                 }
@@ -221,7 +221,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
                     infoItems.add(infoItemClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains(ODFClass.OBJECT)) {
+                if (property.toString().contains(ODFProp.OBJECT)) {
                     objects.add(objectClass.deserialize(object, statements));
                 }
 

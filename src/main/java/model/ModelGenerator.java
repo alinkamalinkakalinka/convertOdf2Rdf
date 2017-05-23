@@ -64,12 +64,21 @@ public abstract class ModelGenerator implements Loggable{
         String nestedObjectsBaseIri = subject.toString() + "/";
         String objRelatedInfoItemBaseIri = infoItemBaseIri + id + "/";
 
-        objects.forEach(nestedObject -> nestedObjectsModels
-                .add(nestedObject.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));
+        for (Object nestedObject : objects) {
+            Model objectModel = nestedObject.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri);
+            nestedObjectsModels.add(objectModel);
+        }
 
-        nestedObjectsModels.forEach(nestedObjectsModel -> {
+        /*objects.forEach(nestedObject -> nestedObjectsModels
+                .add(nestedObject.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));*/
+
+        /*nestedObjectsModels.forEach(nestedObjectsModel -> {
             addConnectingProperty(subject, nestedObjectsModel, "Object", "object");
-        });
+        });*/
+
+        for (Model nestedObjectModel : nestedObjectsModels) {
+            addConnectingProperty(subject, nestedObjectModel, "Object", "object");
+        }
 
         return nestedObjectsModels;
     }
@@ -83,7 +92,7 @@ public abstract class ModelGenerator implements Loggable{
 
         idModels.forEach(idModel -> {
             addConnectingProperty(subject, idModel, "QlmID", propertyName);
-            Resource idValue = ModelHelper.getIdToConnectWith(idModel, "QlmID");
+            Resource idValue = ModelHelper.getIdConnectWith(idModel, "QlmID", "id");
             if (idValue != null) {
                 subject.addProperty(ResourceFactory.createProperty(NS.ODF, propertyName), idValue);
             }

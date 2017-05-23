@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../main/resources/odf.xsd">
+    <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+        <id>UniqueObjectID_1</id>
+        <InfoItem name="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+        </InfoItem>
+        <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+            <id>SubObject1</id>
+        </Object>
+        <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
+            <id>SubObject2</id>
+        </Object>
+    </Object>
+</Objects>

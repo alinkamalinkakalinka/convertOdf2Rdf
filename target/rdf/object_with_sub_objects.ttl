@@ -1,0 +1,40 @@
+@prefix odf:   <http://eis-biotope.iais.fraunhofer.de/odf#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+@prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561>
+        a           odf:Objects ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/UniqueObjectID_1> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/UniqueObjectID_1/SubObject2>
+        a         odf:Object ;
+        odf:id    [ a            odf:QlmID ;
+                    odf:idValue  "SubObject2"
+                  ] ;
+        odf:type  "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" ;
+        odf:udef  "appropriate.udef.code" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/UniqueObjectID_1>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "UniqueObjectID_1"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/26536661/UniqueObjectID_1/SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/UniqueObjectID_1/SubObject1> , <http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/UniqueObjectID_1/SubObject2> ;
+        odf:type      "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" ;
+        odf:udef      "appropriate.udef.code" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/26536661/UniqueObjectID_1/SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF>
+        a         odf:InfoItem ;
+        odf:udef  "appropriate.udef.code" ;
+        dct:name  "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/UniqueObjectID_1/SubObject1>
+        a         odf:Object ;
+        odf:id    [ a            odf:QlmID ;
+                    odf:idValue  "SubObject1"
+                  ] ;
+        odf:type  "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" ;
+        odf:udef  "appropriate.udef.code" .

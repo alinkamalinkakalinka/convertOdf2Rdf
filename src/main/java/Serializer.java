@@ -29,7 +29,7 @@ public class Serializer implements Loggable {
     private String hostname = "localhost";
 
 
-    public Model odf2rdf(String inputFileName, String outputFileName) {
+    public Model serialize(String inputFileName, String outputFileName) {
 
         Model modelJena = null;
 
