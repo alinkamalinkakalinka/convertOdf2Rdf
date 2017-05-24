@@ -128,7 +128,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         Model model = ModelFactory.createDefaultModel();
         String idValue = "";
         if (getId().size() < 2) {
-            idValue = getId().iterator().next().getId();
+            idValue = getId().iterator().next().getId().replaceAll("[^a-zA-Z^0-9]", "");
         } else {
             idValue = String.valueOf(getId().hashCode());
         }
@@ -136,7 +136,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         Resource subject = model.createResource(objectBaseIri +idValue);
 
         model.setNsPrefix("rdf", NS.RDF);
-        model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + "Object"));
+        model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.OBJECT));
 
         //todo: namespaces
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
@@ -201,7 +201,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
             Resource object = ResourceFactory.createResource(statement.getObject().toString());
 
             if (subject.toString().equals(statement.getSubject().toString())) {
-                if (property.toString().contains("type") && !object.toString().contains("Object")) {
+                if (property.toString().contains("type") && !object.toString().contains(ODFClass.OBJECT)) {
                     objectClass.setType(object.toString());
                 }
 
@@ -213,7 +213,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
                     objectClass.setDescription(descriptionClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains("id")) {
+                if (property.toString().contains(ODFProp.ID)) {
                     ids.add(qlmIDClass.deserialize(object, statements));
                 }
 

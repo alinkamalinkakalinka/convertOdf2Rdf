@@ -5,6 +5,8 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
 import vocabs.NS;
+import vocabs.ODFClass;
+import vocabs.ODFProp;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -52,7 +54,7 @@ public class MetaData extends ModelGenerator implements Deserializable, Serializ
         model.setNsPrefix("rdf", NS.RDF);
         model.setNsPrefix("odf", NS.ODF);
 
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "MetaData"));
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.METADATA));
 
         if (getInfoItems() != null) {
             Collection<Model> infoItemModels = getInfoItemModels(getInfoItems(), infoItemBaseIri, subject);
@@ -77,7 +79,7 @@ public class MetaData extends ModelGenerator implements Deserializable, Serializ
 
             if (subject.toString().equals(statement.getSubject().toString())) {
 
-                if (property.toString().contains("infoItem")) {
+                if (property.toString().contains(ODFProp.INFOITEM)) {
                     infoitems.add(infoItemClass.deserialize(object, statements));
                 }
             }

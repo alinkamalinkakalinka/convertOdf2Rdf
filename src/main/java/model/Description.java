@@ -3,6 +3,7 @@ package model;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
+import vocabs.ODFClass;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -75,7 +76,7 @@ public class Description implements Deserializable, Serializable{
         Resource subject = model.createResource();
 
         model.setNsPrefix("rdf", NS.RDF);
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "Description"));
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.DESCRIPTION));
 
         if (getDescription() != null) {
             model.setNsPrefix("dct", NS.DCT);

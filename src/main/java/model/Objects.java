@@ -137,7 +137,7 @@ public class Objects extends ModelGenerator implements Serializable, Deserializa
         for (Statement statement : statements) {
 
             if (statement.getSubject().toString().equals(mainRootObject)&&
-                statement.getPredicate().toString().contains("object")) {
+                statement.getPredicate().toString().contains(ODFProp.OBJECT)) {
                 stringRootObjects.add(statement.getObject().toString());
             }
         }

@@ -11,6 +11,7 @@ public class ODFClass {
     public final static String VALUE = "Value";
     public final static String METADATA = "MetaData";
     public final static String QLMID = "QlmID";
+    public final static String DESCRIPTION = "Description";
 
 
 }

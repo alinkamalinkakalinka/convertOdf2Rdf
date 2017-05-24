@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.RegexHelper;
 import vocabs.NS;
+import vocabs.ODFClass;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.*;
@@ -102,20 +103,19 @@ public class Value implements Deserializable, Serializable{
         Resource subject = model.createResource();
 
         model.setNsPrefix("rdf", NS.RDF);
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "Value"));
-
-        //TODO: define type somehow
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.VALUE));
 
         if (getDateTime() != null || getValue() != null || getUnixTime() != null) {
             model.setNsPrefix("xsd", NS.XSD);
 
             if (getUnixTime() != null) {
-                Literal unixTimeValue = ResourceFactory.createTypedLiteral(unixTime);
+                Literal unixTimeValue = ResourceFactory.createTypedLiteral(unixTime, XSDDatatype.XSDint);
+                subject.addProperty(ResourceFactory.createProperty(NS.TIME + "unixTime"), unixTimeValue);
             }
 
             if (getDateTime() != null) {
                 Literal createdValue = ResourceFactory.createTypedLiteral(
-                        DatatypeConverter.parseDateTime(getDateTime()).getTime().toString(),
+                        getDateTime(),
                         XSDDatatype.XSDdateTime);
 
                 model.setNsPrefix("dct", NS.DCT);
@@ -164,7 +164,11 @@ public class Value implements Deserializable, Serializable{
                 }
 
                 if (property.toString().contains("created")) {
-                    valueClass.setDateTime(object.toString());
+                    valueClass.setDateTime(RegexHelper.getLiteralValue(object.toString()));
+                }
+
+                if (property.toString().contains("unixTime")) {
+                    valueClass.setUnixTime(RegexHelper.getLiteralValue(object.toString()));
                 }
 
                 if (property.toString().contains("dataValue")) {
@@ -181,6 +185,4 @@ public class Value implements Deserializable, Serializable{
 
         return valueClass;
     }
-
-    //TODO: handle date
 }

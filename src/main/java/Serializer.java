@@ -1,5 +1,6 @@
 import model.Object;
 import model.Objects;
+import org.apache.commons.io.IOUtils;
 import utils.ModelHelper;
 import utils.RegexHelper;
 import validation.FileType;
@@ -12,11 +13,7 @@ import org.apache.jena.riot.RDFFormat;
 
 import javax.xml.bind.JAXB;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Collection;
 
 /**
@@ -35,7 +32,14 @@ public class Serializer implements Loggable {
 
         try {
 
-            ModelHelper.checkIfFileIsValid(inputFileName, "/odf.xsd", FileType.XML);
+            File temp = File.createTempFile("temp-file", ".tmp");
+            temp.deleteOnExit();
+            FileOutputStream out = new FileOutputStream(temp);
+
+            InputStream in = RegexHelper.getDateBetweenTags(inputFileName);
+            IOUtils.copy(in, out);
+
+            ModelHelper.checkIfFileIsValid(temp.getAbsolutePath(), "/odf.xsd", FileType.XML);
 
             Objects beans = JAXB.unmarshal(RegexHelper.getDateBetweenTags(inputFileName), Objects.class);
 

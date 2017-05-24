@@ -4,6 +4,8 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
 import vocabs.NS;
+import vocabs.ODFClass;
+import vocabs.ODFProp;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
@@ -128,10 +130,10 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
     public Model serialize (String objectBaseIri, String infoItemBaseIri) {
 
         Model model = ModelFactory.createDefaultModel();
-        Resource subject = model.createResource(infoItemBaseIri + getName());
+        Resource subject = model.createResource(infoItemBaseIri + getName().replaceAll("[^a-zA-Z^0-9]", ""));
 
         model.setNsPrefix("rdf", NS.RDF);
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "InfoItem"));
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.INFOITEM));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
         elementsAndAttributes.put(NS.DCT + "name", getName());
@@ -221,11 +223,11 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
                     infoItemClass.setDescription(descriptionClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains(NS.ODF + "metadata")) {
+                if (property.toString().contains(NS.ODF + ODFProp.METADATA)) {
                     metaDatas.add(metaDataClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains(NS.ODF + "value")) {
+                if (property.toString().contains(NS.ODF + ODFProp.VALUE)) {
                     values.add(valueClass.deserialize(object,statements));
                 }
             }
@@ -235,7 +237,6 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
         infoItemClass.setMetaData(metaDatas);
         infoItemClass.setName1(ids);
 
-        //TODO: fix double id!!!
         return infoItemClass;
     }
 }

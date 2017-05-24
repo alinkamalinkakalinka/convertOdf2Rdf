@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Objects>
+    <Object type="Air Handling Unit">
+        <id>2013001000@enervent.fi</id>
+        <InfoItem name="Current exhaust fan speed">
+            <value dateTime="2017-05-08T22:30:05.000+03:00" type="xs:decimal" unixTime="1494271805">45</value>
+        </InfoItem>
+        <InfoItem name="CO2 sensor 1">
+            <value dateTime="2017-05-08T22:30:06.000+03:00" type="xs:decimal" unixTime="1494271806">710</value>
+        </InfoItem>
+        <InfoItem name="Room removed air">
+            <value dateTime="2017-05-08T22:30:04.000+03:00" type="xs:decimal" unixTime="1494271804">202</value>
+        </InfoItem>
+        <InfoItem name="48h air humidity average">
+            <value dateTime="2017-05-08T22:30:04.000+03:00" type="xs:decimal" unixTime="1494271804">28</value>
+        </InfoItem>
+        <InfoItem name="Room temperature sensor 2">
+            <value dateTime="2017-05-08T22:30:06.000+03:00" type="xs:decimal" unixTime="1494271806">230</value>
+        </InfoItem>
+        <InfoItem name="Room temperature sensor 1">
+            <value dateTime="2017-05-08T22:30:06.000+03:00" type="xs:decimal" unixTime="1494271806">219</value>
+        </InfoItem>
+        <InfoItem name="CO2 sensor 2">
+            <value dateTime="2017-05-08T22:30:07.000+03:00" type="xs:decimal" unixTime="1494271807">625</value>
+        </InfoItem>
+        <InfoItem name="Fresh air">
+            <value dateTime="2017-05-08T22:30:02.000+03:00" type="xs:decimal" unixTime="1494271802">19</value>
+        </InfoItem>
+        <InfoItem name="Room temperature average">
+            <value dateTime="2016-09-14T16:47:33.212+03:00" unixTime="1473860853">0</value>
+        </InfoItem>
+        <InfoItem name="Room temperature sensor TE21">
+            <value dateTime="2017-05-08T22:30:04.000+03:00" type="xs:decimal" unixTime="1494271804">222</value>
+        </InfoItem>
+        <InfoItem name="Current supply fan speed">
+            <value dateTime="2017-05-08T22:30:05.000+03:00" type="xs:decimal" unixTime="1494271805">40</value>
+        </InfoItem>
+        <InfoItem name="o-def-id">
+            <value dateTime="2016-09-14T16:47:33.212+03:00" unixTime="1473860853">10;[X1]:[40101709]</value>
+        </InfoItem>
+        <InfoItem name="Supply air after HRC">
+            <value dateTime="2017-05-08T22:30:03.000+03:00" type="xs:decimal" unixTime="1494271803">171</value>
+        </InfoItem>
+        <InfoItem name="Exhaust air humidity">
+            <value dateTime="2017-05-08T22:30:04.000+03:00" type="xs:decimal" unixTime="1494271804">26</value>
+        </InfoItem>
+        <InfoItem name="Room temperature sensor TE20">
+            <value dateTime="2017-05-08T22:30:04.000+03:00" type="xs:decimal" unixTime="1494271804">0</value>
+        </InfoItem>
+        <InfoItem name="Temperature control step">
+            <value dateTime="2017-05-08T22:30:02.000+03:00" type="xs:integer" unixTime="1494271802">2</value>
+        </InfoItem>
+        <InfoItem name="Air humidity sensor 2">
+            <value dateTime="2017-05-08T22:30:06.000+03:00" type="xs:decimal" unixTime="1494271806">0</value>
+        </InfoItem>
+        <InfoItem name="Controller output">
+            <value dateTime="2017-05-08T22:30:05.000+03:00" type="xs:decimal" unixTime="1494271805">100</value>
+        </InfoItem>
+        <InfoItem name="Heat recovery efficiency n exhaust">
+            <value dateTime="2017-05-08T22:30:05.000+03:00" type="xs:decimal" unixTime="1494271805">78</value>
+        </InfoItem>
+        <InfoItem name="Air humidity sensor 1">
+            <value dateTime="2017-05-08T22:30:06.000+03:00" type="xs:decimal" unixTime="1494271806">29</value>
+        </InfoItem>
+        <InfoItem name="ManufacturerName">
+            <value dateTime="2016-04-15T19:08:30.534+03:00" unixTime="1460736510">Enervent Oy</value>
+        </InfoItem>
+        <InfoItem name="Heat recovery efficiency n supply">
+            <value dateTime="2017-05-08T22:30:05.000+03:00" type="xs:decimal" unixTime="1494271805">83</value>
+        </InfoItem>
+        <InfoItem name="o-def-name">
+            <value dateTime="2016-09-14T16:47:33.212+03:00" unixTime="1473860853">Product;[UNSPSC]:[Air handling unit]</value>
+        </InfoItem>
+        <InfoItem name="Setpoint for supply air">
+            <value dateTime="2016-09-14T16:47:33.212+03:00" unixTime="1473860853">0</value>
+        </InfoItem>
+        <InfoItem name="Supply air">
+            <value dateTime="2017-05-08T22:30:03.000+03:00" type="xs:decimal" unixTime="1494271803">174</value>
+        </InfoItem>
+        <InfoItem name="Status">
+            <value dateTime="2017-05-08T22:30:02.000+03:00" type="xs:integer" unixTime="1494271802">0</value>
+        </InfoItem>
+        <InfoItem name="Waste air">
+            <value dateTime="2017-05-08T22:30:03.000+03:00" type="xs:decimal" unixTime="1494271803">58</value>
+        </InfoItem>
+        <InfoItem name="Owner">
+            <value dateTime="2016-09-14T16:47:33.212+03:00" unixTime="1473860853">Kary Framling</value>
+        </InfoItem>
+        <InfoItem name="Temperature at operator panel 2">
+            <value dateTime="2016-09-14T16:47:33.212+03:00" unixTime="1473860853">0</value>
+        </InfoItem>
+        <InfoItem name="Boosting">
+            <value dateTime="2017-05-08T22:30:02.000+03:00" type="xs:integer" unixTime="1494271802">0</value>
+        </InfoItem>
+        <Object>
+            <id>http:</id>
+            <Object>
+                <id>o-def.info</id>
+                <Object>
+                    <id>plugins</id>
+                    <Object>
+                        <id>10</id>
+                        <Object>
+                            <id>X1</id>
+                            <InfoItem name="73161517">
+<value dateTime="2016-09-14T16:47:33.212+03:00" unixTime="1473860853">Enervent Oy</value>
+                            </InfoItem>
+                        </Object>
+                    </Object>
+                </Object>
+            </Object>
+        </Object>
+    </Object>
+</Objects>

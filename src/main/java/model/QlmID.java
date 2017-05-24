@@ -5,6 +5,7 @@ import org.apache.jena.datatypes.xsd.impl.XSDAbstractDateTimeType;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
+import vocabs.ODFClass;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.*;
@@ -108,7 +109,7 @@ public class QlmID implements Deserializable, Serializable{
         Resource subject = model.createResource();
 
         model.setNsPrefix("rdf", NS.RDF);
-        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + "QlmID"));
+        subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.QLMID));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
         elementsAndAttributes.put(NS.TIME + "startDate", getStartDate());
