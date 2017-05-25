@@ -208,7 +208,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
                 if (ModelHelper.ifOptionalProperty(property, ODFProp.objectProperties)) {
                     Map<QName, String> optionalAttribute = new HashMap<>();
                     optionalAttribute.put(QName.valueOf(RegexHelper.getOptionalProperty(property.toString())), object.toString());
-                    descriptionClass.setOtherAttributes(optionalAttribute);
+                    objectClass.setOtherAttributes(optionalAttribute);
                 }
 
             }

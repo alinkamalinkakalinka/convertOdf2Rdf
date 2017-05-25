@@ -214,7 +214,7 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
                 if (ModelHelper.ifOptionalProperty(property, ODFProp.infoItemProperties)) {
                     Map<QName, String> optionalAttribute = new HashMap<>();
                     optionalAttribute.put(QName.valueOf(RegexHelper.getOptionalProperty(property.toString())), object.toString());
-                    descriptionClass.setOtherAttributes(optionalAttribute);
+                    infoItemClass.setOtherAttributes(optionalAttribute);
                 }
             }
         }

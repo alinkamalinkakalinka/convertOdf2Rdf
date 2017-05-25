@@ -14,19 +14,14 @@ public class SerializerTest extends XMLTestCase {
 
         Serializer serializer = new Serializer();
 
-        Deserializer deserializer = new Deserializer();
+        String inputXmlFile = "src/test/resources/test/input/xml/metadata.xml";
+        String outputRdfFile = "target/rdf/metadata.ttl";
+        String targetRdfFile = "src/test/resources/test/input/rdf/metadata.ttl";
 
-        String xmlFile = "test/input/xml/metadata.xml";
+        serializer.serialize(inputXmlFile, outputRdfFile);
 
-        serializer.serialize("src/test/resources/test/input/xml/metadata.xml", "target/rdf/metadata.ttl");
-        deserializer.deserialize(getClass().getClassLoader().getResource("test/input/rdf/metadata_about_refrigerator_power.ttl").getFile(), "target/xml/metadata.xml");
-
-        XMLDiff diff = new XMLDiff("src/test/resources/test/input/xml/metadata.xml", "target/xml/metadata.xml");
-        int result = diff.compare();
-        System.out.println(result);
-
-        boolean ifEqual = RDFDiff.diff("target/rdf/metadata.ttl", "target/rdf/metadata.ttl");
-        System.out.println(ifEqual);
+        boolean ifEqual = RDFDiff.diff(targetRdfFile, outputRdfFile);
+        assertTrue(ifEqual);
         }
 
 }

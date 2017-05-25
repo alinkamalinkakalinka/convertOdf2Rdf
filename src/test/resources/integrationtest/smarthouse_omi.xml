@@ -1,0 +1,18 @@
+<omi:omiEnvelope ttl="10.0" version="1.0" xmlns="/Users/aarunova/Documents/thesis/convertOdf2Rdf/src/test/resources/xsd/odf.xsd" xmlns:omi="omi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <omi:response>
+        <omi:result msgformat="odf">
+            <omi:return returnCode="200">
+            </omi:return>
+            <omi:msg>
+                <Objects>
+                    <Object>
+                        <id>SmartHouse</id>
+                        <InfoItem name="FrontDoor">
+                            <value unixTime="1494268071" dateTime="2017-05-08T21:27:51.691+03:00" type="xs:double">-1.0</value>
+                        </InfoItem>
+                    </Object>
+                </Objects>
+            </omi:msg>
+        </omi:result>
+    </omi:response>
+</omi:omiEnvelope>

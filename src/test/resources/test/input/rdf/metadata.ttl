@@ -1,0 +1,31 @@
+@prefix odf:   <http://eis-biotope.iais.fraunhofer.de/odf#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+@prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561>
+        a           odf:Objects ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/SmartFridge22334411> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17396574/SmartFridge22334411/PowerConsumption/11468906/accuracy>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "1"^^xsd:double
+                   ] ;
+        dct:name   "accuracy" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17396574/SmartFridge22334411/PowerConsumption>
+        a             odf:InfoItem ;
+        odf:metadata  [ a             odf:MetaData ;
+                        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17396574/SmartFridge22334411/PowerConsumption/11468906/accuracy>
+                      ] ;
+        dct:name      "PowerConsumption" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17208561/SmartFridge22334411>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SmartFridge22334411"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17396574/SmartFridge22334411/PowerConsumption> .

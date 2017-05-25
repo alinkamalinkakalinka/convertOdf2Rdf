@@ -7,8 +7,5 @@
         <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
             <id>SubObject1</id>
         </Object>
-        <Object type="SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" udef="appropriate.udef.code">
-            <id>SubObject2</id>
-        </Object>
     </Object>
 </Objects>
