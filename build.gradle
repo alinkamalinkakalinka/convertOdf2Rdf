@@ -77,6 +77,10 @@ dependencies {
     // https://mvnrepository.com/artifact/xmlunit/xmlunit
     compile group: 'xmlunit', name: 'xmlunit', version: '1.6'
 
+    // https://mvnrepository.com/artifact/org.xmlunit/xmlunit-core
+    compile group: 'org.xmlunit', name: 'xmlunit-core', version: '2.3.0'
+
+
     // https://mvnrepository.com/artifact/org.codehaus.castor/castor-xml-diff
     compile group: 'org.codehaus.castor', name: 'castor-xml-diff', version: '1.4.1'
 

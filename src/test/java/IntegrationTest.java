@@ -1,6 +1,12 @@
+import org.apache.commons.io.IOUtils;
 import org.castor.xmlctf.xmldiff.XMLDiff;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 import org.junit.Test;
 import utils.FileToStringConverter;
+import utils.RegexHelper;
+
+import java.io.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,7 +34,15 @@ public class IntegrationTest {
 
         main.main(args2);
 
-        XMLDiff diff = new XMLDiff(inputFilepathXml, outputFilepathXml);
+        File temp = File.createTempFile("temp-file", ".tmp");
+        temp.deleteOnExit();
+        FileOutputStream out = new FileOutputStream(temp);
+
+        InputStream in = RegexHelper.getDateBetweenTags(inputFilepathXml);
+        IOUtils.copy(in, out);
+
+
+        XMLDiff diff = new XMLDiff(temp.getAbsolutePath(), outputFilepathXml);
         int result = diff.compare();
 
         assertTrue(result == 0);

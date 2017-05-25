@@ -10,9 +10,7 @@ import vocabs.ODFClass;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static utils.ModelHelper.getOtherAttributesModel;
 
@@ -176,9 +174,35 @@ public class QlmID implements Deserializable, Serializable{
                 if (property.toString().contains("endDate")) {
                     qlmIDClass.setStartDate(object.toString());
                 }
+
+                if (ifOptionalProperty(property)) {
+                    Map<QName, String> optionalAttribute = new HashMap<>();
+                    optionalAttribute.put(QName.valueOf("idType"), object.toString());
+                    qlmIDClass.setOtherAttributes(optionalAttribute);
+                }
             }
         }
 
         return qlmIDClass;
+    }
+
+    private boolean ifOptionalProperty (Property property) {
+
+        boolean ifOptionalProperty = true;
+
+        List<String> idProperties = new ArrayList<>();
+        idProperties.add("idValue");
+        idProperties.add("tagType");
+        idProperties.add("startDate");
+        idProperties.add("endDate");
+        idProperties.add("type");
+
+        for (String idProperty : idProperties) {
+            if (property.toString().contains(idProperty)) {
+                ifOptionalProperty = false;
+            }
+        }
+
+        return ifOptionalProperty;
     }
 }
