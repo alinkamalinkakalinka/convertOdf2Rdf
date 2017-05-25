@@ -2,12 +2,7 @@ package utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.rdf.model.*;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -32,25 +27,6 @@ import vocabs.NS;
 public class ModelHelper {
 
     private static final Log LOG = LogFactory.getLog(ModelHelper.class);
-
-    public static Resource getIdToConnectWith (Model model, String classType) {
-
-        if (model != null && model != null) {
-
-            Resource id = null;
-            StmtIterator iterator = model.listStatements();
-            while (iterator.hasNext()) {
-                Statement stmt = iterator.nextStatement();
-                if (stmt.getObject().toString().contains(classType)) {
-                    id = stmt.getSubject();
-                }
-            }
-
-            return id;
-        }
-
-        return null;
-    }
 
     public static Resource getIdConnectWith (Model model, String classType, String propertyType) {
 
@@ -140,5 +116,18 @@ public class ModelHelper {
         if (!isValid) {
             LOG.error("Data is not valid");
         }
+    }
+
+    public static boolean ifOptionalProperty (Property property, List<String> properties) {
+
+        boolean ifOptionalProperty = true;
+
+        for (String idProperty : properties) {
+            if (property.toString().contains(idProperty)) {
+                ifOptionalProperty = false;
+            }
+        }
+
+        return ifOptionalProperty;
     }
 }

@@ -77,5 +77,11 @@ public class RegexHelper {
         return literalType;
     }
 
+    public static String getOptionalProperty (String property) {
+
+        String optionalProperty = findMatch("(?<=\\/)[^\\/]+?$", property);
+
+        return optionalProperty;
+    }
 
 }

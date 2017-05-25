@@ -3,16 +3,17 @@ package model;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import utils.ModelHelper;
 import utils.RegexHelper;
 import vocabs.NS;
 import vocabs.ODFClass;
+import vocabs.ODFProp;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.*;
+import java.util.*;
 
 import static utils.ModelHelper.getOtherAttributesModel;
 
@@ -110,7 +111,7 @@ public class Value implements Deserializable, Serializable{
 
             if (getUnixTime() != null) {
                 Literal unixTimeValue = ResourceFactory.createTypedLiteral(unixTime, XSDDatatype.XSDint);
-                subject.addProperty(ResourceFactory.createProperty(NS.TIME + "unixTime"), unixTimeValue);
+                subject.addProperty(ResourceFactory.createProperty(NS.TIME + ODFProp.UNIXTIME), unixTimeValue);
             }
 
             if (getDateTime() != null) {
@@ -119,20 +120,20 @@ public class Value implements Deserializable, Serializable{
                         XSDDatatype.XSDdateTime);
 
                 model.setNsPrefix("dct", NS.DCT);
-                subject.addProperty(ResourceFactory.createProperty(NS.DCT + "created"), createdValue);
+                subject.addProperty(ResourceFactory.createProperty(NS.DCT + ODFProp.CREATED), createdValue);
             }
 
             if (getValue() != null) {
                 XSDDatatype datatype = null;
 
                 if (getType() != null) {
-                    datatype = new XSDDatatype(RegexHelper.getObjectType(getType()), String.class);
+                    datatype = new XSDDatatype(RegexHelper.getObjectType(getType()), java.lang.Object.class);
                 }
 
                 Literal dataValue = ResourceFactory.createTypedLiteral(getValue(), datatype);
 
                 model.setNsPrefix("odf", NS.ODF);
-                subject.addProperty(ResourceFactory.createProperty(NS.ODF + "dataValue"), dataValue);
+                subject.addProperty(ResourceFactory.createProperty(NS.ODF + ODFProp.DATAVALUE), dataValue);
 
             }
         }
@@ -146,10 +147,9 @@ public class Value implements Deserializable, Serializable{
         return model;
     }
 
-
-
     @Override
     public Value deserialize (Resource subject, Collection<Statement> statements) {
+
         Value valueClass = new Value();
 
         for (Statement statement : statements) {
@@ -159,19 +159,19 @@ public class Value implements Deserializable, Serializable{
 
             if (subject.toString().equals(statement.getSubject().toString())) {
 
-                if (property.toString().contains("type") && !object.toString().contains("Value")){
+                if (property.toString().contains(ODFProp.TYPE) && !object.toString().contains(ODFClass.VALUE)){
                     valueClass.setType(object.toString());
                 }
 
-                if (property.toString().contains("created")) {
+                if (property.toString().contains(ODFProp.CREATED)) {
                     valueClass.setDateTime(RegexHelper.getLiteralValue(object.toString()));
                 }
 
-                if (property.toString().contains("unixTime")) {
+                if (property.toString().contains(ODFProp.UNIXTIME)) {
                     valueClass.setUnixTime(RegexHelper.getLiteralValue(object.toString()));
                 }
 
-                if (property.toString().contains("dataValue")) {
+                if (property.toString().contains(ODFProp.DATAVALUE)) {
 
                     if (object.toString().contains("Schema")) {
                         valueClass.setValue(RegexHelper.getLiteralValue(object.toString()));
@@ -179,6 +179,12 @@ public class Value implements Deserializable, Serializable{
                     } else {
                         valueClass.setValue(object.toString());
                     }
+                }
+
+                if (ModelHelper.ifOptionalProperty(property, ODFProp.valueProperties)) {
+                    Map<QName, String> optionalAttribute = new HashMap<>();
+                    optionalAttribute.put(QName.valueOf(RegexHelper.getOptionalProperty(property.toString())), object.toString());
+                    valueClass.setOtherAttributes(optionalAttribute);
                 }
             }
         }

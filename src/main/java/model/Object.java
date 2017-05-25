@@ -3,6 +3,7 @@ package model;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
+import utils.RegexHelper;
 import vocabs.NS;
 import vocabs.ODFClass;
 import vocabs.ODFProp;
@@ -28,7 +29,6 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
 
     private Collection<QlmID> id;
     private String type;
-    private String udef;
     private Description description;
     private Collection<InfoItem> infoItems = new ArrayList<>();
     private Collection<Object> objects = new ArrayList<>();
@@ -39,14 +39,12 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
 
     public Object(Collection<QlmID> id,
                   String type,
-                  String udef,
                   Description description,
                   Collection<InfoItem> infoItems,
                   Collection<Object> objects,
                   Map<QName, String> otherAttributes){
         this.id = id;
         this.type = type;
-        this.udef = udef;
         this.description = description;
         this.infoItems = infoItems;
         this.objects = objects;
@@ -84,17 +82,6 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
     public void setObjects(Collection<Object> objects) {
         this.objects = objects;
     }
-
-
-    public String getUdef() {
-        return udef;
-    }
-
-    @XmlAttribute (name = "udef")
-    public void setUdef(String udef) {
-        this.udef = udef;
-    }
-
 
     public Description getDescription() {
         return description;
@@ -138,12 +125,9 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         model.setNsPrefix("rdf", NS.RDF);
         model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.OBJECT));
 
-        //todo: namespaces
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put(NS.ODF + "type", getType());
-        elementsAndAttributes.put(NS.ODF + "udef", getUdef());
+        elementsAndAttributes.put(NS.ODF + ODFProp.TYPE, getType());
 
-        //TODO: namespace udef !!!
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
@@ -201,15 +185,11 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
             Resource object = ResourceFactory.createResource(statement.getObject().toString());
 
             if (subject.toString().equals(statement.getSubject().toString())) {
-                if (property.toString().contains("type") && !object.toString().contains(ODFClass.OBJECT)) {
+                if (property.toString().contains(ODFProp.TYPE) && !object.toString().contains(ODFClass.OBJECT)) {
                     objectClass.setType(object.toString());
                 }
 
-                if (property.toString().contains("udef")) {
-                    objectClass.setUdef(object.toString());
-                }
-
-                if (property.toString().contains(NS.ODF + "description")) {
+                if (property.toString().contains(NS.ODF + ODFProp.DESCRIPTION)) {
                     objectClass.setDescription(descriptionClass.deserialize(object, statements));
                 }
 
@@ -223,6 +203,12 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
 
                 if (property.toString().contains(ODFProp.OBJECT)) {
                     objects.add(objectClass.deserialize(object, statements));
+                }
+
+                if (ModelHelper.ifOptionalProperty(property, ODFProp.objectProperties)) {
+                    Map<QName, String> optionalAttribute = new HashMap<>();
+                    optionalAttribute.put(QName.valueOf(RegexHelper.getOptionalProperty(property.toString())), object.toString());
+                    descriptionClass.setOtherAttributes(optionalAttribute);
                 }
 
             }

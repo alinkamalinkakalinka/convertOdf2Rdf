@@ -3,6 +3,7 @@ package model;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import utils.ModelHelper;
+import utils.RegexHelper;
 import vocabs.NS;
 import vocabs.ODFClass;
 import vocabs.ODFProp;
@@ -26,11 +27,8 @@ import static utils.ModelHelper.getOtherAttributesModel;
 })
 public class InfoItem extends ModelGenerator implements Deserializable, Serializable {
 
-    //TODO: name one as id and list
-    //TODO: any attribute
     private Collection<QlmID> name1;
     private String name;
-    private String udef;
     private Collection<Value> values = new ArrayList<>();
     private Description description;
     private Collection<MetaData> metaData = new ArrayList<>();
@@ -40,29 +38,17 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
 
     public InfoItem(String name,
                     Collection<QlmID> name1,
-                    String udef,
                     List<Value> values,
                     Description description,
                     Collection<MetaData> metaData,
                     Map<QName, String> otherAttributes){
         this.name = name;
         this.name1 = name1;
-        this.udef = udef;
         this.values = values;
         this.description = description;
         this.metaData = metaData;
         this.otherAttributes = otherAttributes;
     }
-
-    public String getUdef() {
-        return udef;
-    }
-
-    @XmlAttribute (name = "udef")
-    public void setUdef(String udef) {
-        this.udef = udef;
-    }
-
 
     public Collection<Value> getValues() {
         return values;
@@ -136,8 +122,7 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
         subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.INFOITEM));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put(NS.DCT + "name", getName());
-        elementsAndAttributes.put(NS.ODF + "udef", getUdef());
+        elementsAndAttributes.put(NS.DCT + ODFProp.NAME, getName());
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
             if (entry.getValue() != null) {
@@ -206,20 +191,15 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
 
             if (subject.equals(statement.getSubject())) {
 
-                if (property.toString().contains(NS.DCT + "name")) {
+                if (property.toString().contains(NS.DCT + ODFProp.NAME)) {
                     infoItemClass.setName(object.toString());
                 }
 
-                //TODO: name1 ????
-                if (property.toString().contains(NS.ODF + "name")) {
+                if (property.toString().contains(NS.ODF + ODFProp.NAME)) {
                     ids.add(qlmIDClass.deserialize(object, statements));
                 }
 
-                if (property.toString().contains("udef")) {
-                    infoItemClass.setUdef(object.toString());
-                }
-
-                if (property.toString().contains(NS.ODF + "description")) {
+                if (property.toString().contains(NS.ODF + ODFProp.DESCRIPTION)) {
                     infoItemClass.setDescription(descriptionClass.deserialize(object, statements));
                 }
 
@@ -229,6 +209,12 @@ public class InfoItem extends ModelGenerator implements Deserializable, Serializ
 
                 if (property.toString().contains(NS.ODF + ODFProp.VALUE)) {
                     values.add(valueClass.deserialize(object,statements));
+                }
+
+                if (ModelHelper.ifOptionalProperty(property, ODFProp.infoItemProperties)) {
+                    Map<QName, String> optionalAttribute = new HashMap<>();
+                    optionalAttribute.put(QName.valueOf(RegexHelper.getOptionalProperty(property.toString())), object.toString());
+                    descriptionClass.setOtherAttributes(optionalAttribute);
                 }
             }
         }

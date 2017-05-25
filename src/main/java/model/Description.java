@@ -2,8 +2,11 @@ package model;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import utils.ModelHelper;
+import utils.RegexHelper;
 import vocabs.NS;
 import vocabs.ODFClass;
+import vocabs.ODFProp;
 
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -11,9 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 import java.lang.*;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static utils.ModelHelper.getOtherAttributesModel;
 
@@ -80,7 +81,7 @@ public class Description implements Deserializable, Serializable{
 
         if (getDescription() != null) {
             model.setNsPrefix("dct", NS.DCT);
-            subject.addProperty(ResourceFactory.createProperty(NS.DCT, "description"),
+            subject.addProperty(ResourceFactory.createProperty(NS.DCT, ODFProp.DESCRIPTION),
                     ResourceFactory.createLangLiteral(getDescription(), getLang()));
         }
 
@@ -105,18 +106,22 @@ public class Description implements Deserializable, Serializable{
 
             if (subject.toString().equals(statement.getSubject().toString())) {
 
-                if (property.toString().contains("description")) {
+                if (property.toString().contains(ODFProp.DESCRIPTION)) {
                     descriptionClass.setDescription(object.toString());
                 }
 
-                if (property.toString().contains("language")) {
+                if (property.toString().contains(ODFProp.LANGUAGE)) {
                     descriptionClass.setLang(object.toString());
+                }
+
+                if (ModelHelper.ifOptionalProperty(property, ODFProp.descriptionProperties)) {
+                    Map<QName, String> optionalAttribute = new HashMap<>();
+                    optionalAttribute.put(QName.valueOf(RegexHelper.getOptionalProperty(property.toString())), object.toString());
+                    descriptionClass.setOtherAttributes(optionalAttribute);
                 }
             }
         }
 
         return descriptionClass;
     }
-
-    //TODO: descriptionValue or just value??? namespace
 }

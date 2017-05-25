@@ -5,30 +5,7 @@
 @prefix time:  <http://www.w3.org/2006/time#> .
 @prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17599160/2013001000enerventfi/http/odefinfo/plugins/10/X1/73161517>
-        a          odf:InfoItem ;
-        odf:value  [ a              odf:Value ;
-                     odf:dataValue  "Enervent Oy"^^xsd:string ;
-                     dct:created    "2016-09-14T16:47:33.212+03:00"^^xsd:dateTime ;
-                     time:unixTime  "1473860853"^^xsd:int
-                   ] ;
-        dct:name   "73161517" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo/plugins/10>
-        a           odf:Object ;
-        odf:id      [ a            odf:QlmID ;
-                      odf:idValue  "10"
-                    ] ;
-        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo/plugins/10/X1> .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo>
-        a           odf:Object ;
-        odf:id      [ a            odf:QlmID ;
-                      odf:idValue  "o-def.info"
-                    ] ;
-        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo/plugins> .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17599160/2013001000enerventfi/Roomremovedair>
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8331055/2013001000enerventfi/Roomremovedair>
         a          odf:InfoItem ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "202"^^xsd:decimal ;
@@ -37,13 +14,36 @@
                    ] ;
         dct:name   "Room removed air" .
 
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo/plugins/10>
+        a           odf:Object ;
+        odf:id      [ a            odf:QlmID ;
+                      odf:idValue  "10"
+                    ] ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo/plugins/10/X1> .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8331055/2013001000enerventfi/http/odefinfo/plugins/10/X1/73161517>
+        a          odf:InfoItem ;
+        odf:value  [ a              odf:Value ;
+                     odf:dataValue  "Enervent Oy" ;
+                     dct:created    "2016-09-14T16:47:33.212+03:00"^^xsd:dateTime ;
+                     time:unixTime  "1473860853"^^xsd:int
+                   ] ;
+        dct:name   "73161517" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo>
+        a           odf:Object ;
+        odf:id      [ a            odf:QlmID ;
+                      odf:idValue  "o-def.info"
+                    ] ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http/odefinfo/plugins> .
+
 <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi>
         a             odf:Object ;
         odf:id        [ a            odf:QlmID ;
                         ca:idType    "id@uri" ;
                         odf:idValue  "2013001000@enervent.fi"
                       ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17599160/2013001000enerventfi/Roomremovedair> ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8331055/2013001000enerventfi/Roomremovedair> ;
         odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/2013001000enerventfi/http> ;
         odf:type      "Air Handling Unit" .
 
@@ -66,7 +66,7 @@
         odf:id        [ a            odf:QlmID ;
                         odf:idValue  "X1"
                       ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/17599160/2013001000enerventfi/http/odefinfo/plugins/10/X1/73161517> .
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8331055/2013001000enerventfi/http/odefinfo/plugins/10/X1/73161517> .
 
 <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494>
         a           odf:Objects ;

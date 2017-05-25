@@ -4,8 +4,11 @@ import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.datatypes.xsd.impl.XSDAbstractDateTimeType;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import utils.ModelHelper;
+import utils.RegexHelper;
 import vocabs.NS;
 import vocabs.ODFClass;
+import vocabs.ODFProp;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.*;
@@ -110,8 +113,8 @@ public class QlmID implements Deserializable, Serializable{
         subject.addProperty(RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.QLMID));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put(NS.TIME + "startDate", getStartDate());
-        elementsAndAttributes.put(NS.TIME + "endDate", getEndDate());
+        elementsAndAttributes.put(NS.TIME + ODFProp.STARTDATE, getStartDate());
+        elementsAndAttributes.put(NS.TIME + ODFProp.ENDDATE, getEndDate());
 
         model.setNsPrefix("dct", NS.DCT)
                 .setNsPrefix("time", NS.TIME)
@@ -121,12 +124,12 @@ public class QlmID implements Deserializable, Serializable{
 
         if (getId() != null) {
             model.setNsPrefix("odf", NS.ODF);
-            subject.addProperty(ResourceFactory.createProperty(NS.ODF, "idValue"), getId());
+            subject.addProperty(ResourceFactory.createProperty(NS.ODF, ODFProp.IDVALUE), getId());
         }
 
         if (getTagType() != null) {
             model.setNsPrefix("dct", NS.DCT);
-            subject.addProperty(ResourceFactory.createProperty(NS.DCT, "tagType"), getTagType());
+            subject.addProperty(ResourceFactory.createProperty(NS.DCT, ODFProp.TAGTYPE), getTagType());
         }
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {
@@ -159,50 +162,30 @@ public class QlmID implements Deserializable, Serializable{
 
             if (subject.toString().equals(statement.getSubject().toString())) {
 
-                if (property.toString().contains("idValue")) {
+                if (property.toString().contains(ODFProp.IDVALUE)) {
                     qlmIDClass.setId(object.toString());
                 }
 
-                if (property.toString().contains("tagType")) {
+                if (property.toString().contains(ODFProp.TAGTYPE)) {
                     qlmIDClass.setTagType(object.toString());
                 }
 
-                if (property.toString().contains("startDate")) {
+                if (property.toString().contains(ODFProp.STARTDATE)) {
                     qlmIDClass.setStartDate(object.toString());
                 }
 
-                if (property.toString().contains("endDate")) {
+                if (property.toString().contains(ODFProp.ENDDATE)) {
                     qlmIDClass.setStartDate(object.toString());
                 }
 
-                if (ifOptionalProperty(property)) {
+                if (ModelHelper.ifOptionalProperty(property, ODFProp.idProperties)) {
                     Map<QName, String> optionalAttribute = new HashMap<>();
-                    optionalAttribute.put(QName.valueOf("idType"), object.toString());
+                    optionalAttribute.put(QName.valueOf(RegexHelper.getOptionalProperty(property.toString())), object.toString());
                     qlmIDClass.setOtherAttributes(optionalAttribute);
                 }
             }
         }
 
         return qlmIDClass;
-    }
-
-    private boolean ifOptionalProperty (Property property) {
-
-        boolean ifOptionalProperty = true;
-
-        List<String> idProperties = new ArrayList<>();
-        idProperties.add("idValue");
-        idProperties.add("tagType");
-        idProperties.add("startDate");
-        idProperties.add("endDate");
-        idProperties.add("type");
-
-        for (String idProperty : idProperties) {
-            if (property.toString().contains(idProperty)) {
-                ifOptionalProperty = false;
-            }
-        }
-
-        return ifOptionalProperty;
     }
 }

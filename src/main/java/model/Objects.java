@@ -3,6 +3,7 @@ package model;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import vocabs.NS;
+import vocabs.ODFClass;
 import vocabs.ODFProp;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -78,10 +79,10 @@ public class Objects extends ModelGenerator implements Serializable, Deserializa
 
         if (getVersion() != null) {
             model.setNsPrefix("dct", NS.DCT);
-            subject.addProperty(ResourceFactory.createProperty(NS.DCT + "version"), getVersion());
+            subject.addProperty(ResourceFactory.createProperty(NS.DCT + ODFProp.VERSION), getVersion());
         }
 
-        model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + "Objects"));
+        model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.OBJECTS));
 
         if (getObjects() != null) {
             // NESTED OBJECT MODEL
