@@ -5,14 +5,11 @@
 @prefix time:  <http://www.w3.org/2006/time#> .
 @prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/SmartHouse>
-        a             odf:Object ;
-        odf:id        [ a            odf:QlmID ;
-                        odf:idValue  "SmartHouse"
-                      ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8331055/SmartHouse/FrontDoor> .
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920>
+        a           odf:Objects ;
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920/SmartHouse> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8331055/SmartHouse/FrontDoor>
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/15163836/SmartHouse/FrontDoor>
         a          odf:InfoItem ;
         odf:value  [ a              odf:Value ;
                      odf:dataValue  "-1.0"^^xsd:double ;
@@ -21,6 +18,9 @@
                    ] ;
         dct:name   "FrontDoor" .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494>
-        a           odf:Objects ;
-        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/11003494/SmartHouse> .
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920/SmartHouse>
+        a             odf:Object ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "SmartHouse"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/15163836/SmartHouse/FrontDoor> .

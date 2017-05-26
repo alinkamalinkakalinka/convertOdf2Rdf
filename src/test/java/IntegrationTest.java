@@ -1,9 +1,6 @@
 import org.apache.commons.io.IOUtils;
 import org.castor.xmlctf.xmldiff.XMLDiff;
-import org.xmlunit.builder.DiffBuilder;
-import org.xmlunit.diff.Diff;
 import org.junit.Test;
-import utils.FileToStringConverter;
 import utils.RegexHelper;
 
 import java.io.*;

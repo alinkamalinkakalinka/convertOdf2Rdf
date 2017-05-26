@@ -1,6 +1,7 @@
 import model.Object;
 import model.Objects;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import utils.ModelHelper;
 import utils.RegexHelper;
 import validation.FileType;
@@ -36,7 +37,9 @@ public class Serializer implements Loggable {
             temp.deleteOnExit();
             FileOutputStream out = new FileOutputStream(temp);
 
+
             InputStream in = RegexHelper.getDateBetweenTags(inputFileName);
+
             IOUtils.copy(in, out);
 
             ModelHelper.checkIfFileIsValid(temp.getAbsolutePath(), "/odf.xsd", FileType.XML);
@@ -49,9 +52,12 @@ public class Serializer implements Loggable {
             modelJena = ModelFactory.createDefaultModel();
 
             modelJena.add(beans.serialize(objectBaseIri, infoItemBaseIri));
+            File f = new File(outputFileName);
+            logger().info("file exists = " + f.exists() + "  >>" + outputFileName );
+            OutputStream fos = new FileOutputStream(outputFileName);
 
-            RDFDataMgr.write(new FileOutputStream(outputFileName), modelJena, RDFFormat.TURTLE) ;
-
+            modelJena.write(fos, "TTL") ;
+            fos.close();
 
         } catch (IOException e) {
             logger().error("IOException", e);

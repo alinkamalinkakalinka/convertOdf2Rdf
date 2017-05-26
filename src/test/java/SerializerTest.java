@@ -1,13 +1,13 @@
-import org.castor.xmlctf.xmldiff.XMLDiff;
-import org.custommonkey.xmlunit.XMLTestCase;
 import org.junit.Test;
 
 import utils.RDFDiff;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by aarunova on 5/8/17.
  */
-public class SerializerTest extends XMLTestCase {
+public class SerializerTest {
 
     @Test
     public void testOdf2rdf() throws Exception {

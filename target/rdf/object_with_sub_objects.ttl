@@ -4,21 +4,11 @@
 @prefix time:  <http://www.w3.org/2006/time#> .
 @prefix ca:    <http://biotope.sntiotlab.lu/customAttribute/> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17319689/UniqueObjectID1>
-        a             odf:Object ;
-        ca:udef       "appropriate.udef.code" ;
-        odf:id        [ a            odf:QlmID ;
-                        odf:idValue  "UniqueObjectID_1"
-                      ] ;
-        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8001130/UniqueObjectID1/SOMECLASSPREFERABLYDEFINEDBYUDEF> ;
-        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/17319689/UniqueObjectID1/SubObject1> ;
-        odf:type      "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
-
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17319689>
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920>
         a           odf:Objects ;
-        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/17319689/UniqueObjectID1> .
+        odf:object  <http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920/UniqueObjectID1> .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/obj/17319689/UniqueObjectID1/SubObject1>
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920/UniqueObjectID1/SubObject1>
         a         odf:Object ;
         ca:udef   "appropriate.udef.code" ;
         odf:id    [ a            odf:QlmID ;
@@ -26,7 +16,17 @@
                   ] ;
         odf:type  "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
 
-<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/8001130/UniqueObjectID1/SOMECLASSPREFERABLYDEFINEDBYUDEF>
+<http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1137479/UniqueObjectID1/SOMECLASSPREFERABLYDEFINEDBYUDEF>
         a         odf:InfoItem ;
         ca:udef   "appropriate.udef.code" ;
         dct:name  "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .
+
+<http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920/UniqueObjectID1>
+        a             odf:Object ;
+        ca:udef       "appropriate.udef.code" ;
+        odf:id        [ a            odf:QlmID ;
+                        odf:idValue  "UniqueObjectID_1"
+                      ] ;
+        odf:infoItem  <http://eis-biotope.iais.fraunhofer.de/localhost/infoitem/1137479/UniqueObjectID1/SOMECLASSPREFERABLYDEFINEDBYUDEF> ;
+        odf:object    <http://eis-biotope.iais.fraunhofer.de/localhost/obj/29229920/UniqueObjectID1/SubObject1> ;
+        odf:type      "SOME_CLASS_PREFERABLY_DEFINED_BY_UDEF" .

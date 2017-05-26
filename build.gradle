@@ -71,21 +71,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.jena/jena-core
     compile group: 'org.apache.jena', name: 'jena-arq', version: '3.1.0'
 
-    // https://mvnrepository.com/artifact/org.mockito/mockito-all
-    compile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
-
-    // https://mvnrepository.com/artifact/xmlunit/xmlunit
-    compile group: 'xmlunit', name: 'xmlunit', version: '1.6'
-
-    // https://mvnrepository.com/artifact/org.xmlunit/xmlunit-core
-    compile group: 'org.xmlunit', name: 'xmlunit-core', version: '2.3.0'
-
-
     // https://mvnrepository.com/artifact/org.codehaus.castor/castor-xml-diff
     compile group: 'org.codehaus.castor', name: 'castor-xml-diff', version: '1.4.1'
-
-    //compile fileTree(dir: 'libs', include: 'rdf-utils-compact-0.5.jar')
-
 
 
     testCompile 'junit:junit:4.11'
