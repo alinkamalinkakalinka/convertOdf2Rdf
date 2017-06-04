@@ -37,7 +37,6 @@ public class Serializer implements Loggable {
             temp.deleteOnExit();
             FileOutputStream out = new FileOutputStream(temp);
 
-
             InputStream in = RegexHelper.getDateBetweenTags(inputFileName);
 
             IOUtils.copy(in, out);
