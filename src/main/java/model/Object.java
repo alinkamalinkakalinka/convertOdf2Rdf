@@ -126,7 +126,7 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
         model.add(subject, RDF.type, ResourceFactory.createResource(NS.ODF + ODFClass.OBJECT));
 
         HashMap<String, String> elementsAndAttributes = new HashMap<>();
-        elementsAndAttributes.put(NS.ODF + ODFProp.TYPE, getType());
+        elementsAndAttributes.put(NS.DC + ODFProp.TYPE, getType());
 
 
         for (Map.Entry<String, String> entry : elementsAndAttributes.entrySet()) {

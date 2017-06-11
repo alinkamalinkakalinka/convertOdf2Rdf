@@ -74,6 +74,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.codehaus.castor/castor-xml-diff
     compile group: 'org.codehaus.castor', name: 'castor-xml-diff', version: '1.4.1'
 
+    // https://mvnrepository.com/artifact/org.okkam.owl/jaob
+    compile group: 'org.okkam.owl', name: 'jaob', version: '1.0'
+
+
 
     testCompile 'junit:junit:4.11'
 }

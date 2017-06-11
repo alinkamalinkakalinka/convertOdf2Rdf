@@ -26,6 +26,7 @@ public class ODFProp {
     public final static String STARTDATE = "startDate";
     public final static String ENDDATE = "endDate";
     public final static String VERSION = "version";
+    public final static String IDTYPE = "idType";
 
     public final static List<String> objectProperties = new ArrayList<>();
     public final static List<String> infoItemProperties = new ArrayList<>();

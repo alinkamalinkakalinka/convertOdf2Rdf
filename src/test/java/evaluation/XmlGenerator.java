@@ -24,7 +24,7 @@ public class XmlGenerator {
 
         Collection<Object> objects = new ArrayList<>();
 
-        for (long i=1; i<100000; i++) {
+        for (int i=1; i<100000; i++) {
             Object object = new Object();
 
             QlmID id = new QlmID();
