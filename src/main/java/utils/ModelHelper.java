@@ -10,8 +10,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,10 +67,10 @@ public class ModelHelper {
     public static Model getOtherAttributesModel (Resource subject, Map<QName, String> attributesMap) {
 
         Model otherAttributesModel = ModelFactory.createDefaultModel();
-        otherAttributesModel.setNsPrefix("ca", NS.ATTR);
+        otherAttributesModel.setNsPrefix("ca", NS.CA);
 
         for (Map.Entry<QName, String> entry : attributesMap.entrySet()) {
-            otherAttributesModel.add(subject, ResourceFactory.createProperty(NS.ATTR + entry.getKey()), entry.getValue());
+            otherAttributesModel.add(subject, ResourceFactory.createProperty(NS.CA + entry.getKey()), entry.getValue());
         }
 
         return otherAttributesModel;

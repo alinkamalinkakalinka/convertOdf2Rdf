@@ -52,7 +52,6 @@ public class Serializer implements Loggable {
 
             modelJena.add(beans.serialize(objectBaseIri, infoItemBaseIri));
             File f = new File(outputFileName);
-            logger().info("file exists = " + f.exists() + "  >>" + outputFileName );
             OutputStream fos = new FileOutputStream(outputFileName);
 
             modelJena.write(fos, "TTL") ;

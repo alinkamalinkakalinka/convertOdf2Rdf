@@ -21,10 +21,7 @@ import static utils.ModelHelper.getOtherAttributesModel;
  * Created by aarunova on 12/11/16.
  */
 
-//@XmlRootElement(name = "id")
 public class QlmID implements Deserializable, Serializable{
-
-    //TODO: gregorian calendar ????
 
     private String id;
     private String tagType;

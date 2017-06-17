@@ -1,3 +1,4 @@
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Test;
 
 import utils.RDFDiff;
@@ -14,14 +15,25 @@ public class SerializerTest {
 
         Serializer serializer = new Serializer();
 
-        String inputXmlFile = "src/test/resources/test/input/xml/metadata.xml";
-        String outputRdfFile = "target/rdf/metadata.ttl";
-        String targetRdfFile = "src/test/resources/test/input/rdf/metadata.ttl";
+        //String inputXmlFile = "src/test/resources/test/input/xml/metadata.xml";
+        //String outputRdfFile = "target/rdf/metadata.ttl";
+        //String targetRdfFile = "src/test/resources/test/input/rdf/metadata.ttl";
+
+        String inputXmlFile = "test.xml";
+        String outputRdfFile = "test.ttl";
+        //String targetRdfFile = "src/test/resources/test/input/rdf/metadata.ttl";
+
+
+        StopWatch timer = new StopWatch();
+        timer.start();
 
         serializer.serialize(inputXmlFile, outputRdfFile);
 
-        boolean ifEqual = RDFDiff.diff(targetRdfFile, outputRdfFile);
-        assertTrue(ifEqual);
+        timer.stop();
+        System.out.println(timer.getTime());
+
+        //boolean ifEqual = RDFDiff.diff(targetRdfFile, outputRdfFile);
+        //assertTrue(ifEqual);
         }
 
 }
