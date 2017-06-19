@@ -77,7 +77,14 @@ dependencies {
     // https://mvnrepository.com/artifact/org.okkam.owl/jaob
     compile group: 'org.okkam.owl', name: 'jaob', version: '1.0'
 
+    // https://mvnrepository.com/artifact/org.jibx.schema.org.apache.maven/org.apache.maven
+    compile group: 'org.jibx.schema.org.apache.maven', name: 'org.apache.maven', version: '1.1.4'
 
+    // https://mvnrepository.com/artifact/org.codehaus.woodstox/woodstox-core-asl
+    compile group: 'org.codehaus.woodstox', name: 'woodstox-core-asl', version: '4.4.1'
+
+    // https://mvnrepository.com/artifact/org.codehaus.woodstox/stax2-api
+    compile group: 'org.codehaus.woodstox', name: 'stax2-api', version: '4.0.0'
 
     testCompile 'junit:junit:4.11'
 }

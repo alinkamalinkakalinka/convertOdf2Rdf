@@ -1,7 +1,9 @@
-import model.Object;
 import model.Objects;
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.vocabulary.RDF;
+import org.apache.jena.rdf.model.Statement;
+import org.jibx.runtime.BindingDirectory;
+import org.jibx.runtime.IBindingFactory;
+import org.jibx.runtime.IMarshallingContext;
+import org.jibx.runtime.JiBXException;
 import utils.Loggable;
 import utils.ModelHelper;
 import validation.FileType;
@@ -9,8 +11,8 @@ import validation.FileType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import java.io.*;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Collection;
 
 import static utils.ModelHelper.getStatementsFromFile;
