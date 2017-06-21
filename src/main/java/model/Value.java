@@ -9,7 +9,6 @@ import vocabs.NS;
 import vocabs.ODFClass;
 import vocabs.ODFProp;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.lang.*;
@@ -26,7 +25,7 @@ public class Value implements Deserializable, Serializable{
 
     private String type;
     private String dateTime;
-    private String unixTime; //TODO: Long
+    private String unixTime;
     private String value;
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
@@ -41,6 +40,7 @@ public class Value implements Deserializable, Serializable{
         this.dateTime = dateTime;
         this.unixTime = unixTime;
         this.value = value;
+        this.otherAttributes = otherAttributes;
     }
 
 

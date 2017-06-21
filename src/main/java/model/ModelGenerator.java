@@ -11,9 +11,6 @@ import vocabs.NS;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
-
-import javax.xml.namespace.QName;
 
 /**
  * Created by aarunova on 3/29/17.

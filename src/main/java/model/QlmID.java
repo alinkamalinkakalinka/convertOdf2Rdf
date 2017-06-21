@@ -9,12 +9,10 @@ import vocabs.NS;
 import vocabs.ODFClass;
 import vocabs.ODFProp;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 import java.util.*;
 
-import static org.apache.jena.datatypes.xsd.XSDDatatype.XSDdateTime;
 import static utils.ModelHelper.getOtherAttributesModel;
 
 /**

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Objects>
     <Object>
-        <id>SmartFridge22334411</id>
+        <id>SmartFridge</id>
         <InfoItem name="PowerConsumption">
             <MetaData>
-                <InfoItem name="accuracy">
-                    <value type="xs:double">1</value>
+                <InfoItem name="latency">
+                    <value type="xs:int">5</value>
                 </InfoItem>
             </MetaData>
         </InfoItem>

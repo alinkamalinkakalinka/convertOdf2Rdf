@@ -1,6 +1,5 @@
 package evaluation;
 
-import org.apache.jena.ext.com.google.common.util.concurrent.Service;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -18,11 +17,11 @@ public class SPARQLTest {
     @Test
     public void sparqlTest() {
 
-        String fileName1 = "test.ttl";
-        String fileName2 = "test.ttl";
+        String fileName1 = "src/test/resources/test/input/rdf/metadata.ttl";
+        String fileName2 = "src/test/resources/test/input/rdf/metadata2.ttl";
 
-        Collection<Statement> statements1 = ModelHelper.getStatementsFromFile(fileName1);
-        Collection<Statement> statements2 = ModelHelper.getStatementsFromFile(fileName2);
+        Collection<Statement> statements1 = ModelHelper.getStatementsFromFile(fileName1, "TTL");
+        Collection<Statement> statements2 = ModelHelper.getStatementsFromFile(fileName2, "TTL");
 
         Model model = ModelFactory.createDefaultModel();
 
@@ -36,7 +35,10 @@ public class SPARQLTest {
 
         String queryString = "SELECT ?x \n" +
                 "  {\n" +
-                "     ?x  a ?y .\n" +
+                "     ?infoItemMain <http://purl.org/dc/terms/name> \"PowerConsumption\"." +
+                "     ?infoItemMain <http://eis-biotope.iais.fraunhofer.de/odf#metadata> ?metaData." +
+                "     ?metaData <http://eis-biotope.iais.fraunhofer.de/odf#infoItem> ?infoItem." +
+                "     ?infoItem <http://purl.org/dc/terms/name> ?x .\n" +
                 "  }";
 
         Query query = QueryFactory.create(queryString);

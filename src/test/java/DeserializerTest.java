@@ -15,24 +15,22 @@ public class DeserializerTest {
         Deserializer deserializer = new Deserializer();
 
         //String inputRdfFile = "src/test/resources/test/input/rdf/metadata.ttl";
-        //String outputXmlFile = "target/rdf/metadata.ttl";
-        //String targetXmlFile = "src/test/resources/test/input/xml/metadata.xml";
-
-        String inputRdfFile = "test.ttl";
-        String outputXmlFile = "testRdf.xml";
+        String inputRdfFile = "target/rdf/metadata.ttl";
+        String outputXmlFile = "target/xml/metadata.xml";
+        String targetXmlFile = "src/test/resources/test/input/xml/metadata.xml";
 
         StopWatch timer = new StopWatch();
         timer.start();
 
-        deserializer.deserialize(inputRdfFile, outputXmlFile);
+        deserializer.deserialize(inputRdfFile, outputXmlFile, "TTL");
 
         timer.stop();
         System.out.println(timer.getTime());
 
-        //XMLDiff diff = new XMLDiff(targetXmlFile, outputXmlFile);
-        //int result = diff.compare();
+        XMLDiff diff = new XMLDiff(targetXmlFile, outputXmlFile);
+        int result = diff.compare();
 
-        //assertTrue(result == 0);
+        assertTrue(result == 0);
 
     }
 

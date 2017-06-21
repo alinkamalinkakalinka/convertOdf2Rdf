@@ -1,21 +1,15 @@
-import model.Object;
 import model.Objects;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import utils.ModelHelper;
 import utils.RegexHelper;
 import validation.FileType;
-import validation.ValidatorFactory;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.riot.RDFFormat;
 
 import javax.xml.bind.JAXB;
 
 import java.io.*;
-import java.util.Collection;
 
 /**
  * Created by aarunova on 1/22/17.
@@ -27,7 +21,7 @@ public class Serializer implements Loggable {
     private String hostname = "localhost";
 
 
-    public Model serialize(String inputFileName, String outputFileName) {
+    public Model serialize(String inputFileName, String outputFileName, String rdfFormat) {
 
         Model modelJena = null;
 
@@ -53,7 +47,7 @@ public class Serializer implements Loggable {
             modelJena.add(beans.serialize(objectBaseIri, infoItemBaseIri));
             OutputStream fos = new FileOutputStream(outputFileName);
 
-            modelJena.write(fos, "TTL") ;
+            modelJena.write(fos, rdfFormat) ;
             fos.close();
 
         } catch (IOException e) {

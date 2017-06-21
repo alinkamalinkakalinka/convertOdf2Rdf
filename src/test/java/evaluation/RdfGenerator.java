@@ -1,6 +1,5 @@
 package evaluation;
 
-import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
@@ -9,14 +8,10 @@ import vocabs.NS;
 import vocabs.ODFClass;
 import vocabs.ODFProp;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Alina on 6/5/2017.

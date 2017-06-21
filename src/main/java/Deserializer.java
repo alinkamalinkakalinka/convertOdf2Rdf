@@ -1,9 +1,5 @@
 import model.Objects;
 import org.apache.jena.rdf.model.Statement;
-import org.jibx.runtime.BindingDirectory;
-import org.jibx.runtime.IBindingFactory;
-import org.jibx.runtime.IMarshallingContext;
-import org.jibx.runtime.JiBXException;
 import utils.Loggable;
 import utils.ModelHelper;
 import validation.FileType;
@@ -25,7 +21,7 @@ import static utils.ModelHelper.getStatementsFromFile;
 
 public class Deserializer implements Loggable{
 
-    public void deserialize (String rdfFile, String xmlFilePath) {
+    public void deserialize (String rdfFile, String xmlFilePath, String rdfFormat) {
 
         try {
 
@@ -33,7 +29,7 @@ public class Deserializer implements Loggable{
 
             Objects objectsClass = new Objects();
 
-            Collection<Statement> statements = getStatementsFromFile(rdfFile);
+            Collection<Statement> statements = getStatementsFromFile(rdfFile, rdfFormat);
 
             if (statements != null) {
 

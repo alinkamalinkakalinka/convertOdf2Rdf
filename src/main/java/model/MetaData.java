@@ -1,9 +1,7 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
-import utils.ModelHelper;
 import vocabs.NS;
 import vocabs.ODFClass;
 import vocabs.ODFProp;
@@ -12,7 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 /**
  * Created by aarunova on 12/11/16.

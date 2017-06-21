@@ -76,7 +76,7 @@ public class ModelHelper {
         return otherAttributesModel;
     }
 
-    public static Collection<Statement> getStatementsFromFile (String rdfFile) {
+    public static Collection<Statement> getStatementsFromFile (String rdfFile, String rdfFormat) {
 
         try {
             InputStream inputStream = new FileInputStream(rdfFile);
@@ -85,7 +85,7 @@ public class ModelHelper {
             Model model = ModelFactory.createDefaultModel();
 
             // parses in turtle format
-            model.read(new InputStreamReader(inputStream), null, "TURTLE");
+            model.read(new InputStreamReader(inputStream), null, rdfFormat);
 
             //generate list of statements
             StmtIterator iterator = model.listStatements();

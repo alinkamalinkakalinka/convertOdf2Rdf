@@ -34,9 +34,6 @@ public class Object extends ModelGenerator implements Deserializable, Serializab
     private Collection<Object> objects = new ArrayList<>();
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
-    //TODO: take care other attributes in deserialization and serialization
-    //TODO: id as a list
-
     public Object(Collection<QlmID> id,
                   String type,
                   Description description,
