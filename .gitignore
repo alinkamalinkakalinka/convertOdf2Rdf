@@ -2,8 +2,6 @@
 .idea/
 build/
 .gradle/
-target/rdf
-target/xml
 
 # Package Files #
 *.jar

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Objects>
     <Object>
-        <id>SmartFridge1</id>
-        <InfoItem name="PowerConsumption1">
+        <id>SmartFridge</id>
+        <InfoItem name="PowerConsumption">
             <MetaData>
-                <InfoItem name="accuracy1">
+                <InfoItem name="accuracy">
                     <value type="xs:double">1</value>
                 </InfoItem>
             </MetaData>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Objects>
-    <Object>
-        <id>SmartHouse</id>
-        <InfoItem name="FrontDoor">
-            <value dateTime="2017-05-08T21:27:51.691+03:00" type="xs:double" unixTime="1494268071">-1.0</value>
-        </InfoItem>
-    </Object>
-</Objects>
