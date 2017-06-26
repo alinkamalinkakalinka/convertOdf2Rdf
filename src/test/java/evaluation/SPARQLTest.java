@@ -17,11 +17,13 @@ public class SPARQLTest {
     @Test
     public void sparqlTest() {
 
-        String fileName1 = "src/test/resources/test/input/rdf/metadata.ttl";
-        String fileName2 = "src/test/resources/test/input/rdf/metadata2.ttl";
+        String fileName1 = "src/test/resources/test/input/rdf/metadataSparql1.ttl";
+        String fileName2 = "src/test/resources/test/input/rdf/metadataSparql2.ttl";
+        String fileName3 = "src/test/resources/test/input/rdf/metadataSparql3.ttl";
 
         Collection<Statement> statements1 = ModelHelper.getStatementsFromFile(fileName1, "TTL");
         Collection<Statement> statements2 = ModelHelper.getStatementsFromFile(fileName2, "TTL");
+        Collection<Statement> statements3 = ModelHelper.getStatementsFromFile(fileName3, "TTL");
 
         Model model = ModelFactory.createDefaultModel();
 
@@ -33,13 +35,26 @@ public class SPARQLTest {
             model.add(statement2);
         }
 
-        String queryString = "SELECT ?x \n" +
-                "  {\n" +
-                "     ?infoItemMain <http://purl.org/dc/terms/name> \"PowerConsumption\"." +
-                "     ?infoItemMain <http://eis-biotope.iais.fraunhofer.de/odf#metadata> ?metaData." +
-                "     ?metaData <http://eis-biotope.iais.fraunhofer.de/odf#infoItem> ?infoItem." +
-                "     ?infoItem <http://purl.org/dc/terms/name> ?x .\n" +
-                "  }";
+        for (Statement statement3 : statements3) {
+            model.add(statement3);
+        }
+
+
+        String queryString = "PREFIX dct: <http://purl.org/dc/terms/>" +
+                "PREFIX odf: <http://eis-biotope.iais.fraunhofer.de/odf#>" +
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "SELECT ?device \n" +
+                "WHERE" +
+                "  {" +
+                "   ?object rdf:type odf:Object." +
+                "   ?object odf:id ?id." +
+                "   ?id odf:idValue ?device." +
+                "   ?object odf:infoItem ?infoItem." +
+                "   ?infoItem dct:name \"PowerConsumption\"." +
+                "   ?infoItem odf:value ?value." +
+                "   ?value odf:dataValue ?consumption." +
+                "  }" +
+                "ORDER BY DESC(?consumption) LIMIT 1";
 
         Query query = QueryFactory.create(queryString);
         QueryExecution qexec = QueryExecutionFactory.create(query, model);

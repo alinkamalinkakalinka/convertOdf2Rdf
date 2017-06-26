@@ -66,13 +66,6 @@ public abstract class ModelGenerator implements Loggable{
             nestedObjectsModels.add(objectModel);
         }
 
-        /*objects.forEach(nestedObject -> nestedObjectsModels
-                .add(nestedObject.serialize(nestedObjectsBaseIri, objRelatedInfoItemBaseIri)));*/
-
-        /*nestedObjectsModels.forEach(nestedObjectsModel -> {
-            addConnectingProperty(subject, nestedObjectsModel, "Object", "object");
-        });*/
-
         for (Model nestedObjectModel : nestedObjectsModels) {
             addConnectingProperty(subject, nestedObjectModel, "Object", "object");
         }

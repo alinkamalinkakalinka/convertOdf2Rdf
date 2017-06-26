@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Objects>
+    <Object>
+        <id>Microwave</id>
+        <InfoItem name="PowerConsumption">
+            <description>Watt</description>
+            <value type="xs:double">600</value>
+        </InfoItem>
+    </Object>
+</Objects>

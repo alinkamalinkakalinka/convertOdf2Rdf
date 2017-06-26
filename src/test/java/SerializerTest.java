@@ -15,14 +15,15 @@ public class SerializerTest {
 
         Serializer serializer = new Serializer();
 
-        String inputXmlFile = "src/test/resources/test/input/xml/metadata.xml";
-        String outputRdfFile = "target/rdf/metadata.ttl";
+        String inputXmlFile = "src/test/resources/test/input/xml/metadataSparql3.xml";
+        String outputRdfFile = "target/rdf/metadataSparql3.ttl";
         String targetRdfFile = "src/test/resources/test/input/rdf/metadata.ttl";
 
         StopWatch timer = new StopWatch();
         timer.start();
 
         serializer.serialize(inputXmlFile, outputRdfFile, "TTL");
+
 
         timer.stop();
         System.out.println(timer.getTime());

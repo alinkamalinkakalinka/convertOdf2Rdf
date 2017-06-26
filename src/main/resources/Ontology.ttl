@@ -1,0 +1,82 @@
+@prefix odf: <http://eis-biotope.iais.fraunhofer.de/odf#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix dc: <http://purl.org/dc/> .
+
+
+# Description of O-DF ontology
+# ----------------------------
+
+odf: a owl:Ontology;
+	dct:title "Ontology for representing O-DF data structures"@en;
+    dct:creator "Alina Arunova" ;
+    owl:versionInfo "0.0.1".
+
+# Classes
+
+odf:Objects a owl:Class.
+odf:Object a owl:Class.
+odf:InfoItem a owl:Class.
+odf:Value a owl:Class.
+odf:MetaData a owl:Class.
+odf:Description a owl:Class.
+odf:QlmID a owl:Class.
+
+_:x1 a owl:Class;
+    owl:unionOf (odf:Objects, odf:InfoItem).
+_:x2 a owl:Class;
+    owl:unionOf (odf:Object, odf:InfoItem).
+_:x3 a owl:Class;
+    owl:unionOf (odf:Object, odf:MetaData).
+_:x4 a owl:Class;
+    owl:unionOf (odf:Objects, odf:Object).
+
+# Properties
+
+dct:name a owl:DatatypeProperty;
+    rdfs:domain _:x1.
+dct:version a owl:DatatypeProperty;
+    rdfs:domain odf:Objects.
+odf:object a owl:ObjectProperty;
+    rdfs:domain _:x4;
+    rdfs:range odf:Object.
+dc:type a owl:DatatypeProperty;
+    rdfs:domain odf:Object.
+odf:id a owl:ObjectProperty;
+    rdfs:domain _:x2;
+    rdfs:range odf:QlmID.
+odf:idValue a owl:DatatypeProperty;
+    rdfs:domain odf:QlmID.
+dct:tagType a owl:DatatypeProperty;
+    rdfs:domain odf:QlmID.
+time:startDate a owl:DatatypeProperty;
+    rdfs:domain odf:QlmID.
+time:endDate a owl:DatatypeProperty;
+    rdfs:domain odf:QlmID.
+odf:idType a owl:DatatypeProperty;
+    rdfs:domain odf:QlmID.
+odf:description a owl:ObjectProperty;
+    rdfs:domain _:x2;
+    rdfs:range odf:Description.
+dct:description a owl:DatatypeProperty;
+    rdfs:domain odf:Description.
+odf:infoitem a owl:ObjectProperty;
+    rdfs:range odf:InfoItem;
+    rdfs:domain _:x3.
+odf:value a owl:ObjectProperty;
+    rdfs:domain odf:InfoItem;
+    rdfs:range odf:Value.
+odf:dataValue a owl:DatatypeProperty;
+    rdfs:domain odf:Value.
+time:dateTime a owl:DatatypeProperty;
+    rdfs:domain odf:Value.
+time:unixTime a owl:DatatypeProperty;
+    rdfs:domain odf:Value.
+odf:metadata a owl:ObjectProperty;
+    rdfs:domain odf:InfoItem;
+    rdfs:range odf:MetaData.
+
+
+
